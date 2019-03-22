@@ -6,25 +6,46 @@ const keys = require("../config/keys");
 
 class UserController {
   static register(req, res, next) {
-    const { matricula, nome, email, senha, tipo } = req.body;
+    const {
+      matricula,
+      nome,
+      sobrenome,
+      dta_nascimento,
+      graduacao,
+      curso,
+      email,
+      senha,
+      papel
+    } = req.body;
     try {
       db.query(
-        "SELECT * FROM ALUNO where matricula = ? UNION SELECT * FROM PROFESSOR where matricula = ?",
-        [matricula, matricula],
+        "SELECT * FROM USER where email = ?",
+        [email],
         (err, results, fields) => {
           if (err) return console.log(err);
           let user;
           if (results.length > 0) user = results[0];
           if (user) {
-            return res.status(400).json({ error: "Matricula ja cadastrada" });
+            return res.status(400).json({ error: "Email ja cadastrado" });
           }
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(senha, salt, (err, hashed) => {
               if (err) return console.log(err);
-              if (tipo === "professor") {
+              if (papel === "professor") {
                 db.query(
-                  "INSERT INTO PROFESSOR VALUES(?, ?, ?, ?)",
-                  [matricula, nome, email, hashed],
+                  `INSERT INTO USER (email, senha, papel) VALUES(?, ?, ?);
+                  INSERT INTO PROFESSOR (matricula, nome, sobrenome, dta_nascimento, graduacao, USER_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                  `,
+                  [
+                    email,
+                    hashed,
+                    papel,
+                    matricula,
+                    nome,
+                    sobrenome,
+                    dta_nascimento,
+                    graduacao
+                  ],
                   (err, results, fields) => {
                     if (err)
                       return res.status(400).json({ error: err.sqlMessage });
@@ -33,10 +54,21 @@ class UserController {
                       .json({ message: "Usuário criado com sucesso" });
                   }
                 );
-              } else if (tipo === "aluno") {
+              } else if (papel === "aluno") {
                 db.query(
-                  "INSERT INTO ALUNO VALUES(?, ?, ?, ?)",
-                  [matricula, nome, email, hashed],
+                  `INSERT INTO USER (email, senha, papel) VALUES(?, ?, ?);
+                  INSERT INTO ALUNO (matricula, nome, sobrenome, dta_nascimento, curso, USER_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                  `,
+                  [
+                    email,
+                    hashed,
+                    papel,
+                    matricula,
+                    nome,
+                    sobrenome,
+                    dta_nascimento,
+                    curso
+                  ],
                   (err, results, fields) => {
                     if (err)
                       return res.status(400).json({ error: err.sqlMessage });
@@ -59,8 +91,8 @@ class UserController {
     const { email, senha } = req.body;
     try {
       db.query(
-        "SELECT * FROM ALUNO where email = ? UNION SELECT * FROM PROFESSOR where email = ?",
-        [email, email],
+        "SELECT * FROM USER where email = ?",
+        [email],
         async (err, results, fields) => {
           if (err) return console.log(err);
           let user;
@@ -73,7 +105,8 @@ class UserController {
 
             if (isMatch) {
               const payload = {
-                matricula: user.matricula
+                id: user.id,
+                papel: user.papel
               };
 
               jwt.sign(
@@ -98,7 +131,7 @@ class UserController {
     }
   }
 
-  static current(req, res, next) {
+  static getCurrentUser(req, res, next) {
     res.json(req.user);
   }
 }
