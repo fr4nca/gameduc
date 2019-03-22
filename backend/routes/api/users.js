@@ -20,13 +20,13 @@ router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 
 // @route   GET api/users/current
-// @desc    Returns the current user
-// @returns Current user
+// @desc    Returns the current user's profile
+// @returns User's profile that's logged in
 // @access  private
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
-  UserController.getCurrentProfile
+  UserController.getProfile
 );
 
 module.exports = router;

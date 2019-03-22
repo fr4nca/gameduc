@@ -131,7 +131,7 @@ class UserController {
     }
   }
 
-  static getCurrentProfile(req, res, next) {
+  static getProfile(req, res, next) {
     try {
       const { id, papel } = req.user;
       db.query(

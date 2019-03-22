@@ -3,8 +3,9 @@ require("dotenv").config();
 const cors = require("cors");
 const passport = require("passport");
 
-const gamesRoutes = require("./routes/api/games");
 const usersRoutes = require("./routes/api/users");
+const gamesRoutes = require("./routes/api/games");
+const disciplinaRoutes = require("./routes/api/disciplina");
 
 const app = express();
 
@@ -18,6 +19,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", usersRoutes);
 app.use("/api/games", gamesRoutes);
+app.use("/api/disciplina", disciplinaRoutes);
 
 const PORT = 5000 || process.env.PORT;
 
