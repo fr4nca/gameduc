@@ -1,6 +1,21 @@
-module.export = {
-  dbhost: process.env.HOST,
-  dbuser: process.env.USER,
-  dbpassword: process.env.PASSWORD,
-  dbname: process.env.DATABASE
-};
+let config = {};
+
+if (process.env.NODE_ENV !== "production") {
+  config = {
+    dbhost: "localhost",
+    dbuser: "root",
+    dbpassword: "62013",
+    dbname: "gameduca",
+    jwtsecret: "secret"
+  };
+} else {
+  config = {
+    dbhost: process.env.DB_HOST,
+    dbuser: process.env.DB_USER,
+    dbpassword: process.env.DB_PASSWORD,
+    dbname: process.env.DB_DATABASE,
+    jwtsecret: process.env.JWT_SECRET
+  };
+}
+
+module.exports = config;

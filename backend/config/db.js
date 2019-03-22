@@ -1,10 +1,11 @@
 const mysql = require("mysql");
+const keys = require("./keys");
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  name: process.env.DB_NAME
+const db = mysql.createConnection({
+  host: keys.dbhost,
+  user: keys.dbuser,
+  password: keys.dbpassword,
+  database: keys.dbname
 });
 
-module.exports = connection;
+module.exports = db;
