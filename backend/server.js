@@ -17,8 +17,8 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/api/users", usersRoutes);
-app.use("/api/games", gamesRoutes);
+app.use("/api/user", usersRoutes);
+app.use("/api/game", gamesRoutes);
 app.use("/api/disciplina", disciplinaRoutes);
 
 const PORT = 5000 || process.env.PORT;
