@@ -26,7 +26,7 @@ router.post("/login", UserController.login);
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
-  UserController.getCurrentUser
+  UserController.getCurrentProfile
 );
 
 module.exports = router;

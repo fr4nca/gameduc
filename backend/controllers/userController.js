@@ -119,7 +119,7 @@ class UserController {
                 }
               );
             } else {
-              return res.status(400).json({ error: "Password incorrect" });
+              return res.status(400).json({ error: "Senha incorreta" });
             }
           } catch (e) {
             return console.log(e);
@@ -131,8 +131,23 @@ class UserController {
     }
   }
 
-  static getCurrentUser(req, res, next) {
-    res.json(req.user);
+  static getCurrentProfile(req, res, next) {
+    try {
+      const { id, papel } = req.user;
+      db.query(
+        `SELECT * FROM ${papel.toUpperCase()} WHERE USER_id = ?`,
+        [id],
+        (err, results, fields) => {
+          if (err)
+            return res.status(400).json({ error: "Ocorreu algum problema" });
+          let user;
+          if (results.length > 0) user = results[0];
+          return res.json(user);
+        }
+      );
+    } catch (e) {
+      return console.log(e);
+    }
   }
 }
 module.exports = UserController;
