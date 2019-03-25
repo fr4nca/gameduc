@@ -27,4 +27,25 @@ router.post(
   GameController.createGame
 );
 
+// @route   GET api/games/getAlunoGame
+// @desc    Get all alunos from a game
+// @params  Game id
+// @access  private
+router.get(
+  "/getAlunoGame",
+  passport.authenticate("jwt", { session: false }),
+  GameController.getAlunoGame
+);
+
+// @route   POST api/games/addAlunoGame
+// @desc    Add a aluno to a game
+// @params  Game ID and aluno matricula
+// @access  private
+router.post(
+  "/addAlunoGame",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  GameController.addAlunoGame
+);
+
 module.exports = router;

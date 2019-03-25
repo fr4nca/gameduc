@@ -149,5 +149,18 @@ class UserController {
       return console.log(e);
     }
   }
+
+  static getAlunos(req, res, next) {
+    try {
+      db.query(`SELECT * FROM ALUNO`, (err, results, fields) => {
+        if (err)
+          return res.status(400).json({ error: "Ocorreu algum problema" });
+        return res.json(results);
+      });
+    } catch (e) {
+      return console.log(e);
+    }
+  }
 }
+
 module.exports = UserController;

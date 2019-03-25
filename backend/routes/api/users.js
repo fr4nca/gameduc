@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
 const passport = require("passport");
+
+const checkUserRole = require("../../utils/checkUserRole");
 
 const UserController = require("../../controllers/userController");
 
@@ -27,6 +28,17 @@ router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
   UserController.getProfile
+);
+
+// @route   GET api/users/getAlunos
+// @desc    Returns all alunos
+// @returns All alunos
+// @access  private
+router.get(
+  "/getAlunos",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  UserController.getAlunos
 );
 
 module.exports = router;
