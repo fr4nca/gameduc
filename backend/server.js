@@ -3,8 +3,8 @@ require("dotenv").config();
 const cors = require("cors");
 const passport = require("passport");
 
-const usersRoutes = require("./routes/api/users");
-const gamesRoutes = require("./routes/api/games");
+const userRoutes = require("./routes/api/user");
+const gameRoutes = require("./routes/api/game");
 const disciplinaRoutes = require("./routes/api/disciplina");
 
 const app = express();
@@ -17,9 +17,13 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/api/user", usersRoutes);
-app.use("/api/game", gamesRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/game", gameRoutes);
 app.use("/api/disciplina", disciplinaRoutes);
+
+app.use("/", (req, res) => {
+  res.status(404).send("Route not found");
+});
 
 const PORT = 5000 || process.env.PORT;
 

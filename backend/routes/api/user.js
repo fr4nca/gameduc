@@ -6,21 +6,21 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const UserController = require("../../controllers/userController");
 
-// @route   POST api/users/register
+// @route   POST api/user/register
 // @desc    Login a user
 // @returns JWT token
 // @params  email, password
 // @access  public
 router.post("/register", UserController.register);
 
-// @route   POST api/users/login
+// @route   POST api/user/login
 // @desc    Login a user
 // @returns JWT token
 // @params  email, password
 // @access  public
 router.post("/login", UserController.login);
 
-// @route   GET api/users/current
+// @route   GET api/user/current
 // @desc    Returns the current user's profile
 // @returns User's profile that's logged in
 // @access  private
@@ -30,7 +30,7 @@ router.get(
   UserController.getProfile
 );
 
-// @route   GET api/users/getAlunos
+// @route   GET api/user/getAlunos
 // @desc    Returns all alunos
 // @returns All alunos
 // @access  private

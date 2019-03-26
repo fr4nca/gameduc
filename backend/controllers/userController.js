@@ -19,7 +19,7 @@ class UserController {
     } = req.body;
     try {
       db.query(
-        "SELECT * FROM USER where email = ?",
+        "SELECT * FROM tb_user where email = ?",
         [email],
         (err, results, fields) => {
           if (err) return console.log(err);
@@ -33,8 +33,8 @@ class UserController {
               if (err) return console.log(err);
               if (papel === "professor") {
                 db.query(
-                  `INSERT INTO USER (email, senha, papel) VALUES(?, ?, ?);
-                  INSERT INTO PROFESSOR (matricula, nome, sobrenome, dta_nascimento, graduacao, USER_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                  `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+                  INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
                   `,
                   [
                     email,
@@ -56,8 +56,8 @@ class UserController {
                 );
               } else if (papel === "aluno") {
                 db.query(
-                  `INSERT INTO USER (email, senha, papel) VALUES(?, ?, ?);
-                  INSERT INTO ALUNO (matricula, nome, sobrenome, dta_nascimento, curso, USER_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                  `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+                  INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
                   `,
                   [
                     email,
@@ -91,7 +91,7 @@ class UserController {
     const { email, senha } = req.body;
     try {
       db.query(
-        "SELECT * FROM USER where email = ?",
+        "SELECT * FROM tb_user where email = ?",
         [email],
         async (err, results, fields) => {
           if (err) return console.log(err);
@@ -135,7 +135,7 @@ class UserController {
     try {
       const { id, papel } = req.user;
       db.query(
-        `SELECT * FROM ${papel.toUpperCase()} WHERE USER_id = ?`,
+        `SELECT * FROM tb_${papel} WHERE tb_user_id = ?`,
         [id],
         (err, results, fields) => {
           if (err)
@@ -152,7 +152,7 @@ class UserController {
 
   static getAlunos(req, res, next) {
     try {
-      db.query(`SELECT * FROM ALUNO`, (err, results, fields) => {
+      db.query(`SELECT * FROM tb_aluno`, (err, results, fields) => {
         if (err)
           return res.status(400).json({ error: "Ocorreu algum problema" });
         return res.json(results);

@@ -13,7 +13,7 @@ module.exports = passport => {
     new JwtStrategy(opts, (payload, done) => {
       try {
         db.query(
-          "SELECT id, email, papel FROM USER where id = ?",
+          "SELECT id, email, papel FROM tb_user where id = ?",
           [payload.id],
           (err, results, fields) => {
             if (err) {

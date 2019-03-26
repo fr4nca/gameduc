@@ -3,7 +3,7 @@ const db = require("../config/db");
 class DisciplinaController {
   static getDisciplinas(req, res, next) {
     try {
-      db.query("SELECT * FROM DISCIPLINA", (err, results, fields) => {
+      db.query("SELECT * FROM tb_disciplina", (err, results, fields) => {
         if (err) return console.log(err);
         return res.json(results);
       });
@@ -17,7 +17,7 @@ class DisciplinaController {
       const { nome } = req.body;
 
       db.query(
-        "INSERT INTO DISCIPLINA(nome) VALUES(?)",
+        "INSERT INTO tb_disciplina(nome) VALUES(?)",
         [nome],
         (err, results, fields) => {
           if (err) return console.log(err);
@@ -34,7 +34,7 @@ class DisciplinaController {
       const { matricula } = req.body;
 
       db.query(
-        "SELECT D.id, D.nome FROM DISCIPLINA_has_PROFESSOR as DP INNER JOIN DISCIPLINA as D ON D.id= DP.DISCIPLINA_ID WHERE DP.PROFESSOR_matricula = ?",
+        "SELECT D.id, D.nome FROM ta_professor_disciplina as DP INNER JOIN tb_disciplina as D ON D.id= DP.tb_disciplina_id WHERE DP.tb_professor_matricula = ?",
         [matricula],
         (err, results, fields) => {
           if (err) return console.log(err);
@@ -51,7 +51,7 @@ class DisciplinaController {
       const { disciplinaId, matricula } = req.body;
 
       db.query(
-        "INSERT INTO DISCIPLINA_has_PROFESSOR VALUES(?, ?)",
+        "INSERT INTO ta_professor_disciplina VALUES(?, ?)",
         [disciplinaId, matricula],
         (err, results, fields) => {
           if (err) return console.log(err);

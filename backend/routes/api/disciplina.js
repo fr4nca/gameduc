@@ -6,7 +6,7 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const DisciplinaController = require("../../controllers/disciplinaController");
 
-// @route   GET api/disciplinas/
+// @route   GET api/disciplina/
 // @desc    Get all disciplinas
 // @returns All disciplinas
 // @access  private
@@ -17,7 +17,7 @@ router.get(
   DisciplinaController.getDisciplinas
 );
 
-// @route   POST api/disciplinas/
+// @route   POST api/disciplina/
 // @desc    Create a disciplina
 // @params  Name
 // @access  private
@@ -28,7 +28,7 @@ router.post(
   DisciplinaController.createDisciplina
 );
 
-// @route   POST api/disciplinas/addDiscProf
+// @route   POST api/disciplina/addDiscProf
 // @desc    Create a disciplina
 // @params  Disciplina ID and matricula
 // @access  private
@@ -39,7 +39,7 @@ router.post(
   DisciplinaController.addDisciplinaProfessor
 );
 
-// @route   GET api/disciplinas/discProf
+// @route   GET api/disciplina/discProf
 // @desc    Get all disciplinas vinculated to professor
 // @params  Matricula
 // @access  private

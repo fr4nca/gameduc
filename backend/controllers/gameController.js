@@ -7,7 +7,7 @@ class GameController {
       try {
         const { matricula } = req.body;
         db.query(
-          "SELECT * FROM GAME WHERE DISCIPLINA_has_PROFESSOR_PROFESSOR_matricula = ?",
+          "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ?",
           [matricula],
           (err, results, fields) => {
             if (err) return console.log(err);
@@ -21,7 +21,7 @@ class GameController {
       try {
         const { matricula } = req.body;
         db.query(
-          "SELECT G.* FROM GAME_has_ALUNO as GA INNER JOIN GAME as G ON G.id = GA.GAME_id WHERE GA.ALUNO_matricula = ?",
+          "SELECT G.* FROM ta_game_aluno as GA INNER JOIN tb_game as G ON G.id = GA.tb_game_id WHERE GA.tb_aluno_matricula = ?",
           [matricula],
           (err, results, fields) => {
             if (err) return console.log(err);
@@ -39,7 +39,7 @@ class GameController {
       const { nome, dta_inicio, dta_fim, disciplinaId, matricula } = req.body;
 
       db.query(
-        "INSERT INTO GAME(nome, dta_inicio, dta_fim, DISCIPLINA_has_PROFESSOR_DISCIPLINA_id, DISCIPLINA_has_PROFESSOR_PROFESSOR_matricula) VALUES(?, ?, ?, ?, ?)",
+        "INSERT INTO tb_game(nome, dta_inicio, dta_fim, ta_professor_disciplina_tb_disciplina_id, ta_professor_disciplina_tb_professor_matricula) VALUES(?, ?, ?, ?, ?)",
         [nome, dta_inicio, dta_fim, disciplinaId, matricula],
         err => {
           if (err) return console.log(err);
@@ -56,7 +56,7 @@ class GameController {
       const { gameId } = req.body;
 
       db.query(
-        "SELECT A.* FROM GAME_has_ALUNO as GA INNER JOIN ALUNO as A ON GA.ALUNO_matricula = A.matricula WHERE GAME_id = ?",
+        "SELECT A.* FROM ta_game_aluno as GA INNER JOIN tb_aluno as A ON GA.tb_aluno_matricula = A.matricula WHERE GA.tb_game_id = ?",
         [gameId],
         (err, results, field) => {
           if (err) return console.log(err);
@@ -73,7 +73,7 @@ class GameController {
       const { gameId, matricula } = req.body;
 
       db.query(
-        "INSERT INTO GAME_has_ALUNO(GAME_id, ALUNO_matricula) VALUES(?, ?)",
+        "INSERT INTO ta_game_aluno(tb_game_id, tb_aluno_matricula) VALUES(?, ?)",
         [gameId, matricula],
         err => {
           if (err) return console.log(err);

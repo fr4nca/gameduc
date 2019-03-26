@@ -6,7 +6,7 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const GameController = require("../../controllers/gameController");
 
-// @route   GET api/games/
+// @route   GET api/game/
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private
@@ -16,7 +16,7 @@ router.get(
   GameController.getGames
 );
 
-// @route   POST api/games/
+// @route   POST api/game/
 // @desc    Create a game
 // @params  Nome, data de inicio, data de fim, id disciplina and matricula professor
 // @access  private
@@ -27,7 +27,7 @@ router.post(
   GameController.createGame
 );
 
-// @route   GET api/games/getAlunoGame
+// @route   GET api/game/getAlunoGame
 // @desc    Get all alunos from a game
 // @params  Game id
 // @access  private
@@ -37,7 +37,7 @@ router.get(
   GameController.getAlunoGame
 );
 
-// @route   POST api/games/addAlunoGame
+// @route   POST api/game/addAlunoGame
 // @desc    Add a aluno to a game
 // @params  Game ID and aluno matricula
 // @access  private
