@@ -22,7 +22,7 @@ class UserController {
         "SELECT * FROM tb_user where email = ?",
         [email],
         (err, results, fields) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           let user;
           if (results.length > 0) user = results[0];
           if (user) {
