@@ -159,6 +159,25 @@ class UserController {
       return console.log(e);
     }
   }
+
+  static deleteUser(req, res, next) {
+    try {
+      const { papel, id } = req.user;
+      const { matricula } = req.body;
+      if (papel === "professor") {
+        db.query(
+          `DELETE FROM tb_professor WHERE matricula = ?; DELETE FROM tb_user WHERE id = ?`,
+          [matricula, id],
+          (err, results, fields) => {
+            if (err) return res.status(400).json({ error: err.sqlMessage });
+            return res.status(200).json({ message: "Usuário deletado" });
+          }
+        );
+      }
+    } catch (e) {
+      return console.log(e);
+    }
+  }
 }
 
 module.exports = UserController;
