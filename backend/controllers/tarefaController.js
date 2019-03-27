@@ -81,6 +81,7 @@ class TarefaController {
           if (regra) {
             return regra;
           }
+          console.log("alcrim");
         }
       );
     } catch (e) {
