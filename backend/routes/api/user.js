@@ -42,8 +42,8 @@ router.get(
 );
 
 // @route   DELETE api/user/
-// @desc    Returns all alunos
-// @returns All alunos
+// @desc    Delete a user
+// @params  Matricula
 // @access  private
 router.delete(
   "/",
