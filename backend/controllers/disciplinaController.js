@@ -4,7 +4,7 @@ class DisciplinaController {
   static getDisciplinas(req, res, next) {
     try {
       db.query("SELECT * FROM tb_disciplina", (err, results, fields) => {
-        if (err) return console.log(err);
+        if (err) return res.status(400).json({ error: err.sqlMessage });
         return res.json(results);
       });
     } catch (e) {
@@ -20,7 +20,7 @@ class DisciplinaController {
         "INSERT INTO tb_disciplina(nome) VALUES(?)",
         [nome],
         (err, results, fields) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json({ message: "Disciplina criada com sucesso" });
         }
       );
@@ -37,7 +37,7 @@ class DisciplinaController {
         "SELECT D.id, D.nome FROM ta_professor_disciplina as DP INNER JOIN tb_disciplina as D ON D.id= DP.tb_disciplina_id WHERE DP.tb_professor_matricula = ?",
         [matricula],
         (err, results, fields) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json(results);
         }
       );
@@ -54,7 +54,7 @@ class DisciplinaController {
         "INSERT INTO ta_professor_disciplina VALUES(?, ?)",
         [disciplinaId, matricula],
         (err, results, fields) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json({ message: "Disciplina vinculada com sucesso" });
         }
       );

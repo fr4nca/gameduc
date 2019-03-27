@@ -94,7 +94,7 @@ class UserController {
         "SELECT * FROM tb_user where email = ?",
         [email],
         async (err, results, fields) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           let user;
           if (results.length > 0) user = results[0];
           if (!user) {
@@ -114,7 +114,7 @@ class UserController {
                 keys.jwtsecret,
                 { expiresIn: 3600 },
                 (err, token) => {
-                  if (err) throw err;
+                  if (err) console.log(err);
                   res.json({ token: "Bearer " + token });
                 }
               );
@@ -138,8 +138,7 @@ class UserController {
         `SELECT * FROM tb_${papel} WHERE tb_user_id = ?`,
         [id],
         (err, results, fields) => {
-          if (err)
-            return res.status(400).json({ error: "Ocorreu algum problema" });
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           let user;
           if (results.length > 0) user = results[0];
           return res.json(user);
@@ -153,8 +152,7 @@ class UserController {
   static getAlunos(req, res, next) {
     try {
       db.query(`SELECT * FROM tb_aluno`, (err, results, fields) => {
-        if (err)
-          return res.status(400).json({ error: "Ocorreu algum problema" });
+        if (err) return res.status(400).json({ error: err.sqlMessage });
         return res.json(results);
       });
     } catch (e) {

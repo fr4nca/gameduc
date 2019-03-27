@@ -10,7 +10,7 @@ class GameController {
           "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ?",
           [matricula],
           (err, results, fields) => {
-            if (err) return console.log(err);
+            if (err) return res.status(400).json({ error: err.sqlMessage });
             return res.json(results);
           }
         );
@@ -24,7 +24,7 @@ class GameController {
           "SELECT G.* FROM ta_game_aluno as GA INNER JOIN tb_game as G ON G.id = GA.tb_game_id WHERE GA.tb_aluno_matricula = ?",
           [matricula],
           (err, results, fields) => {
-            if (err) return console.log(err);
+            if (err) return res.status(400).json({ error: err.sqlMessage });
             return res.json(results);
           }
         );
@@ -42,7 +42,7 @@ class GameController {
         "INSERT INTO tb_game(nome, dta_inicio, dta_fim, ta_professor_disciplina_tb_disciplina_id, ta_professor_disciplina_tb_professor_matricula) VALUES(?, ?, ?, ?, ?)",
         [nome, dta_inicio, dta_fim, disciplinaId, matricula],
         err => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json({ message: "Game criado com sucesso" });
         }
       );
@@ -59,7 +59,7 @@ class GameController {
         "SELECT A.* FROM ta_game_aluno as GA INNER JOIN tb_aluno as A ON GA.tb_aluno_matricula = A.matricula WHERE GA.tb_game_id = ?",
         [gameId],
         (err, results, field) => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json(results);
         }
       );
@@ -76,7 +76,7 @@ class GameController {
         "INSERT INTO ta_game_aluno(tb_game_id, tb_aluno_matricula) VALUES(?, ?)",
         [gameId, matricula],
         err => {
-          if (err) return console.log(err);
+          if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json({ message: "Aluno adicionado com sucesso" });
         }
       );

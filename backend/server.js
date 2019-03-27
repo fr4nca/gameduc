@@ -6,6 +6,7 @@ const passport = require("passport");
 const userRoutes = require("./routes/api/user");
 const gameRoutes = require("./routes/api/game");
 const disciplinaRoutes = require("./routes/api/disciplina");
+const regraRoutes = require("./routes/api/regra");
 
 const app = express();
 
@@ -20,6 +21,7 @@ require("./config/passport")(passport);
 app.use("/api/user", userRoutes);
 app.use("/api/game", gameRoutes);
 app.use("/api/disciplina", disciplinaRoutes);
+app.use("/api/regra", regraRoutes);
 
 app.use("/", (req, res) => {
   res.status(404).send("Route not found");
