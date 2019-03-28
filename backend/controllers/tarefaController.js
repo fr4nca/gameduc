@@ -44,43 +44,43 @@ class TarefaController {
         gameId
       } = req.body;
 
-      let regra = vinculateTarefaRegra(classificacao, tag);
+      const { papel } = req.user;
+
+      let validado;
+
+      if (papel === "professor") {
+        validado = true;
+      } else if (papel === "aluno") {
+        validado = false;
+      }
 
       db.query(
-        "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, tb_regra_id, tb_aluno_matricula, tb_game_id) VALUES(?, ?, ?, ?, ?, ?, ?)",
-        [
-          classificacao,
-          descricao,
-          dta_resolucao,
-          tag,
-          regra.id,
-          matricula,
-          gameId
-        ],
-        (err, results, fields) => {
-          if (err) return res.status(400).json({ error: err.sqlMessage });
-          return res
-            .status(200)
-            .json({ message: "Tarefa adicionada com sucesso" });
-        }
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  vinculateTarefaRegra(classificacao, tag) {
-    try {
-      db.query(
-        "SELECT * FROM tb_regra WHERE classificacao = ? AND tag = ?",
-        [classificacao, tag],
+        "SELECT * FROM tb_regra WHERE tb_game_id = ? and classificacao = ? AND tag = ?",
+        [gameId, classificacao, tag],
         (err, results, fields) => {
           if (err) return res.status(400).json({ error: err.sqlMessage });
           let regra;
           if (results.length > 0) regra = results[0];
-          if (regra) {
-            return regra;
-          }
+          console.log(regra);
+          db.query(
+            "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, validado, tb_regra_id, tb_aluno_matricula, tb_game_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+              classificacao,
+              descricao,
+              dta_resolucao,
+              tag,
+              validado,
+              regra.id,
+              matricula,
+              gameId
+            ],
+            (err, results, fields) => {
+              if (err) return res.status(400).json({ error: err.sqlMessage });
+              return res
+                .status(200)
+                .json({ message: "Tarefa adicionada com sucesso" });
+            }
+          );
         }
       );
     } catch (e) {

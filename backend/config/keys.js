@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== "production") {
     dbhost: "localhost",
     dbuser: "root",
     dbpassword: "62013",
-    dbname: "gameduca",
+    dbname: "gameduc",
     jwtsecret: "secret"
   };
 } else {

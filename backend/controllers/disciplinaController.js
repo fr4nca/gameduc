@@ -52,7 +52,7 @@ class DisciplinaController {
 
       db.query(
         "INSERT INTO ta_professor_disciplina VALUES(?, ?)",
-        [disciplinaId, matricula],
+        [matricula, disciplinaId],
         (err, results, fields) => {
           if (err) return res.status(400).json({ error: err.sqlMessage });
           return res.json({ message: "Disciplina vinculada com sucesso" });
