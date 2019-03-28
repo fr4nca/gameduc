@@ -31,7 +31,7 @@ class UserController {
 
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(senha, salt, async (err, hashed) => {
-          if (err) return console.log(err);
+          if (err) throw err;
           if (papel === "professor") {
             await db.query(
               `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
@@ -74,7 +74,9 @@ class UserController {
         });
       });
     } catch (err) {
-      return res.status(400).json({ error: err.sqlMessage });
+      if (err.sqlMessage)
+        return res.status(400).json({ error: err.sqlMessage });
+      else return res.status(400).json({ error: err });
     }
   }
 
@@ -108,7 +110,9 @@ class UserController {
         return res.status(400).json({ error: "Senha incorreta" });
       }
     } catch (err) {
-      return res.status(400).json({ error: err.sqlMessage });
+      if (err.sqlMessage)
+        return res.status(400).json({ error: err.sqlMessage });
+      else return res.status(400).json({ error: err });
     }
   }
 

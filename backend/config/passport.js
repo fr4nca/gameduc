@@ -18,6 +18,7 @@ module.exports = passport => {
         );
 
         let user;
+
         if (results.length > 0) user = results[0];
 
         if (user) {
