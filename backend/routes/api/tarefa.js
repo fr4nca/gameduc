@@ -26,4 +26,14 @@ router.get(
   TarefaController.getTarefasByRegra
 );
 
+// @route   POST api/tarefa/
+// @desc    Create tarefa
+// @params  Classificacao, descricao, data de resolucao, tag, matricula, game id
+// @access  private
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  TarefaController.createTarefa
+);
+
 module.exports = router;

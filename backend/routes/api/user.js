@@ -41,4 +41,14 @@ router.get(
   UserController.getAlunos
 );
 
+// @route   DELETE api/user/
+// @desc    Delete a user
+// @params  Matricula
+// @access  private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  UserController.deleteUser
+);
+
 module.exports = router;

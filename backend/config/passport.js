@@ -10,27 +10,24 @@ opts.secretOrKey = keys.jwtsecret;
 
 module.exports = passport => {
   passport.use(
-    new JwtStrategy(opts, (payload, done) => {
+    new JwtStrategy(opts, async (payload, done) => {
       try {
-        db.query(
+        const results = await db.query(
           "SELECT id, email, papel FROM tb_user where id = ?",
-          [payload.id],
-          (err, results, fields) => {
-            if (err) {
-              return done(err, false);
-            }
-            let user;
-            if (results.length > 0) user = results[0];
-
-            if (user) {
-              return done(null, user);
-            } else {
-              return done(null, false);
-            }
-          }
+          [payload.id]
         );
-      } catch (e) {
-        console.log(e);
+
+        let user;
+
+        if (results.length > 0) user = results[0];
+
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      } catch (err) {
+        return done(err, false);
       }
     })
   );

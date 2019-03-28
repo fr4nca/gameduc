@@ -1,39 +1,29 @@
 const db = require("../config/db");
 
 class TarefaController {
-  static getTarefasByGame(req, res, next) {
-    try {
-      const { gameId } = req.body;
-      db.query(
-        "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
-        [gameId],
-        (err, results, fields) => {
-          if (err) return res.status(400).json({ error: err.sqlMessage });
-          return res.json(results);
-        }
-      );
-    } catch (e) {
-      console.log(e);
-    }
+  static async getTarefasByGame(req, res, next) {
+    const { gameId } = req.body;
+    const results = await db.query(
+      "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
+      [gameId]
+    );
+    return res.json(results);
   }
 
-  static getTarefasByRegra(req, res, next) {
+  static async getTarefasByRegra(req, res, next) {
     try {
       const { regraId } = req.body;
-      db.query(
+      const results = await db.query(
         "SELECT * FROM tb_tarefa WHERE tb_regra_id = ?",
-        [regraId],
-        (err, results, fields) => {
-          if (err) return res.status(400).json({ error: err.sqlMessage });
-          return res.json(results);
-        }
+        [regraId]
       );
-    } catch (e) {
-      console.log(e);
+      return res.json(results);
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
     }
   }
 
-  static createTarefa(req, res, next) {
+  static async createTarefa(req, res, next) {
     try {
       const {
         classificacao,
@@ -44,48 +34,46 @@ class TarefaController {
         gameId
       } = req.body;
 
-      let regra = vinculateTarefaRegra(classificacao, tag);
+      const { papel } = req.user;
 
-      db.query(
-        "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, tb_regra_id, tb_aluno_matricula, tb_game_id) VALUES(?, ?, ?, ?, ?, ?, ?)",
+      let validado;
+
+      if (papel === "professor") {
+        validado = true;
+      } else if (papel === "aluno") {
+        validado = false;
+      }
+
+      const results = await db.query(
+        "SELECT * FROM tb_regra WHERE tb_game_id = ? and classificacao = ? AND tag = ?",
+        [gameId, classificacao, tag]
+      );
+
+      let regra;
+
+      if (results.length > 0) {
+        regra = results[0];
+      } else {
+        return res.status(400).json({ message: "Regra não encontrada" });
+      }
+
+      await db.query(
+        "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, validado, tb_regra_id, tb_aluno_matricula, tb_game_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
         [
           classificacao,
           descricao,
           dta_resolucao,
           tag,
+          validado,
           regra.id,
           matricula,
           gameId
-        ],
-        (err, results, fields) => {
-          if (err) return res.status(400).json({ error: err.sqlMessage });
-          return res
-            .status(200)
-            .json({ message: "Tarefa adicionada com sucesso" });
-        }
+        ]
       );
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
-  vinculateTarefaRegra(classificacao, tag) {
-    try {
-      db.query(
-        "SELECT * FROM tb_regra WHERE classificacao = ? AND tag = ?",
-        [classificacao, tag],
-        (err, results, fields) => {
-          if (err) return res.status(400).json({ error: err.sqlMessage });
-          let regra;
-          if (results.length > 0) regra = results[0];
-          if (regra) {
-            return regra;
-          }
-          console.log("alcrim");
-        }
-      );
-    } catch (e) {
-      console.log(e);
+      return res.status(200).json({ message: "Tarefa adicionada com sucesso" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
     }
   }
 }
