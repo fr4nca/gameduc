@@ -24,7 +24,15 @@ export const loginUser = userData => async dispatch => {
 
     dispatch(setCurrentProfile());
   } catch (e) {
-    console.log(e);
+    console.log(e.response.data);
+  }
+};
+
+export const registerUser = user => async dispatch => {
+  try {
+    await axios.post("http://localhost:5000/api/user/register", user);
+  } catch (e) {
+    console.log(e.response.data);
   }
 };
 
@@ -45,7 +53,7 @@ export const setCurrentProfile = () => async dispatch => {
       payload: data
     });
   } catch (e) {
-    console.log(e);
+    console.log(e.response);
   }
 };
 

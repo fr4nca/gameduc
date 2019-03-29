@@ -8,8 +8,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import Login from "./components/Auth/Login/Login";
+import Register from "./components/Auth/Register/Register";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
