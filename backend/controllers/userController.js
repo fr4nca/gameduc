@@ -24,9 +24,7 @@ class UserController {
         [email]
       );
 
-      let user;
-      if (userResults.length > 0) user = userResults[0];
-      if (user) {
+      if (userResults.length > 0) {
         return res.status(400).json({ error: "Email ja cadastrado" });
       }
 
@@ -36,9 +34,7 @@ class UserController {
         [matricula, matricula]
       );
 
-      let perfil;
-      if (perfilResults.length > 0) perfil = perfilResults[0];
-      if (perfil) {
+      if (perfilResults[0].length > 0 || perfilResults[1].length > 0) {
         return res.status(400).json({ error: "Matricula ja cadastrada" });
       }
 
