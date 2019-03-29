@@ -19,14 +19,27 @@ class UserController {
         papel
       } = req.body;
 
-      const results = await db.query("SELECT * FROM tb_user where email = ?", [
-        email
-      ]);
+      const userResults = await db.query(
+        "SELECT * FROM tb_user where email = ?",
+        [email]
+      );
 
       let user;
-      if (results.length > 0) user = results[0];
+      if (userResults.length > 0) user = userResults[0];
       if (user) {
         return res.status(400).json({ error: "Email ja cadastrado" });
+      }
+
+      const perfilResults = await db.query(
+        `SELECT * FROM tb_aluno where matricula = ?;
+         SELECT * FROM tb_professor where matricula = ?`,
+        [matricula, matricula]
+      );
+
+      let perfil;
+      if (perfilResults.length > 0) perfil = perfilResults[0];
+      if (perfil) {
+        return res.status(400).json({ error: "Matricula ja cadastrada" });
       }
 
       bcrypt.genSalt(10, (err, salt) => {
