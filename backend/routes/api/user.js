@@ -46,7 +46,7 @@ router.get(
 // @params  Matricula
 // @access  private
 router.delete(
-  "/",
+  "/deleteUser",
   passport.authenticate("jwt", { session: false }),
   UserController.deleteUser
 );

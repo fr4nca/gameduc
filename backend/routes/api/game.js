@@ -48,4 +48,17 @@ router.post(
   GameController.addAlunoGame
 );
 
+router.delete(
+  "/deleteGame",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  GameController.deleteGame
+)
+
+router.delete(
+  "/deleteGameAluno",
+  passport.authenticate("jwt", {session: false}),
+  GameController.deleteGameAluno
+)
+
 module.exports = router;

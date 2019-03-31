@@ -76,6 +76,19 @@ class TarefaController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async deleteTarefa (req, res, next) {
+    try {
+      const { tarefaId } = req.body
+      await db.query (
+        `DELETE FROM tb_tarefa WHERE id = ?`, [tarefaId]
+      )
+      return res.status(200).json({message: "Tarefa Deletada!"})
+    } catch (err) {
+      return res.status(400).json({error: err.sqlMessage})
+    }
+    
+  }
 }
 
 module.exports = TarefaController;

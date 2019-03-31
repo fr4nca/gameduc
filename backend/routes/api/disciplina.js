@@ -50,4 +50,17 @@ router.get(
   DisciplinaController.getDisciplinaProfessor
 );
 
+router.delete(
+  "/deleteDisciplina",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  DisciplinaController.deleteDisciplina
+)
+
+router.delete(
+  "/deleteProfDisciplina", 
+  passport.authenticate("jwt", {session: false}),
+  DisciplinaController.deleteProfDisciplina
+)
+
 module.exports = router;

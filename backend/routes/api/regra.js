@@ -27,4 +27,11 @@ router.post(
   RegraController.createRegra
 );
 
+router.delete(
+  "/deleteRegra",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  RegraController.deleteRegra
+)
+
 module.exports = router;
