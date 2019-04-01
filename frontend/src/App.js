@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+
 import { Provider } from "react-redux";
 import store from "./store";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -10,6 +13,7 @@ import setAuthToken from "./utils/setAuthToken";
 
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
+import Navbar from "./pages/common/Navbar";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -31,6 +35,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
+          <Navbar />
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
