@@ -42,6 +42,10 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
 
   dispatch(setCurrentUser({}));
+  dispatch({
+    type: SET_CURRENT_PROFILE,
+    payload: {}
+  });
 };
 
 export const setCurrentProfile = () => async dispatch => {

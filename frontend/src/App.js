@@ -6,7 +6,11 @@ import "@fortawesome/fontawesome-free/css/all.css";
 
 import { Provider } from "react-redux";
 import store from "./store";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+import {
+  setCurrentUser,
+  logoutUser,
+  setCurrentProfile
+} from "./actions/authActions";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -21,6 +25,7 @@ if (localStorage.getItem("@Gameduc:userToken")) {
   const decoded = jwt_decode(localStorage.getItem("@Gameduc:userToken"));
 
   store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setCurrentProfile());
 
   const currentTime = Date.now() / 1000;
 
