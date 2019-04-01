@@ -25,7 +25,6 @@ class Login extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state);
   };
 
   handleSubmit = async e => {
@@ -43,26 +42,66 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="card">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: 90 + "vh"
+        }}
+      >
+        <div
+          className="container card"
+          style={{
+            width: 550 + "px",
+            padding: 1.5 + "rem"
+          }}
+        >
+          <h3 className="title has-text-centered">Log in</h3>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="email">Email</label>
-            <input
-              class="input is-rounded"
-              type="email"
-              name="email"
-              id="email"
-              onChange={this.handleChange}
-            />
-            <label htmlFor="senha">Senha</label>
-            <input
-              class="input is-rounded"
-              type="password"
-              name="senha"
-              id="senha"
-              onChange={this.handleChange}
-            />
-            <button type="submit">Entrar</button>
+            <div className="field">
+              <p className="control has-icons-left has-icons-right">
+                <input
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                  name="email"
+                  required
+                  className="input"
+                  type="email"
+                  placeholder="Email"
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope" />
+                </span>
+                <span className="icon is-small is-right">
+                  <i className="fas fa-check" />
+                </span>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control has-icons-left">
+                <input
+                  onChange={this.handleChange}
+                  required
+                  value={this.state.senha}
+                  name="senha"
+                  className="input"
+                  type="password"
+                  placeholder="Senha"
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-lock" />
+                </span>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control">
+                <input
+                  type="submit"
+                  className="button is-success is-pulled-right"
+                  value="Entrar"
+                />
+              </p>
+            </div>
           </form>
         </div>
       </div>

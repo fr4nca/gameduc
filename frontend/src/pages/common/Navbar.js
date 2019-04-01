@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div className="container">
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            Gameduc
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="/">
+            GAMEDUC
           </a>
-
           <a
             href="#!"
             role="button"
-            class="navbar-burger burger"
+            className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbar_menu"
@@ -24,19 +23,19 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div id="navbar_menu" class="navbar-menu">
+        <div id="navbar_menu" className="navbar-menu">
           {/* 
             TODO: Display different menu options if logged-in
           */}
 
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
                 {/* TODO: Display logout button if logged-in */}
-                <Link to="/register" class="button is-primary">
+                <Link to="/register" className="button is-primary">
                   <strong>Registrar</strong>
                 </Link>
-                <Link to="/login" class="button is-light">
+                <Link to="/login" className="button is-light">
                   Log in
                 </Link>
               </div>
