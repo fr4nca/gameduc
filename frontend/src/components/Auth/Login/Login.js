@@ -43,24 +43,28 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="senha">Senha</label>
-          <input
-            type="password"
-            name="senha"
-            id="senha"
-            onChange={this.handleChange}
-          />
-          <button type="submit">Entrar</button>
-        </form>
+      <div className="container">
+        <div className="card">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="email">Email</label>
+            <input
+              class="input is-rounded"
+              type="email"
+              name="email"
+              id="email"
+              onChange={this.handleChange}
+            />
+            <label htmlFor="senha">Senha</label>
+            <input
+              class="input is-rounded"
+              type="password"
+              name="senha"
+              id="senha"
+              onChange={this.handleChange}
+            />
+            <button type="submit">Entrar</button>
+          </form>
+        </div>
       </div>
     );
   }
