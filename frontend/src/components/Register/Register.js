@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import { connect } from "react-redux";
-import { registerUser } from "../../../actions/authActions";
+import { registerUser } from "../../actions/authActions";
 
 export class Register extends Component {
   state = {
@@ -79,7 +79,7 @@ export class Register extends Component {
         }}
       >
         <div
-          className="container card"
+          className="container box"
           style={{
             width: 550 + "px",
             padding: 1.5 + "rem"

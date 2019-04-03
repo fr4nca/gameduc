@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { loginUser } from "../../../actions/authActions";
+import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
   state = {
@@ -11,13 +11,13 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(next) {
     if (next.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }
   }
 
@@ -50,7 +50,7 @@ class Login extends Component {
         }}
       >
         <div
-          className="container card"
+          className="container box"
           style={{
             width: 550 + "px",
             padding: 1.5 + "rem"

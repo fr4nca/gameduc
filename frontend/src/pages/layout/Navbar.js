@@ -1,26 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
+
+import classNames from "classnames";
 
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-function Navbar({ auth, logoutUser }) {
+function Navbar({ auth, logoutUser, location }) {
   const { isAuthenticated } = auth;
+  const [open, toggleOpen] = useState(false);
 
   return (
-    <div className="container">
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav
+      className="navbar has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/">
+          <Link
+            className="navbar-item"
+            to="/"
+            onClick={() => toggleOpen(false)}
+          >
             GAMEDUC
-          </a>
+          </Link>
           <a
-            href="#!"
+            onClick={() => {
+              toggleOpen(!open);
+            }}
             role="button"
             className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbar_menu"
+            data-target="navbarBasicExample"
           >
             <span aria-hidden="true" />
             <span aria-hidden="true" />
@@ -28,34 +41,70 @@ function Navbar({ auth, logoutUser }) {
           </a>
         </div>
 
-        <div id="navbar_menu" className="navbar-menu">
+        <div
+          id="navbar_menu"
+          className={classNames({ "navbar-menu": true, "is-active": open })}
+        >
           {/* 
             TODO: Display different menu options if logged-in
           */}
 
           <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                {isAuthenticated ? (
-                  <Link to="/login" onClick={logoutUser} className="button">
-                    Log out
-                  </Link>
-                ) : (
-                  <>
-                    <Link to="/register" className="button is-primary">
-                      <strong>Registrar</strong>
-                    </Link>
-                    <Link to="/login" className="button is-light">
-                      Log in
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
+            {isAuthenticated ? (
+              <Link
+                to="/login"
+                onClick={() => {
+                  logoutUser();
+                  toggleOpen(false);
+                }}
+                className="navbar-item is-tab"
+              >
+                <span className="icon">
+                  <i className="fa fa-sign-out-alt" />
+                </span>
+              </Link>
+            ) : (
+              <>
+                <Link
+                  to="/register"
+                  className={classNames({
+                    "navbar-item": true,
+                    "is-tab": true,
+                    "is-active": location.pathname === "/register"
+                  })}
+                  onClick={() => toggleOpen(false)}
+                >
+                  {!open ? (
+                    <span className="icon">
+                      <i className="fa fa-user-plus" />
+                    </span>
+                  ) : (
+                    <span>Registrar</span>
+                  )}
+                </Link>
+                <Link
+                  to="/login"
+                  className={classNames({
+                    "navbar-item": true,
+                    "is-tab": true,
+                    "is-active": location.pathname === "/login"
+                  })}
+                  onClick={() => toggleOpen(false)}
+                >
+                  {!open ? (
+                    <span className="icon">
+                      <i className="fa fa-sign-in-alt" />
+                    </span>
+                  ) : (
+                    <span>Login</span>
+                  )}
+                </Link>
+              </>
+            )}
           </div>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 
@@ -63,7 +112,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Navbar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(Navbar)
+);
