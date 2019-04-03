@@ -51,6 +51,30 @@ class DisciplinaController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async deleteDisciplina (req, res, next) {
+    try {
+      const { disciplinaID } = req.body
+      await db.query (
+        `DELETE FROM tb_disciplina WHERE id = ? `, [disciplinaID]
+      )
+      return res.status(200).json({message: "Disciplina deletada"})
+    }catch(err) {
+      return res.status(400).json({erro: err.sqlMessage})
+    }
+  }
+
+  static async deleteProfDisciplina(req, res, next){
+    try{
+      const {matricula, disciplinaId} = req.body
+      await db.query(
+        `DELETE FROM ta_professor_disciplina WHERE tb_professor_matricula = ? AND tb_disciplina_id = ?`, [matricula, disciplinaId]
+      )
+      return res.status(200).json({message: "Disciplina desvinculada"})
+    }catch(err){
+      return res.status(400).json({erro: err.sqlMessage})
+    }
+  }
 }
 
 module.exports = DisciplinaController;

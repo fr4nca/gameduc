@@ -48,4 +48,25 @@ router.post(
   GameController.addAlunoGame
 );
 
+// @route   DELETE api/game/deleteGame
+// @desc    Delete a game
+// @params  Game ID
+// @access  private
+router.delete(
+  "/deleteGame",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  GameController.deleteGame
+)
+
+// @route   DELETE api/game/deleteGameAluno
+// @desc    Delete a aluno to a game
+// @params  Game ID and Matricula
+// @access  private
+router.delete(
+  "/deleteGameAluno",
+  passport.authenticate("jwt", {session: false}),
+  GameController.deleteGameAluno
+)
+
 module.exports = router;

@@ -36,4 +36,11 @@ router.post(
   TarefaController.createTarefa
 );
 
+router.delete(
+  "/deleteTarefa",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(['professor']),
+  TarefaController.deleteTarefa
+)
+
 module.exports = router;
