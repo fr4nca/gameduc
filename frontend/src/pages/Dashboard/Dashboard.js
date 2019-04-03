@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, withRouter } from "react-router-dom";
+import classNames from "classnames";
+
 import Games from "../../components/Games/Games";
 
-export class Dashboard extends Component {
+class Dashboard extends Component {
   render() {
+    const { pathname } = this.props.location;
     return (
       <div className="dashboard">
         <div className="dashboard-panel is-medium has-thick-padding is-hidden-mobile">
@@ -11,39 +14,38 @@ export class Dashboard extends Component {
             <p className="menu-label">Geral</p>
             <ul className="menu-list">
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link
+                  className={classNames({
+                    "is-active": pathname === "/dashboard"
+                  })}
+                  to="/dashboard"
+                >
+                  Dashboard
+                </Link>
               </li>
               <li>
-                <Link to="/dashboard/games">Games</Link>
+                <Link
+                  className={classNames({
+                    "is-active": pathname === "/dashboard/games"
+                  })}
+                  to="/dashboard/games"
+                >
+                  Games
+                </Link>
               </li>
             </ul>
-            <p className="menu-label">Administração</p>
+            <p className="menu-label">Configurações</p>
             <ul className="menu-list">
               <li>
-                <a>Team Settings</a>
-              </li>
-              <li>
-                <a className="is-active">Manage Your Team</a>
+                <a>Perfil</a>
                 <ul>
                   <li>
-                    <a>Members</a>
+                    <a>Editar</a>
                   </li>
                   <li>
-                    <a>Plugins</a>
-                  </li>
-                  <li>
-                    <a>Add a member</a>
+                    <a>Remover</a>
                   </li>
                 </ul>
-              </li>
-              <li>
-                <a>Invitations</a>
-              </li>
-              <li>
-                <a>Cloud Storage Environment Settings</a>
-              </li>
-              <li>
-                <a>Authentication</a>
               </li>
             </ul>
           </aside>
@@ -59,4 +61,4 @@ export class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);
