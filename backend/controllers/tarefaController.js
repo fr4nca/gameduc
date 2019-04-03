@@ -58,7 +58,7 @@ class TarefaController {
       }
 
       await db.query(
-        "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, validado, tb_regra_id, tb_aluno_matricula, tb_game_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO tb_tarefa(classificacao, descricao, dta_resolucao, tag, validado, tb_regra_id, tb_aluno_matricula) VALUES(?, ?, ?, ?, ?, ?, ?)",
         [
           classificacao,
           descricao,
@@ -66,8 +66,7 @@ class TarefaController {
           tag,
           validado,
           regra.id,
-          matricula,
-          gameId
+          matricula
         ]
       );
 
