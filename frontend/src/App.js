@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import "./App.css";
 
 import { Provider } from "react-redux";
 import store from "./store";

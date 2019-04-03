@@ -59,9 +59,7 @@ function Navbar({ auth, logoutUser, location }) {
                 }}
                 className="navbar-item is-tab"
               >
-                <span className="icon">
-                  <i className="fa fa-sign-out-alt" />
-                </span>
+                Logout
               </Link>
             ) : (
               <>
@@ -74,13 +72,7 @@ function Navbar({ auth, logoutUser, location }) {
                   })}
                   onClick={() => toggleOpen(false)}
                 >
-                  {!open ? (
-                    <span className="icon">
-                      <i className="fa fa-user-plus" />
-                    </span>
-                  ) : (
-                    <span>Registrar</span>
-                  )}
+                  <span>Registrar</span>
                 </Link>
                 <Link
                   to="/login"
@@ -91,13 +83,7 @@ function Navbar({ auth, logoutUser, location }) {
                   })}
                   onClick={() => toggleOpen(false)}
                 >
-                  {!open ? (
-                    <span className="icon">
-                      <i className="fa fa-sign-in-alt" />
-                    </span>
-                  ) : (
-                    <span>Login</span>
-                  )}
+                  <span>Login</span>
                 </Link>
               </>
             )}

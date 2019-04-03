@@ -14,7 +14,9 @@ const PrivateRoute = ({ component: Component, auth, allowed, ...rest }) => {
           checkRole(allowed, auth.user.papel) ? (
             <Component {...props} />
           ) : (
-            <h1>Poti nãum</h1>
+            <div className="container box" style={{ padding: 1 + "rem" }}>
+              <h2>Você não tem permissão para visitar esta página! :(</h2>
+            </div>
           )
         ) : (
           <Redirect to="/login" />
