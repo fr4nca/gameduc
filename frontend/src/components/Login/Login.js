@@ -97,7 +97,7 @@ class Login extends Component {
               <p className="control">
                 <input
                   type="submit"
-                  className="button is-success is-pulled-right"
+                  className="button is-link is-pulled-right is-rounded"
                   value="Entrar"
                 />
               </p>
