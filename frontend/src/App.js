@@ -17,7 +17,7 @@ import setAuthToken from "./utils/setAuthToken";
 
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
-import Navbar from "./pages/common/Navbar";
+import Navbar from "./components/common/Navbar";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
