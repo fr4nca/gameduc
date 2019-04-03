@@ -54,7 +54,7 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
                   className={classNames({
                     "navbar-item": true,
                     "is-tab": true,
-                    "is-active": pathname === "/dashboard"
+                    "is-active": pathname.includes("/dashboard")
                   })}
                 >
                   Dashboard
