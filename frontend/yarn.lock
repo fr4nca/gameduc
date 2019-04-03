@@ -2063,6 +2063,11 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bulma-dashboard@^0.1.40:
+  version "0.1.40"
+  resolved "https://registry.yarnpkg.com/bulma-dashboard/-/bulma-dashboard-0.1.40.tgz#57e393a308ebca5746b7576817a6a77cc7224667"
+  integrity sha512-BkiGvhShPQx3ww3WnfH38OrTEr7s5qUmxfmiX5GZTee18gDXAU5imhBY9wJ6mzXq+tMBsa+PsLBheKggb9Llkw==
+
 bulma@^0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"

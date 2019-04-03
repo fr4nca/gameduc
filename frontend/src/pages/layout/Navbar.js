@@ -18,13 +18,13 @@ function Navbar({ auth, logoutUser, location }) {
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link
+          <a
             className="navbar-item"
-            to="/"
+            href="/dashboard"
             onClick={() => toggleOpen(false)}
           >
             GAMEDUC
-          </Link>
+          </a>
           <a
             onClick={() => {
               toggleOpen(!open);
