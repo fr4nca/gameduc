@@ -15,7 +15,7 @@ class Dashboard extends Component {
     const { pathname } = this.props.location;
 
     return (
-      <div className="dashboard">
+      <div className="dashboard py-1">
         <div
           className="dashboard-panel has-background-black is-small has-thick-padding is-hidden-touch"
           style={{ height: 100 + "vh" }}
