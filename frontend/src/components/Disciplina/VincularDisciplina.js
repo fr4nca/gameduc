@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import classNames from "classnames";
 
 import {
   getDisciplinas,
@@ -33,20 +32,33 @@ class VincularDisciplina extends Component {
   render() {
     const { disciplinas } = this.props.disciplina;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <select
-          value={this.state.disciplinaId}
-          onChange={this.handleChange}
-          name="disciplinaId"
-        >
-          {disciplinas.map(d => (
-            <option key={d.id} value={d.id}>
-              {d.nome}
-            </option>
-          ))}
-        </select>
-        <input type="submit" value="Vincular" />
-      </form>
+      <div className="box">
+        <form onSubmit={this.handleSubmit}>
+          <div className="field">
+            <div className="select is-rounded">
+              <select
+                value={this.state.disciplinaId}
+                onChange={this.handleChange}
+                name="disciplinaId"
+              >
+                <option value="" disabled>
+                  Selecione a opção
+                </option>
+                {disciplinas.map(d => (
+                  <option key={d.id} value={d.id}>
+                    {d.nome}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <input
+            type="submit"
+            value="Vincular"
+            className="button is-rounded is-link"
+          />
+        </form>
+      </div>
     );
   }
 }

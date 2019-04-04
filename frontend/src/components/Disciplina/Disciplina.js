@@ -5,7 +5,16 @@ export class Disciplina extends Component {
     const { disciplina } = this.props;
     return (
       <div>
-        <h1>{disciplina.nome}</h1>
+        <p>
+          {disciplina.nome}
+          <span
+            onClick={() => {}}
+            style={{ cursor: "pointer" }}
+            className="icon has-text-info"
+          >
+            <i className="fas fa-arrow-right is-pulled-right" />
+          </span>
+        </p>
       </div>
     );
   }

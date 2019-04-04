@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-function Sidebar({ location, auth }) {
+function Sidebar({ location, auth, logoutUser }) {
   const { pathname } = location;
   const { papel } = auth.user;
 
@@ -66,9 +66,9 @@ function Sidebar({ location, auth }) {
             </li>
             <li>
               <Link
-                to="/dashboard/login"
+                to="/login"
                 onClick={() => {
-                  this.props.logoutUser();
+                  logoutUser();
                 }}
                 className="has-text-grey-lighter"
               >

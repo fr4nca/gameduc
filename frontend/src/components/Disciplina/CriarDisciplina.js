@@ -2,7 +2,10 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { criarDisciplina } from "../../actions/disciplinaActions";
+import {
+  criarDisciplina,
+  getDisciplinas
+} from "../../actions/disciplinaActions";
 
 class CriarDisciplina extends Component {
   state = {
@@ -20,6 +23,7 @@ class CriarDisciplina extends Component {
     };
 
     this.props.criarDisciplina(disciplina);
+    this.props.getDisciplinas();
 
     this.setState({
       ...this.state,
@@ -36,16 +40,24 @@ class CriarDisciplina extends Component {
 
   render() {
     return (
-      <div>
+      <div className="box">
         <form onSubmit={this.handleSubmit}>
+          <div className="field">
+            <input
+              onChange={this.handleChange}
+              value={this.state.nome}
+              placeholder="Digite o nome da disciplina"
+              type="text"
+              name="nome"
+              className="control input is-rounded"
+              required
+            />
+          </div>
           <input
-            onChange={this.handleChange}
-            value={this.state.nome}
-            type="text"
-            name="nome"
-            id="nome"
+            type="submit"
+            className="button is-rounded is-link"
+            value="Criar"
           />
-          <input type="submit" value="Criar" />
         </form>
       </div>
     );
@@ -56,5 +68,5 @@ const mapStateToProps = ({ disciplina }) => ({ disciplina });
 
 export default connect(
   mapStateToProps,
-  { criarDisciplina }
+  { criarDisciplina, getDisciplinas }
 )(CriarDisciplina);
