@@ -1,5 +1,3 @@
-const checkRole = (roles, userRole) => {
+export default (roles, userRole) => {
   return roles.includes(userRole);
 };
-
-export default checkRole;

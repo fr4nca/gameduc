@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-export class Painel extends Component {
+class PainelProfessor extends Component {
   render() {
     return (
       <div>
-        <h1>Painel</h1>
+        <h1>Painel Professor</h1>
       </div>
     );
   }
 }
 
-export default Painel;
+export default PainelProfessor;

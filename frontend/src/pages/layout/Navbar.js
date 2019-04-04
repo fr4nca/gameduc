@@ -12,14 +12,15 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
 
   return (
     <nav
-      className="navbar is-black is-fixed-top"
+      className="navbar is-black"
       role="navigation"
       aria-label="main navigation"
+      style={{ position: "sticky", top: 0, left: 0 }}
     >
       <div className="navbar-brand">
         <Link
           className="navbar-item"
-          to="/dashboard"
+          to="/painel"
           onClick={() => toggleOpen(false)}
         >
           GAMEDUC
@@ -63,10 +64,10 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
           {isAuthenticated ? (
             <>
               <Link
-                to="/dashboard"
+                to="/painel"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab", {
-                  "is-active": pathname === "/dashboard",
+                  "is-active": pathname === "/painel",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&
@@ -76,10 +77,10 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
                 Painel
               </Link>
               <Link
-                to="/dashboard/games"
+                to="/games"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab is-hidden-desktop", {
-                  "is-active": pathname === "/dashboard/games",
+                  "is-active": pathname === "/games",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&
@@ -89,10 +90,10 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
                 Games
               </Link>
               <Link
-                to="/dashboard/perfil"
+                to="/perfil"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab is-hidden-desktop", {
-                  "is-active": pathname === "/dashboard/perfil",
+                  "is-active": pathname === "/perfil",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&
