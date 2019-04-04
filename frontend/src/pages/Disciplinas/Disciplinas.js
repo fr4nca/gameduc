@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Disciplina from "../../components/Disciplina/Disciplina";
+import CriarDisciplina from "../../components/Disciplina/CriarDisciplina";
+import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
 import {
   getDisciplinas,
@@ -27,6 +29,8 @@ export class Disciplinas extends Component {
         {disciplinasProf.map(d => (
           <Disciplina key={d.id} disciplina={d} />
         ))}
+        <CriarDisciplina />
+        <VincularDisciplina />
       </div>
     );
   }

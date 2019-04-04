@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 function Navbar({ auth, logoutUser, location: { pathname } }) {
-  const { isAuthenticated } = auth;
+  const {
+    isAuthenticated,
+    user: { papel }
+  } = auth;
   const [open, toggleOpen] = useState(false);
 
   return (
@@ -20,7 +23,7 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
       <div className="navbar-brand">
         <Link
           className="navbar-item"
-          to="/painel"
+          to="/dashboard"
           onClick={() => toggleOpen(false)}
         >
           GAMEDUC
@@ -64,10 +67,10 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
           {isAuthenticated ? (
             <>
               <Link
-                to="/painel"
+                to="/dashboard"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab", {
-                  "is-active": pathname === "/painel",
+                  "is-active": pathname === "/dashboard",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&
@@ -77,10 +80,10 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
                 Painel
               </Link>
               <Link
-                to="/games"
+                to="/dashboard/games"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab is-hidden-desktop", {
-                  "is-active": pathname === "/games",
+                  "is-active": pathname === "/dashboard/games",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&
@@ -89,11 +92,29 @@ function Navbar({ auth, logoutUser, location: { pathname } }) {
               >
                 Games
               </Link>
+              {papel === "professor" ? (
+                <Link
+                  to="/dashboard/disciplina"
+                  onClick={() => toggleOpen(false)}
+                  className={classNames(
+                    "navbar-item is-tab is-hidden-desktop",
+                    {
+                      "is-active": pathname === "/dashboard/disciplina",
+                      "is-hidden-desktop":
+                        pathname !== "/" &&
+                        pathname !== "/register" &&
+                        pathname !== "/login"
+                    }
+                  )}
+                >
+                  Disciplina
+                </Link>
+              ) : null}
               <Link
-                to="/perfil"
+                to="/dashboard/perfil"
                 onClick={() => toggleOpen(false)}
                 className={classNames("navbar-item is-tab is-hidden-desktop", {
-                  "is-active": pathname === "/perfil",
+                  "is-active": pathname === "/dashboard/perfil",
                   "is-hidden-desktop":
                     pathname !== "/" &&
                     pathname !== "/register" &&

@@ -11,21 +11,20 @@ function Sidebar({ location, auth }) {
 
   return (
     <div>
-      <aside className="is-hidden-touch">
-        <nav
-          className="menu p-1"
-          style={{
-            backgroundColor: "#181818"
-          }}
-        >
+      <div className="is-hidden-touch" style={{ marginLeft: 170 + "px" }} />
+      <div
+        className="dashboard-panel is-hidden-touch is-small has-background-black"
+        style={{ position: "fixed" }}
+      >
+        <aside className="menu">
           <p className="menu-label has-text-grey-lighter">Geral</p>
           <ul className="menu-list">
             <li>
               <Link
                 className={classNames("has-text-grey-lighter", {
-                  "is-active": pathname === "/painel"
+                  "is-active": pathname === "/dashboard/painel"
                 })}
-                to="/painel"
+                to="/dashboard/painel"
               >
                 Painel
               </Link>
@@ -34,69 +33,23 @@ function Sidebar({ location, auth }) {
               <li>
                 <Link
                   className={classNames("has-text-grey-lighter", {
-                    "is-active": pathname === "/disciplina"
+                    "is-active": pathname === "/dashboard/disciplina"
                   })}
-                  to="/disciplina"
+                  to="/dashboard/disciplina"
                 >
                   Disciplina
                 </Link>
-                <ul>
-                  <li>
-                    <Link
-                      className={classNames("has-text-grey-lighter", {
-                        "is-active": pathname === "/disciplina/criar"
-                      })}
-                      to="/disciplina/criar"
-                    >
-                      Criar
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={classNames("has-text-grey-lighter", {
-                        "is-active": pathname === "/disciplina/vincular"
-                      })}
-                      to="/disciplina/vincular"
-                    >
-                      Vincular
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={classNames("has-text-grey-lighter", {
-                        "is-active": pathname === "/disciplina/desvincular"
-                      })}
-                      to="/disciplina/desvincular"
-                    >
-                      Desvincular
-                    </Link>
-                  </li>
-                </ul>
               </li>
             ) : null}
             <li>
               <Link
                 className={classNames("has-text-grey-lighter", {
-                  "is-active": pathname === "/games"
+                  "is-active": pathname === "/dashboard/games"
                 })}
-                to="/games"
+                to="/dashboard/games"
               >
                 Games
               </Link>
-              <ul>
-                {papel === "professor" ? (
-                  <li>
-                    <Link
-                      className={classNames("has-text-grey-lighter", {
-                        "is-active": pathname === "/games/criar"
-                      })}
-                      to="/games/criar"
-                    >
-                      Criar
-                    </Link>
-                  </li>
-                ) : null}
-              </ul>
             </li>
           </ul>
           <p className="menu-label has-text-grey-lighter">Configurações</p>
@@ -104,28 +57,16 @@ function Sidebar({ location, auth }) {
             <li>
               <Link
                 className={classNames("has-text-grey-lighter", {
-                  "is-active": pathname === "/perfil"
+                  "is-active": pathname === "/dashboard/perfil"
                 })}
-                to="/perfil"
+                to="/dashboard/perfil"
               >
                 Perfil
               </Link>
-              <ul>
-                <li>
-                  <Link
-                    className={classNames("has-text-grey-lighter", {
-                      "is-active": pathname === "/perfil/editar"
-                    })}
-                    to="/perfil/editar"
-                  >
-                    Editar
-                  </Link>
-                </li>
-              </ul>
             </li>
             <li>
               <Link
-                to="/login"
+                to="/dashboard/login"
                 onClick={() => {
                   this.props.logoutUser();
                 }}
@@ -135,8 +76,8 @@ function Sidebar({ location, auth }) {
               </Link>
             </li>
           </ul>
-        </nav>
-      </aside>
+        </aside>
+      </div>
     </div>
   );
 }

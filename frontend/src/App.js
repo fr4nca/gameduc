@@ -1,4 +1,5 @@
 import "bulma/css/bulma.css";
+import "bulma-dashboard/dist/bulma-dashboard.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./App.css";
 
@@ -16,19 +17,11 @@ import {
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
+import Navbar from "./pages/layout/Navbar";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import Navbar from "./pages/layout/Navbar";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Sidebar from "./pages/layout/Sidebar";
-import Disciplinas from "./pages/Disciplinas/Disciplinas";
-import CriarDisciplina from "./components/Disciplina/CriarDisciplina";
-import VincularDisciplina from "./components/Disciplina/VincularDisciplina";
-import Games from "./pages/Games/Games";
-import CriarGame from "./components/Game/CriarGame";
-import Perfil from "./components/Perfil/Perfil";
-import EditarPerfil from "./components/Perfil/EditarPerfil";
-import Painel from "./pages/Painel/Painel";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -52,45 +45,15 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Navbar />
-          <div className="columns">
-            <div className="column is-2">
-              <Sidebar />
-            </div>
-            <div className="column is-10 py-3">
-              <Switch>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/painel" component={Painel} />
-                <PrivateRoute
-                  allowed={["professor"]}
-                  exact
-                  path="/disciplina"
-                  component={Disciplinas}
-                />
-                <PrivateRoute
-                  allowed={["professor"]}
-                  exact
-                  path="/disciplina/criar"
-                  component={CriarDisciplina}
-                />
-                <PrivateRoute
-                  allowed={["professor"]}
-                  exact
-                  path="/disciplina/vincular"
-                  component={VincularDisciplina}
-                />
-                <Route exact path="/games" component={Games} />
-                <PrivateRoute
-                  allowed={["professor"]}
-                  exact
-                  path="/games/criar"
-                  component={CriarGame}
-                />
-                <Route exact path="/perfil" component={Perfil} />
-                <Route exact path="/perfil/editar" component={EditarPerfil} />
-              </Switch>
-            </div>
-          </div>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <PrivateRoute
+              allowed={["professor", "aluno"]}
+              path="/dashboard"
+              component={Dashboard}
+            />
+          </Switch>
         </Router>
       </Provider>
     );
