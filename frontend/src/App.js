@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import "bulma/css/bulma.css";
+import "bulma-dashboard/dist/bulma-dashboard.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./App.css";
+
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -49,7 +50,6 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <PrivateRoute
               allowed={["professor", "aluno"]}
-              exact
               path="/dashboard"
               component={Dashboard}
             />

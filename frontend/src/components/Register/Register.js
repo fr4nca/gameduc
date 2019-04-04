@@ -257,7 +257,15 @@ export class Register extends Component {
                 </p>
               </div>
             ) : null}
-            <input type="submit" className="button" value="Cadastrar" />
+            <div className="field">
+              <p className="control">
+                <input
+                  type="submit"
+                  className="button is-link is-pulled-right is-rounded"
+                  value="Registrar"
+                />
+              </p>
+            </div>
           </form>
         </div>
       </div>

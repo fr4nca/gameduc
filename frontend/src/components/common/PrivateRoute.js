@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import checkRole from "../../utils/checkUserRole";
 
 const PrivateRoute = ({ component: Component, auth, allowed, ...rest }) => {
-  console.log(auth.user.papel);
   return (
     <Route
       {...rest}
