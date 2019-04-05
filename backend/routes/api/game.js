@@ -48,10 +48,13 @@ router.post(
   GameController.addAlunoGame
 );
 
+<<<<<<< HEAD
 // @route   DELETE api/game/deleteGame
 // @desc    Delete a game
 // @params  Game ID
 // @access  private
+=======
+>>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
 router.delete(
   "/deleteGame",
   passport.authenticate("jwt", {session: false}),
@@ -59,10 +62,13 @@ router.delete(
   GameController.deleteGame
 )
 
+<<<<<<< HEAD
 // @route   DELETE api/game/deleteGameAluno
 // @desc    Delete a aluno to a game
 // @params  Game ID and Matricula
 // @access  private
+=======
+>>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
 router.delete(
   "/deleteGameAluno",
   passport.authenticate("jwt", {session: false}),

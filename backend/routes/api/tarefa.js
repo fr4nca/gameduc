@@ -39,7 +39,10 @@ router.post(
 router.delete(
   "/deleteTarefa",
   passport.authenticate("jwt", {session: false}),
+<<<<<<< HEAD
   checkUserRole(['professor']),
+=======
+>>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
   TarefaController.deleteTarefa
 )
 

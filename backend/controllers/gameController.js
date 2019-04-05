@@ -72,7 +72,11 @@ class GameController {
       await db.query(
         `DELETE FROM tb_game WHERE id = ?`, [gameId]
       )
+<<<<<<< HEAD
       return res.status(200).json({message: "Game deletado"})
+=======
+      return res.status(200).json({message: "Game Deletado!!"})
+>>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
     } catch(err) {
       return res.status(400).json({erro: err.sqlMessage})
     }
@@ -85,7 +89,11 @@ class GameController {
       await db.query(
         `DELETE FROM ta_game_aluno WHERE  tb_game_id = ? AND tb_aluno_matricula = ?`, [gameId, matricula]
       )
+<<<<<<< HEAD
       return res.status(200).json({message: "GameAluno deletado"})
+=======
+      return res.status(200).json({message: "GameAluno deletado!"})
+>>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
     } catch (err){
       return res.status(400).json({erro: err.sqlMessage})
     }
