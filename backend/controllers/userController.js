@@ -153,12 +153,11 @@ class UserController {
 
   static async deleteUser(req, res, next) {
     try {
-      const { papel, id } = req.user;
-      const { matricula } = req.body;
+      const { id } = req.user;
 
       await db.query(
-        `DELETE FROM tb_${papel} WHERE matricula = ?; DELETE FROM tb_user WHERE id = ?`,
-        [matricula, id]
+        `DELETE FROM tb_user WHERE id = ?`,
+        [id]
       );
       return res.status(200).json({ message: "Usuário deletado" });
     } catch (err) {
