@@ -32,15 +32,18 @@ class Games extends Component {
   render() {
     const { games } = this.props.game;
     const { createGame } = this.state;
+    const { papel } = this.props.auth.user;
+
+    let style = papel === "professor" ? { display: "inline-block" } : null;
 
     return (
       <div>
-        <div>
-          <h1 className="title is-1" style={{ display: "inline-block" }}>
-            <span>
-              <i className="fas fa-gamepad has-text-link" /> Games
-            </span>
-          </h1>
+        <h1 className="title is-1" style={style}>
+          <span>
+            <i className="fas fa-gamepad has-text-link" /> Games
+          </span>
+        </h1>
+        {papel === "professor" ? (
           <span>
             <button
               onClick={this.createGame}
@@ -49,7 +52,7 @@ class Games extends Component {
               Criar um game
             </button>
           </span>
-        </div>
+        ) : null}
         {createGame ? <CriarGame /> : null}
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
