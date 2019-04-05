@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Disciplina from "../../components/Disciplina/Disciplina";
+import CriarDisciplina from "../../components/Disciplina/CriarDisciplina";
+import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
 import {
   getDisciplinas,
@@ -24,9 +26,24 @@ export class Disciplinas extends Component {
     const { disciplinasProf } = this.props.disciplina;
     return (
       <div>
-        {disciplinasProf.map(d => (
-          <Disciplina key={d.id} disciplina={d} />
-        ))}
+        <div className="box">
+          <h4 className="title">Suas disciplinas</h4>
+          <ul className="list is-hoverable">
+            {disciplinasProf.map(d => (
+              <li key={d.id} className="list-item">
+                <Disciplina disciplina={d} />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <CriarDisciplina />
+          </div>
+          <div className="column">
+            <VincularDisciplina />
+          </div>
+        </div>
       </div>
     );
   }

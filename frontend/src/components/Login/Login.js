@@ -66,7 +66,7 @@ class Login extends Component {
                   value={this.state.email}
                   name="email"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="email"
                   placeholder="Email"
                 />
@@ -85,7 +85,7 @@ class Login extends Component {
                   required
                   value={this.state.senha}
                   name="senha"
-                  className="input"
+                  className="input is-rounded"
                   type="password"
                   placeholder="Senha"
                 />

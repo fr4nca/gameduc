@@ -94,7 +94,7 @@ export class Register extends Component {
                   value={this.state.nome}
                   name="nome"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="text"
                   placeholder="Nome"
                 />
@@ -110,7 +110,7 @@ export class Register extends Component {
                   value={this.state.sobrenome}
                   name="sobrenome"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="text"
                   placeholder="Sobrenome"
                 />
@@ -126,7 +126,7 @@ export class Register extends Component {
                   value={this.state.matricula}
                   name="matricula"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="text"
                   placeholder="Matricula"
                 />
@@ -142,7 +142,7 @@ export class Register extends Component {
                   value={this.state.dta_nascimento}
                   name="dta_nascimento"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="date"
                   placeholder="Data de nascimento"
                 />
@@ -158,7 +158,7 @@ export class Register extends Component {
                   value={this.state.email}
                   name="email"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="text"
                   placeholder="Email"
                 />
@@ -174,7 +174,7 @@ export class Register extends Component {
                   value={this.state.senha}
                   name="senha"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="password"
                   placeholder="Senha"
                 />
@@ -190,7 +190,7 @@ export class Register extends Component {
                   value={this.state.conSenha}
                   name="conSenha"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="password"
                   placeholder="Confirme sua senha"
                 />
@@ -230,7 +230,7 @@ export class Register extends Component {
                     value={this.state.graduacao}
                     name="graduacao"
                     required
-                    className="input"
+                    className="input is-rounded"
                     type="text"
                     placeholder="Graduação"
                   />
@@ -247,7 +247,7 @@ export class Register extends Component {
                     value={this.state.curso}
                     name="curso"
                     required
-                    className="input"
+                    className="input is-rounded"
                     type="text"
                     placeholder="Curso"
                   />
