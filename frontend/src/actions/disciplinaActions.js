@@ -26,6 +26,8 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
     dispatch({
       type: CREATE_DISCIPLINA
     });
+
+    dispatch(getDisciplinas());
   } catch (e) {
     console.log(e.response.data);
   }
@@ -57,6 +59,7 @@ export const vincularDisciplina = (
     dispatch({
       type: VINCULATE_DISCIPLINA_PROFESSOR
     });
+    dispatch(getDisciplinasProfessor(matricula));
   } catch (e) {
     console.log(e.response.data);
   }

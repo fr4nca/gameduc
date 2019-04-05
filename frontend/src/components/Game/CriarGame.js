@@ -37,7 +37,6 @@ class CriarGame extends Component {
     game.matricula = matricula;
 
     this.props.criarGame(game);
-    this.props.getGames(matricula);
 
     this.setState({
       nome: "",
@@ -113,6 +112,7 @@ class CriarGame extends Component {
                 value={this.state.disciplinaId}
                 onChange={this.handleChange}
                 name="disciplinaId"
+                required
               >
                 <option value="" disabled>
                   Selecione a opção

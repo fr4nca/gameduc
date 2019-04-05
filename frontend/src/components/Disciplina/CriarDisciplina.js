@@ -9,8 +9,7 @@ import {
 
 class CriarDisciplina extends Component {
   state = {
-    nome: "",
-    msg: ""
+    nome: ""
   };
 
   handleSubmit = e => {
@@ -23,7 +22,6 @@ class CriarDisciplina extends Component {
     };
 
     this.props.criarDisciplina(disciplina);
-    this.props.getDisciplinas();
 
     this.setState({
       ...this.state,
@@ -41,6 +39,8 @@ class CriarDisciplina extends Component {
   render() {
     return (
       <div className="box">
+        <h5 className="subtitle is-5">Adicione uma disciplina</h5>
+        <hr />
         <form onSubmit={this.handleSubmit}>
           <div className="field">
             <input

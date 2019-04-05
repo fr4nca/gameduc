@@ -57,15 +57,19 @@ class Games extends Component {
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
           <hr />
-          <div className="columns is-multiline">
-            {games.map(game => (
-              <div className="column is-2">
-                <div key={game.id}>
-                  <Game game={game} />
+          {games.length > 0 ? (
+            <div className="columns is-multiline">
+              {games.map(game => (
+                <div className="column is-2">
+                  <div key={game.id}>
+                    <Game game={game} />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <h2>Não há nenhum game cadastrado</h2>
+          )}
         </div>
       </div>
     );
