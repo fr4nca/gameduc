@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-export class Games extends Component {
+class PainelAluno extends Component {
   render() {
     return (
       <div>
-        <h1>Games</h1>
+        <h1>PainelAluno</h1>
       </div>
     );
   }
 }
 
-export default Games;
+export default PainelAluno;

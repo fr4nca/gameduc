@@ -1,5 +1,4 @@
 /* Help classes */
-
 .p-1 {
   padding: 1rem;
 }
@@ -70,4 +69,12 @@
 
 .my-3 {
   margin: 2rem 0rem;
+}
+
+html {
+  background-color: #efefef;
+}
+
+.menu-list a:hover {
+  background-color: #232323;
 }

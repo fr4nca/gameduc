@@ -1,3 +1,4 @@
+import isEmpty from "../utils/isEmpty";
 import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "../actions/types";
 
 const initalState = {
@@ -23,9 +24,3 @@ export default (state = initalState, action) => {
       return state;
   }
 };
-
-const isEmpty = value =>
-  value === undefined ||
-  value === null ||
-  (typeof value === "object" && Object.keys(value).length === 0) ||
-  (typeof value === "string" && value.trim().length === 0);

@@ -39,11 +39,11 @@ router.post(
   DisciplinaController.addDisciplinaProfessor
 );
 
-// @route   GET api/disciplina/discProf
+// @route   POST api/disciplina/discProf
 // @desc    Get all disciplinas vinculated to professor
 // @params  Matricula
 // @access  private
-router.get(
+router.post(
   "/discProf",
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
