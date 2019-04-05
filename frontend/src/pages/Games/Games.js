@@ -6,6 +6,17 @@ import Game from "../../components/Game/Game";
 import CriarGame from "../../components/Game/CriarGame";
 
 class Games extends Component {
+  state = {
+    createGame: false
+  };
+
+  createGame = () => {
+    this.setState({
+      ...this.state,
+      createGame: !this.state.createGame
+    });
+  };
+
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
     this.props.getGames(matricula);
@@ -20,6 +31,8 @@ class Games extends Component {
 
   render() {
     const { games } = this.props.game;
+    const { createGame } = this.state;
+
     return (
       <div>
         <h1 className="title is-1">
@@ -29,6 +42,7 @@ class Games extends Component {
         </h1>
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
+          <hr />
           <div className="columns is-multiline">
             {games.map(game => (
               <div className="column is-2">
@@ -41,7 +55,18 @@ class Games extends Component {
         </div>
         <div className="columns">
           <div className="column is-6">
-            <CriarGame />
+            {createGame ? (
+              <CriarGame />
+            ) : (
+              <span>
+                <button
+                  onClick={this.createGame}
+                  className="button is-rounded is-link"
+                >
+                  Criar um game
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>
