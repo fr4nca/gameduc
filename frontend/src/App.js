@@ -29,6 +29,7 @@ import CriarGame from "./components/Game/CriarGame";
 import Perfil from "./components/Perfil/Perfil";
 import EditarPerfil from "./components/Perfil/EditarPerfil";
 import Painel from "./pages/Painel/Painel";
+import Landing from "./pages/Landing/Landing";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -61,6 +62,7 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/painel" component={Painel} />
+                <Route exact path="/" component={Landing} />
                 <PrivateRoute
                   allowed={["professor"]}
                   exact
