@@ -6,22 +6,22 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const GameController = require("../../controllers/gameController");
 
-// @route   GET api/game/
+// @route   POST api/game/
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private
-router.get(
+router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   GameController.getGames
 );
 
-// @route   POST api/game/
+// @route   POST api/game/criar
 // @desc    Create a game
 // @params  Nome, data de inicio, data de fim, id disciplina and matricula professor
 // @access  private
 router.post(
-  "/",
+  "/criar",
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   GameController.createGame

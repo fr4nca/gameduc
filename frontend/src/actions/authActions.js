@@ -1,16 +1,14 @@
-import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import setAuthToken from "../utils/setAuthToken";
+
+import axios from "../config/api";
 
 import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "./types";
 
 export const loginUser = userData => async dispatch => {
   try {
-    const res = await axios.post(
-      "http://localhost:5000/api/user/login",
-      userData
-    );
+    const res = await axios.post("/user/login", userData);
 
     const { token } = res.data;
 
@@ -30,7 +28,7 @@ export const loginUser = userData => async dispatch => {
 
 export const registerUser = user => async dispatch => {
   try {
-    await axios.post("http://localhost:5000/api/user/register", user);
+    await axios.post("/user/register", user);
   } catch (e) {
     console.log(e.response.data);
   }
@@ -50,7 +48,7 @@ export const logoutUser = () => dispatch => {
 
 export const setCurrentProfile = () => async dispatch => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/user/current");
+    const { data } = await axios.get("/user/current");
 
     dispatch({
       type: SET_CURRENT_PROFILE,

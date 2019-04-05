@@ -16,7 +16,9 @@ class DisciplinaController {
 
       await db.query("INSERT INTO tb_disciplina(nome) VALUES(?)", [nome]);
 
-      return res.json({ message: "Disciplina criada com sucesso" });
+      return res.json({
+        message: "Disciplina criada com sucesso"
+      });
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

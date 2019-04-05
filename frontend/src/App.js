@@ -1,8 +1,10 @@
+import "bulma/css/bulma.css";
+import "bulma-dashboard/dist/bulma-dashboard.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "./App.css";
+
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import "bulma/css/bulma.css";
-import "@fortawesome/fontawesome-free/css/all.css";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -15,9 +17,12 @@ import {
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
-import Login from "./components/Auth/Login/Login";
-import Register from "./components/Auth/Register/Register";
-import Navbar from "./pages/common/Navbar";
+import Navbar from "./pages/layout/Navbar";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import PrivateRoute from "./components/common/PrivateRoute";
+import Footer from "./pages/layout/Footer";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -44,7 +49,13 @@ class App extends Component {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <PrivateRoute
+              allowed={["professor", "aluno"]}
+              path="/dashboard"
+              component={Dashboard}
+            />
           </Switch>
+          <Footer />
         </Router>
       </Provider>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { loginUser } from "../../../actions/authActions";
+import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
   state = {
@@ -11,18 +11,19 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(next) {
     if (next.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }
   }
 
   handleChange = e => {
     this.setState({
+      ...this.state,
       [e.target.name]: e.target.value
     });
   };
@@ -50,7 +51,7 @@ class Login extends Component {
         }}
       >
         <div
-          className="container card"
+          className="container box"
           style={{
             width: 550 + "px",
             padding: 1.5 + "rem"
@@ -65,7 +66,7 @@ class Login extends Component {
                   value={this.state.email}
                   name="email"
                   required
-                  className="input"
+                  className="input is-rounded"
                   type="email"
                   placeholder="Email"
                 />
@@ -84,7 +85,7 @@ class Login extends Component {
                   required
                   value={this.state.senha}
                   name="senha"
-                  className="input"
+                  className="input is-rounded"
                   type="password"
                   placeholder="Senha"
                 />
@@ -97,7 +98,7 @@ class Login extends Component {
               <p className="control">
                 <input
                   type="submit"
-                  className="button is-success is-pulled-right"
+                  className="button is-link is-pulled-right is-rounded"
                   value="Entrar"
                 />
               </p>
