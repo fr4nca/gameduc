@@ -11,6 +11,10 @@ import {
 } from "../../actions/disciplinaActions";
 
 export class Disciplinas extends Component {
+  state = {
+    criarDisciplina: false
+  };
+
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
     this.props.getDisciplinas();
@@ -22,12 +26,23 @@ export class Disciplinas extends Component {
     this.props.getDisciplinasProfessor(matricula);
   }
 
+  criarDisciplina = () => {
+    this.setState({
+      ...this.state,
+      criarDisciplina: !this.state.criarDisciplina
+    });
+  };
+
   render() {
     const { disciplinasProf } = this.props.disciplina;
     return (
       <div>
+        <h1 className="title is-1">
+          <i className="fas fa-chalkboard has-text-link" />
+          {""} Disciplinas
+        </h1>
         <div className="box">
-          <h4 className="title">Suas disciplinas</h4>
+          <h3 className="subtitle is-3">Suas disciplinas</h3>
           <ul className="list is-hoverable">
             {disciplinasProf.map(d => (
               <li key={d.id} className="list-item">
@@ -37,11 +52,23 @@ export class Disciplinas extends Component {
           </ul>
         </div>
         <div className="columns">
-          <div className="column">
-            <CriarDisciplina />
-          </div>
-          <div className="column">
+          <div className="column is-6">
             <VincularDisciplina />
+          </div>
+          <div className="column is-6">
+            {this.state.criarDisciplina ? (
+              <CriarDisciplina />
+            ) : (
+              <span>
+                Não encontrou a disciplina desejada?{" "}
+                <button
+                  onClick={this.criarDisciplina}
+                  className="button is-rounded is-small is-link"
+                >
+                  Adicionar uma disciplina
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>
