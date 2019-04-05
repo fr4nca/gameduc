@@ -17,13 +17,15 @@ export class Disciplinas extends Component {
 
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
-    this.props.getDisciplinas();
     this.props.getDisciplinasProfessor(matricula);
+    this.props.getDisciplinas();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { matricula } = nextProps.auth.profile;
-    this.props.getDisciplinasProfessor(matricula);
+    if (this.props.auth !== nextProps.auth) {
+      const { matricula } = nextProps.auth.profile;
+      this.props.getDisciplinasProfessor(matricula);
+    }
   }
 
   criarDisciplina = () => {
@@ -38,12 +40,13 @@ export class Disciplinas extends Component {
     return (
       <div>
         <h1 className="title is-1">
-          <i className="fas fa-chalkboard has-text-link" />
-          {""} Disciplinas
+          <span>
+            <i className="fas fa-chalkboard has-text-link" /> Disciplinas
+          </span>
         </h1>
         <div className="box">
           <h3 className="subtitle is-3">Suas disciplinas</h3>
-          <ul className="list is-hoverable">
+          <ul className="">
             {disciplinasProf.map(d => (
               <li key={d.id} className="list-item">
                 <Disciplina disciplina={d} />

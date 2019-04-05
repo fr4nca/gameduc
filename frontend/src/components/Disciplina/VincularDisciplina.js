@@ -2,18 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import {
-  getDisciplinas,
-  vincularDisciplina
+  vincularDisciplina,
+  getDisciplinasProfessor
 } from "../../actions/disciplinaActions";
 
 class VincularDisciplina extends Component {
   state = {
     disciplinaId: ""
   };
-
-  componentDidMount() {
-    this.props.getDisciplinas();
-  }
 
   handleChange = e => {
     this.setState({
@@ -27,6 +23,7 @@ class VincularDisciplina extends Component {
     const { disciplinaId } = this.state;
     const { matricula } = this.props.auth.profile;
     this.props.vincularDisciplina(matricula, disciplinaId);
+    this.props.getDisciplinasProfessor(matricula);
   };
 
   render() {
@@ -67,5 +64,5 @@ const mapStateToProps = ({ disciplina, auth }) => ({ disciplina, auth });
 
 export default connect(
   mapStateToProps,
-  { getDisciplinas, vincularDisciplina }
+  { vincularDisciplina, getDisciplinasProfessor }
 )(VincularDisciplina);
