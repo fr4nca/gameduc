@@ -19,12 +19,9 @@ const Game = ({ game }) => {
           </p>
         </div>
       </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">
+      <footer className="card-footer">
+        <a href="#!" className="card-footer-item">
           Visitar
-        </a>
-        <a href="#" class="card-footer-item">
-          Deletar
         </a>
       </footer>
     </div>
