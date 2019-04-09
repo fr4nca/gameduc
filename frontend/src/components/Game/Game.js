@@ -5,15 +5,15 @@ const Game = ({ game }) => {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    // let time = moment.utc(game.dta_fim).local();
-    // let dataFim = time.format("DD/MM/YYYY HH:mm:ss");
-    // let dia2 = new Date(dataFim);
-    // console.log(dia2);
-    // let today = new Date();
-    // let perc = (today * 100) / dia2;
+    let fim = new Date(game.dta_fim).getTime() / 1000;
+    let inicio = new Date(game.dta_inicio).getTime() / 1000;
+    let hoje = new Date().getTime() / 1000;
 
-    // setPercent(perc);
-    console.log(moment(game.dta_fim));
+    let perc = Math.round(((hoje - inicio) / (fim - inicio)) * 100);
+
+    game.dta_inicio = moment(game.dta_inicio).format("DD/MM/YYYY");
+    game.dta_fim = moment(game.dta_fim).format("DD/MM/YYYY");
+    setPercent(perc);
   }, {});
 
   return (
@@ -31,6 +31,7 @@ const Game = ({ game }) => {
           </p>
         </div>
         <progress className="progress is-link" value={percent} max="100" />
+        {percent >= 100 ? 100 + "%" : percent + "%"}
       </div>
       <footer className="card-footer">
         <a href="#!" className="card-footer-item">
