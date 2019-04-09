@@ -24,6 +24,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
+import Footer from "./pages/layout/Footer";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -57,6 +58,7 @@ class App extends Component {
               component={Dashboard}
             />
           </Switch>
+          <Footer />
         </Router>
       </Provider>
     );
