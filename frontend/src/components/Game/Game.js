@@ -11,8 +11,7 @@ const Game = ({ game }) => {
 
     let perc = Math.round(((hoje - inicio) / (fim - inicio)) * 100);
 
-    game.dta_inicio = moment(game.dta_inicio).format("DD/MM/YYYY");
-    game.dta_fim = moment(game.dta_fim).format("DD/MM/YYYY");
+    console.log(perc);
     setPercent(perc);
   }, {});
 
@@ -24,14 +23,20 @@ const Game = ({ game }) => {
       <div className="card-content">
         <div className="content">
           <p>
-            <strong>Data de início:</strong> {game.dta_inicio}
+            <strong>Data de início:</strong>{" "}
+            {moment(game.dta_inicio).format("DD/MM/YYYY")}
           </p>
           <p>
-            <strong>Data de finalização:</strong> {game.dta_fim}
+            <strong>Data de finalização:</strong>{" "}
+            {moment(game.dta_fim).format("DD/MM/YYYY")}
           </p>
         </div>
-        <progress className="progress is-link" value={percent} max="100" />
-        {percent >= 100 ? 100 + "%" : percent + "%"}
+        <progress
+          className="progress is-link"
+          value={percent >= 100 ? 100 : percent}
+          max="100"
+        />
+        {percent >= 100 ? 100 + "%" : percent + "%"} completo
       </div>
       <footer className="card-footer">
         <a href="#!" className="card-footer-item">
@@ -41,4 +46,5 @@ const Game = ({ game }) => {
     </div>
   );
 };
+
 export default Game;
