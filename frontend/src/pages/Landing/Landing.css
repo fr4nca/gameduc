@@ -6,3 +6,7 @@
     max-height: 50px;
   }
   
+  .has-image-centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
