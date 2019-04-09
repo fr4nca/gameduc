@@ -1,3 +1,8 @@
 .bg-card-1{
     background: white;
 }
+
+.altura {
+    max-height: 50px;
+  }
+  
