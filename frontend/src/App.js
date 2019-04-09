@@ -2,6 +2,7 @@ import "bulma/css/bulma.css";
 import "bulma-dashboard/dist/bulma-dashboard.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./App.css";
+import "./pages/Landing/Landing.css"
  
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
