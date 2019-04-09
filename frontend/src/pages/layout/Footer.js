@@ -6,7 +6,7 @@ export default function Footer() {
       <footer className="footer has-background-black has-text-white">
         <div className="content has-text-centered">
           <p>
-            The código fonte é licensiado por
+            O código fonte é licensiado por
             <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>. O
             conteúdo deste site é licensiado por{" "}
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
