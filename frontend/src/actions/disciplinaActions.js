@@ -35,7 +35,7 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
 
 export const getDisciplinasProfessor = matricula => async dispatch => {
   try {
-    const { data } = await axios.post("/disciplina/discProf", { matricula });
+    const { data } = await axios.get(`/disciplina/discProf/${matricula}`);
 
     dispatch({
       type: GET_DISCIPLINAS_PROFESSOR,
