@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Disciplina from "../../components/Disciplina/Disciplina";
 import CriarDisciplina from "../../components/Disciplina/CriarDisciplina";
 import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
@@ -51,7 +50,7 @@ export class Disciplinas extends Component {
             <div>
               {disciplinasProf.map(d => (
                 <li key={d.id} className="list-item">
-                  <Disciplina disciplina={d} />
+                  <p>{d.nome}</p>
                 </li>
               ))}
             </div>

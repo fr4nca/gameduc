@@ -3,7 +3,7 @@ import "bulma-dashboard/dist/bulma-dashboard.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./App.css";
 
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
@@ -40,26 +40,22 @@ if (localStorage.getItem("@Gameduc:userToken")) {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <PrivateRoute
-              allowed={["professor", "aluno"]}
-              path="/dashboard"
-              component={Dashboard}
-            />
-          </Switch>
-          <Footer />
-        </Router>
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <PrivateRoute
+          allowed={["professor", "aluno"]}
+          path="/dashboard"
+          component={Dashboard}
+        />
+      </Switch>
+      <Footer />
+    </Router>
+  </Provider>
+);
 
 export default App;

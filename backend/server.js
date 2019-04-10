@@ -1,5 +1,5 @@
 const express = require("express");
-require("dotenv").config();
+process.env.NODE_ENV !== "production" ? require("dotenv").config() : null;
 const cors = require("cors");
 const passport = require("passport");
 
@@ -29,6 +29,6 @@ app.use("/", (req, res) => {
   res.status(404).send("Route not found");
 });
 
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
