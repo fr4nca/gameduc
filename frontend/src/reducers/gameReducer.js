@@ -1,7 +1,8 @@
-import { GET_GAMES, CREATE_GAME } from "../actions/types";
+import { GET_GAMES, CREATE_GAME, GET_GAME } from "../actions/types";
 
 const initalState = {
-  games: []
+  games: [],
+  game: {}
 };
 
 export default (state = initalState, action) => {
@@ -14,6 +15,11 @@ export default (state = initalState, action) => {
     case CREATE_GAME:
       return {
         ...state
+      };
+    case GET_GAME:
+      return {
+        ...state,
+        game: action.payload
       };
     default:
       return state;

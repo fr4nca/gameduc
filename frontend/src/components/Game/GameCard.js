@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "../../config/api";
 
 import moment from "moment";
 
-class Game extends Component {
+class GameCard extends Component {
   state = {
     percent: "",
     disciplina: ""
@@ -62,13 +63,13 @@ class Game extends Component {
           {percent >= 100 ? "Finalizado" : percent + "% completo"}
         </div>
         <footer className="card-footer">
-          <a href="#!" className="card-footer-item">
+          <Link to={`/dashboard/game/${game.id}`} className="card-footer-item">
             Visitar
-          </a>
+          </Link>
         </footer>
       </div>
     );
   }
 }
 
-export default Game;
+export default GameCard;

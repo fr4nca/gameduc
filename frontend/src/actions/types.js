@@ -2,6 +2,7 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 
 export const GET_GAMES = "GET_GAMES";
+export const GET_GAME = "GET_GAME";
 export const CREATE_GAME = "CREATE_GAME";
 
 export const GET_DISCIPLINAS = "GET_DISCIPLINAS";

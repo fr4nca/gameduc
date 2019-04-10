@@ -1,12 +1,25 @@
 import axios from "../config/api";
-import { GET_GAMES, CREATE_GAME } from "./types";
+import { GET_GAMES, CREATE_GAME, GET_GAME } from "./types";
 
 export const getGames = matricula => async dispatch => {
   try {
-    const { data } = await axios.post("/game", { matricula });
+    const { data } = await axios.post("/game/", { matricula });
 
     dispatch({
       type: GET_GAMES,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const getGame = id => async dispatch => {
+  try {
+    const { data } = await axios.get(`/game/${id}`);
+
+    dispatch({
+      type: GET_GAME,
       payload: data
     });
   } catch (e) {
