@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getDisciplinasProfessor } from "../../actions/disciplinaActions";
-import { criarGame, getGames } from "../../actions/gameActions";
+import { getDisciplinasProfessor } from "../../store/actions/disciplinaActions";
+import { criarGame, getGames } from "../../store/actions/gameActions";
 
 class CriarGame extends Component {
   state = {

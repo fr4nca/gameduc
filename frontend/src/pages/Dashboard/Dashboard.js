@@ -3,7 +3,7 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "../../components/common/PrivateRoute";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../store/actions/authActions";
 
 import Perfil from "../../components/Perfil/Perfil";
 

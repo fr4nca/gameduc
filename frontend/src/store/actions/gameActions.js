@@ -1,4 +1,4 @@
-import axios from "../config/api";
+import axios from "../../services/api";
 import { GET_GAMES, CREATE_GAME, GET_GAME } from "./types";
 
 export const getGames = matricula => async dispatch => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import axios from "../../config/api";
+import axios from "../../services/api";
 
 import moment from "moment";
 

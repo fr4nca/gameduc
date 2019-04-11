@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import { connect } from "react-redux";
-import { getGame } from "../../actions/gameActions";
+import { getGame } from "../../store/actions/gameActions";
 
-import axios from "../../config/api";
+import axios from "../../services/api";
 
 class Game extends Component {
   state = { disciplina: "" };

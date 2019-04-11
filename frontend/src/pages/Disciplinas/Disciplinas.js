@@ -7,7 +7,7 @@ import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 import {
   getDisciplinas,
   getDisciplinasProfessor
-} from "../../actions/disciplinaActions";
+} from "../../store/actions/disciplinaActions";
 
 export class Disciplinas extends Component {
   state = {

@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import classNames from "classnames";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../store/actions/authActions";
 
 function Navbar({ auth, logoutUser, location: { pathname } }) {
   const {

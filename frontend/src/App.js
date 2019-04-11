@@ -1,18 +1,18 @@
 import "bulma/css/bulma.css";
+import "./App.css";
 import "bulma-dashboard/dist/bulma-dashboard.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import "./App.css";
 
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store/";
 import {
   setCurrentUser,
   logoutUser,
   setCurrentProfile
-} from "./actions/authActions";
+} from "./store/actions/authActions";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";

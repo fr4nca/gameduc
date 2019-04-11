@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   criarDisciplina,
   getDisciplinas
-} from "../../actions/disciplinaActions";
+} from "../../store/actions/disciplinaActions";
 
 class CriarDisciplina extends Component {
   state = {

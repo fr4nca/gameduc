@@ -1,4 +1,4 @@
-import isEmpty from "../utils/isEmpty";
+import isEmpty from "../../utils/isEmpty";
 import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "../actions/types";
 
 const initalState = {

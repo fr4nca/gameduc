@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getGames } from "../../actions/gameActions";
+import { getGames } from "../../store/actions/gameActions";
 
 import PainelAluno from "../../components/Painel/PainelAluno";
 import PainelProfessor from "../../components/Painel/PainelProfessor";
