@@ -59,7 +59,7 @@ router.get(
   DisciplinaController.getDisciplinaProfessor
 );
 
-<<<<<<< HEAD
+
 // @route   DELETE api/disciplina/deleteDisciplina
 // @desc    Delete a disciplina
 // @params  Disciplina ID
@@ -81,7 +81,7 @@ router.delete(
   checkUserRole(['professor']),
   DisciplinaController.deleteProfDisciplina
 )
-=======
+
 // @route   POST api/disciplina/addDiscProf
 // @desc    Vinculate a disciplina and professor
 // @params  Disciplina ID and matricula
@@ -92,6 +92,18 @@ router.post(
   checkUserRole(["professor"]),
   DisciplinaController.addDisciplinaProfessor
 );
->>>>>>> db2cbbcfd533e4451e921fbee50dce398eacb36f
+
+// @route   PUT api/disciplina/updateDisciplina
+// @desc    Update a disciplina
+// @params  Disciplina ID and nome
+// @access  private
+
+router.put(
+  "/updateDisciplina",
+  passport.authenticate('jwt', {session: false}),
+  checkUserRole(['professor']),
+  DisciplinaController.updateDisciplina
+)
+
 
 module.exports = router;
