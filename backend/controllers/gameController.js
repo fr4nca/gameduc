@@ -81,6 +81,18 @@ class GameController {
     }
   }
 
+  static async updateGame (req, res, next){
+    try{
+      const{ gameId, newNome, newDataInicio, newDataFim} = req.body
+      await db.query(
+        `UPDATE tb_game SET nome = ?, dta_inicio = ?, dta_fim = ? WHERE id = ?`, [newNome, newDataInicio, newDataFim, gameId]
+      )
+      return res.status(200).json({message:"Game alterado com sucesso"})
+    }catch (err){
+      return res.status(400).json({erro: err.sqlMessage})
+    }
+  }
+
   static async deleteGame (req, res, next) {
     try {
       const { gameId } = req.body
