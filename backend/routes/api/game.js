@@ -79,4 +79,15 @@ router.delete(
   GameController.deleteGameAluno
 )
 
+// @route   UPDATE api/game/updateGame
+// @desc    Update a game
+// @params  Game ID, Nome, Data inicio, Data Fim
+// @access  private
+router.put(
+  "/updateGame",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  GameController.updateGame
+)
+
 module.exports = router;

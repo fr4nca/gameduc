@@ -86,11 +86,27 @@ class DisciplinaController {
     }
   }
 
+
+  static async updateDisciplina (req, res, next){
+    
+    try{
+      const { disciplinaId, newNome } = req.body
+
+      await db.query (
+        `UPDATE tb_disciplina SET nome = ? WHERE id = ?`, [ newNome, disciplinaId]
+      )
+      return res.json({message: 'Disciplina alterada com sucesso'});
+
+    } catch (err){
+      return res.status(400).json({error: err.sqlMessage});
+    }
+  }
+
   static async deleteDisciplina (req, res, next) {
     try {
-      const { disciplinaID } = req.body
+      const { disciplinaId } = req.body
       await db.query (
-        `DELETE FROM tb_disciplina WHERE id = ? `, [disciplinaID]
+        `DELETE FROM tb_disciplina WHERE id = ? `, [disciplinaId]
       )
       return res.status(200).json({message: "Disciplina deletada"})
     }catch(err) {

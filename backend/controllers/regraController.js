@@ -27,6 +27,19 @@ class RegraController {
     }
   }
 
+  static async updateRegra(req, res, next){
+    try{
+      const { regraId, newDescricao, newClassificacao, newTag, newPontuacao} = req.body
+      await db.query(
+        `UPDATE tb_regra SET descricao = ?, classificacao = ?, tag = ?, pontuacao = ? WHERE id = ?`,
+        [newDescricao, newClassificacao, newTag, newPontuacao, regraId] 
+      )
+      return res.status(200).json({message:'Regra alterada com sucesso'})
+    } catch(err){
+      return res.status(400).json({error: err.sqlMessage})
+    }
+  }
+
   static async deleteRegra(req, res, next) {
     try {
       const { regraId } = req.body;
