@@ -3,13 +3,14 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import PrivateRoute from "../../components/common/PrivateRoute";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../store/actions/authActions";
 
 import Perfil from "../../components/Perfil/Perfil";
 
 import Disciplinas from "../Disciplinas/Disciplinas";
 import Games from "../Games/Games";
 import Sidebar from "../layout/Sidebar";
+import Game from "../Games/Game";
 
 class Dashboard extends Component {
   render() {
@@ -27,6 +28,7 @@ class Dashboard extends Component {
               />
               <Route exact path="/dashboard/games" component={Games} />
               <Route exact path="/dashboard/perfil" component={Perfil} />
+              <Route exact path="/dashboard/game/:id" component={Game} />
             </Switch>
           </section>
         </div>

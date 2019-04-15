@@ -1,4 +1,5 @@
-import axios from "../config/api";
+import axios from "../../services/api";
+
 import {
   GET_DISCIPLINAS,
   CREATE_DISCIPLINA,
@@ -26,6 +27,8 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
     dispatch({
       type: CREATE_DISCIPLINA
     });
+
+    dispatch(getDisciplinas());
   } catch (e) {
     console.log(e.response.data);
   }
@@ -33,7 +36,7 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
 
 export const getDisciplinasProfessor = matricula => async dispatch => {
   try {
-    const { data } = await axios.post("/disciplina/discProf", { matricula });
+    const { data } = await axios.get(`/disciplina/discProf/${matricula}`);
 
     dispatch({
       type: GET_DISCIPLINAS_PROFESSOR,
@@ -57,6 +60,7 @@ export const vincularDisciplina = (
     dispatch({
       type: VINCULATE_DISCIPLINA_PROFESSOR
     });
+    dispatch(getDisciplinasProfessor(matricula));
   } catch (e) {
     console.log(e.response.data);
   }

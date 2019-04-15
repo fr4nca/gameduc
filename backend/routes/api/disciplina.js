@@ -13,8 +13,17 @@ const DisciplinaController = require("../../controllers/disciplinaController");
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole(["professor"]),
   DisciplinaController.getDisciplinas
+);
+
+// @route   GET api/disciplina/:id
+// @desc    Get single disciplina
+// @returns One disciplina
+// @access  private
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  DisciplinaController.getDisciplina
 );
 
 // @route   POST api/disciplina/
@@ -28,8 +37,53 @@ router.post(
   DisciplinaController.createDisciplina
 );
 
+// @route   GET api/disciplina/discProf
+// @desc    Get all disciplinas vinculated to professor
+// @params  Matricula
+// @access  private
+router.get(
+  "/discProf/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  DisciplinaController.getDisciplinasProfessor
+);
+
+// @route   GET api/disciplina/discProf/:matricula/:id
+// @desc    Get a disciplina vinculated to professor
+// @params  Matricula
+// @access  private
+router.get(
+  "/discProf/:matricula/:id",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  DisciplinaController.getDisciplinaProfessor
+);
+
+
+// @route   DELETE api/disciplina/deleteDisciplina
+// @desc    Delete a disciplina
+// @params  Disciplina ID
+// @access  private
+router.delete(
+  "/deleteDisciplina",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  DisciplinaController.deleteDisciplina
+)
+
+// @route   DELETE api/disciplina/deleteProfDisciplina
+// @desc    Delete a disciplina vinculated to professor
+// @params  Matricula and Disciplina ID
+// @access  private
+router.delete(
+  "/deleteProfDisciplina", 
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(['professor']),
+  DisciplinaController.deleteProfDisciplina
+)
+
 // @route   POST api/disciplina/addDiscProf
-// @desc    Create a disciplina
+// @desc    Vinculate a disciplina and professor
 // @params  Disciplina ID and matricula
 // @access  private
 router.post(
@@ -39,15 +93,17 @@ router.post(
   DisciplinaController.addDisciplinaProfessor
 );
 
-// @route   POST api/disciplina/discProf
-// @desc    Get all disciplinas vinculated to professor
-// @params  Matricula
+// @route   PUT api/disciplina/updateDisciplina
+// @desc    Update a disciplina
+// @params  Disciplina ID and nome
 // @access  private
-router.post(
-  "/discProf",
-  passport.authenticate("jwt", { session: false }),
-  checkUserRole(["professor"]),
-  DisciplinaController.getDisciplinaProfessor
-);
+
+router.put(
+  "/updateDisciplina",
+  passport.authenticate('jwt', {session: false}),
+  checkUserRole(['professor']),
+  DisciplinaController.updateDisciplina
+)
+
 
 module.exports = router;

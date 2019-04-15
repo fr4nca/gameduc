@@ -15,7 +15,7 @@ class TarefaController {
       const { regraId } = req.body;
       const results = await db.query(
         "SELECT * FROM tb_tarefa WHERE tb_regra_id = ?",
-        [regraId]
+        [regraId] 
       );
       return res.json(results);
     } catch (err) {
@@ -74,6 +74,20 @@ class TarefaController {
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }
+  }
+
+
+  static async deleteTarefa (req, res, next) {
+    try {
+      const { tarefaId } = req.body
+      await db.query (
+        `DELETE FROM tb_tarefa WHERE id = ?`, [tarefaId]
+      )
+      return res.status(200).json({message: "Tarefa deletada"})
+    } catch (err) {
+      return res.status(400).json({error: err.sqlMessage})
+    }
+    
   }
 }
 

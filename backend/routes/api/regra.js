@@ -27,4 +27,26 @@ router.post(
   RegraController.createRegra
 );
 
+// // @route   DELETE api/regra/deleteRegra
+// // @desc    Delete a regra
+// // @params  RegraID
+// // @access  private
+router.delete(
+  "/deleteRegra",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  RegraController.deleteRegra
+)
+
+// @route   UPDATE api/regra/updateRegra
+// @desc    Update a regra
+// @params  Regra ID, Descrição, Classificação, Tag, Pontuação 
+// @access  private
+router.put(
+  "/updateRegra",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  RegraController.updateRegra
+)
+
 module.exports = router;

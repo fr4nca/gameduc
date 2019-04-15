@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getDisciplinasProfessor } from "../../actions/disciplinaActions";
-import { criarGame, getGames } from "../../actions/gameActions";
+import { getDisciplinasProfessor } from "../../store/actions/disciplinaActions";
+import { criarGame, getGames } from "../../store/actions/gameActions";
 
 class CriarGame extends Component {
   state = {
@@ -37,7 +37,6 @@ class CriarGame extends Component {
     game.matricula = matricula;
 
     this.props.criarGame(game);
-    this.props.getGames(matricula);
 
     this.setState({
       nome: "",
@@ -113,6 +112,7 @@ class CriarGame extends Component {
                 value={this.state.disciplinaId}
                 onChange={this.handleChange}
                 name="disciplinaId"
+                required
               >
                 <option value="" disabled>
                   Selecione a opção

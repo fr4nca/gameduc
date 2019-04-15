@@ -6,7 +6,7 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const GameController = require("../../controllers/gameController");
 
-// @route   POST api/game/
+// @route   GET api/game/
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private
@@ -14,6 +14,16 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   GameController.getGames
+);
+
+// @route   GET api/game/:id
+// @desc    Get a single game
+// @returns A game
+// @access  private
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  GameController.getGame
 );
 
 // @route   POST api/game/criar
@@ -47,5 +57,37 @@ router.post(
   checkUserRole(["professor"]),
   GameController.addAlunoGame
 );
+
+// @route   DELETE api/game/deleteGame
+// @desc    Delete a game
+// @params  Game ID
+// @access  private
+router.delete(
+  "/deleteGame",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  GameController.deleteGame
+)
+
+// @route   DELETE api/game/deleteGameAluno
+// @desc    Delete a aluno to a game
+// @params  Game ID and Matricula
+// @access  private
+router.delete(
+  "/deleteGameAluno",
+  passport.authenticate("jwt", {session: false}),
+  GameController.deleteGameAluno
+)
+
+// @route   UPDATE api/game/updateGame
+// @desc    Update a game
+// @params  Game ID, Nome, Data inicio, Data Fim
+// @access  private
+router.put(
+  "/updateGame",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(["professor"]),
+  GameController.updateGame
+)
 
 module.exports = router;
