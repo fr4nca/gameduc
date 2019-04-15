@@ -26,6 +26,16 @@ class RegraController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async deleteRegra(req, res, next) {
+    try {
+      const { regraId } = req.body;
+      await db.query(`DELETE FROM tb_regra WHERE id = ?`, [regraId]);
+      return res.status(200).json({ message: "Regra deletada" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
 }
 
 module.exports = RegraController;
