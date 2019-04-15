@@ -50,13 +50,10 @@ router.post(
   DisciplinaController.getDisciplinaProfessor
 );
 
-<<<<<<< HEAD
 // @route   DELETE api/disciplina/deleteDisciplina
 // @desc    Delete a disciplina
 // @params  Disciplina ID
 // @access  private
-=======
->>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
 router.delete(
   "/deleteDisciplina",
   passport.authenticate("jwt", {session: false}),
@@ -64,7 +61,6 @@ router.delete(
   DisciplinaController.deleteDisciplina
 )
 
-<<<<<<< HEAD
 // @route   DELETE api/disciplina/deleteProfDisciplina
 // @desc    Delete a disciplina vinculated to professor
 // @params  Matricula and Disciplina ID
@@ -73,11 +69,6 @@ router.delete(
   "/deleteProfDisciplina", 
   passport.authenticate("jwt", {session: false}),
   checkUserRole(['professor']),
-=======
-router.delete(
-  "/deleteProfDisciplina", 
-  passport.authenticate("jwt", {session: false}),
->>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
   DisciplinaController.deleteProfDisciplina
 )
 

@@ -31,11 +31,7 @@ class RegraController {
     try {
       const { regraId } = req.body;
       await db.query(`DELETE FROM tb_regra WHERE id = ?`, [regraId]);
-<<<<<<< HEAD
       return res.status(200).json({ message: "Regra deletada" });
-=======
-      return res.status(200).json({ message: "Regra Deletada!" });
->>>>>>> 3170748b0611a1058011fcd1b406f597055f4696
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

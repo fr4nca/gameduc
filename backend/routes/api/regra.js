@@ -27,6 +27,10 @@ router.post(
   RegraController.createRegra
 );
 
+// // @route   DELETE api/regra/deleteRegra
+// // @desc    Delete a regra
+// // @params  RegraID
+// // @access  private
 router.delete(
   "/deleteRegra",
   passport.authenticate("jwt", {session: false}),
