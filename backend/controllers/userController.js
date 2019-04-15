@@ -132,6 +132,7 @@ class UserController {
         `SELECT * FROM tb_${papel} WHERE tb_user_id = ?`,
         [id]
       );
+
       let user;
       if (results.length > 0) user = results[0];
       return res.json(user);
@@ -143,6 +144,7 @@ class UserController {
   static async getAlunos(req, res, next) {
     try {
       const results = await db.query(`SELECT * FROM tb_aluno`);
+
       return res.json(results);
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
@@ -151,16 +153,12 @@ class UserController {
 
   static async deleteUser(req, res, next) {
     try {
-      const { papel, id } = req.user;
-      const { matricula } = req.body;
-      if (papel === "professor") {
-        await db.query(
-          `DELETE FROM tb_professor WHERE matricula = ?; DELETE FROM tb_user WHERE id = ?`,
-          [matricula, id]
-        );
-        return res.status(200).json({ message: "Usuário deletado" });
-      }
-    } catch (e) {
+      const { id } = req.user;
+
+      await db.query(
+        `DELETE FROM tb_user WHERE id = ?`, [id]);
+      return res.status(200).json({ message: "Usuário deletado" });
+    } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }

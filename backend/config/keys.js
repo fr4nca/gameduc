@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
   config = {
     dbhost: "localhost",
     dbuser: "root",
-    dbpassword: "62013",
+    dbpassword: "lunaSZ",
     dbname: "gameduc",
     jwtsecret: "secret"
   };

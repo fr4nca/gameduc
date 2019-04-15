@@ -36,4 +36,15 @@ router.post(
   TarefaController.createTarefa
 );
 
+// @route   DELETE api/tarefa/deleteTarefa
+// @desc    Delete a tarefa
+// @params  TarefaID
+// @access  private
+router.delete(
+  "/deleteTarefa",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(['professor']),
+  TarefaController.deleteTarefa
+)
+
 module.exports = router;
