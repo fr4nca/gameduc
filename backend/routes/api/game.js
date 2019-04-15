@@ -6,7 +6,7 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const GameController = require("../../controllers/gameController");
 
-// @route   POST api/game/
+// @route   GET api/game/
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private
@@ -14,6 +14,16 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   GameController.getGames
+);
+
+// @route   GET api/game/:id
+// @desc    Get a single game
+// @returns A game
+// @access  private
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  GameController.getGame
 );
 
 // @route   POST api/game/criar

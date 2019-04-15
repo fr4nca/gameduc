@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getGames } from "../../actions/gameActions";
-import Game from "../../components/Game/Game";
+import { getGames } from "../../store/actions/gameActions";
+import GameCard from "../../components/Game/GameCard";
 import CriarGame from "../../components/Game/CriarGame";
 
 class Games extends Component {
@@ -65,7 +65,7 @@ class Games extends Component {
             <div className="columns is-multiline">
               {games.map(game => (
                 <div key={game.id} className="column is-2">
-                  <Game game={game} />
+                  <GameCard game={game} />
                 </div>
               ))}
             </div>

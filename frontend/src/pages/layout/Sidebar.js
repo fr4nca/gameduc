@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import classNames from "classnames";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../store/actions/authActions";
 
 function Sidebar({ location, auth, logoutUser }) {
   const { pathname } = location;

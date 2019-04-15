@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
   vincularDisciplina,
   getDisciplinasProfessor
-} from "../../actions/disciplinaActions";
+} from "../../store/actions/disciplinaActions";
 
 class VincularDisciplina extends Component {
   state = {

@@ -1,8 +1,8 @@
 import jwt_decode from "jwt-decode";
 
-import setAuthToken from "../utils/setAuthToken";
+import setAuthToken from "../../utils/setAuthToken";
 
-import axios from "../config/api";
+import axios from "../../services/api";
 
 import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "./types";
 

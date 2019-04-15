@@ -1,4 +1,5 @@
-import axios from "../config/api";
+import axios from "../../services/api";
+
 import {
   GET_DISCIPLINAS,
   CREATE_DISCIPLINA,

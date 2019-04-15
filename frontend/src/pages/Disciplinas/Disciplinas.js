@@ -7,7 +7,7 @@ import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 import {
   getDisciplinas,
   getDisciplinasProfessor
-} from "../../actions/disciplinaActions";
+} from "../../store/actions/disciplinaActions";
 
 export class Disciplinas extends Component {
   state = {
@@ -37,7 +37,7 @@ export class Disciplinas extends Component {
   render() {
     const { disciplinasProf } = this.props.disciplina;
     return (
-      <div>
+      <>
         <h1 className="title is-1">
           <span>
             <i className="fas fa-chalkboard has-text-link" /> Disciplinas
@@ -79,7 +79,7 @@ export class Disciplinas extends Component {
             )}
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

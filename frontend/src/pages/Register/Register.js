@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from "../../store/actions/authActions";
 
 export class Register extends Component {
   state = {
