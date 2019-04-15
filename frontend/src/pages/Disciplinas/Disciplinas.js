@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Disciplina from "../../components/Disciplina/Disciplina";
 import CriarDisciplina from "../../components/Disciplina/CriarDisciplina";
 import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
@@ -46,13 +45,19 @@ export class Disciplinas extends Component {
         </h1>
         <div className="box">
           <h3 className="subtitle is-3">Suas disciplinas</h3>
-          <ul className="">
-            {disciplinasProf.map(d => (
-              <li key={d.id} className="list-item">
-                <Disciplina disciplina={d} />
-              </li>
-            ))}
-          </ul>
+          <hr />
+          {disciplinasProf.length > 0 ? (
+            <div>
+              {disciplinasProf.map(d => (
+                <li key={d.id} className="list-item">
+                  <p>{d.nome}</p>
+                </li>
+              ))}
+            </div>
+          ) : (
+            <p>Não há nenhuma disciplina vinculada</p>
+          )}
+          <ul />
         </div>
         <div className="columns">
           <div className="column is-6">

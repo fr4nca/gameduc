@@ -21,6 +21,8 @@ export const criarGame = game => async dispatch => {
     dispatch({
       type: CREATE_GAME
     });
+
+    dispatch(getGames(game.matricula));
   } catch (e) {
     console.log(e.response.data);
   }

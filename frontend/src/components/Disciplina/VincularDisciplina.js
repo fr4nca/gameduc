@@ -23,13 +23,14 @@ class VincularDisciplina extends Component {
     const { disciplinaId } = this.state;
     const { matricula } = this.props.auth.profile;
     this.props.vincularDisciplina(matricula, disciplinaId);
-    this.props.getDisciplinasProfessor(matricula);
   };
 
   render() {
     const { disciplinas } = this.props.disciplina;
     return (
       <div className="box">
+        <h5 className="subtitle is-5">Se vincule a uma disciplina</h5>
+        <hr />
         <form onSubmit={this.handleSubmit}>
           <div className="field">
             <div className="select is-rounded">
@@ -37,6 +38,7 @@ class VincularDisciplina extends Component {
                 value={this.state.disciplinaId}
                 onChange={this.handleChange}
                 name="disciplinaId"
+                required
               >
                 <option value="" disabled>
                   Selecione a opção
