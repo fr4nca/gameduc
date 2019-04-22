@@ -8,7 +8,7 @@ class TarefaController {
       [gameId]
     );
     return res.json(results);
-  }
+  } 
 
   static async getTarefasByRegra(req, res, next) {
     try {
@@ -73,6 +73,40 @@ class TarefaController {
       return res.status(200).json({ message: "Tarefa adicionada com sucesso" });
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
+
+  static async updateTarefa(req, res, next){
+    try{
+      const {tarefaId, newClassificacao, newDescricao, newDataResolucao, newTag} = req.body
+
+      await db.query (
+        `UPDATE tb_tarefa SET classificacao = ?, descricao = ?, dta_resolucao = ?, tag = ? WHERE id = ?`, 
+        [newClassificacao, newDescricao, newDataResolucao, newTag, tarefaId]
+      )
+      return res.status(200).json({message: "Tarefa atualizada com sucesso"})
+    }catch(err){
+      return res.status(400).json({error: err.sqlMessage})
+    }
+  }
+
+  static async updateValidado(req, res, next){
+    try{
+      const {tarefaId, validado} = req.body
+      if(validado == 0){
+        await db.query (
+          `UPDATE tb_tarefa SET validado = ? WHERE id = ?`, 
+          [1, tarefaId]
+        )
+      }else{
+        await db.query (
+          `UPDATE tb_tarefa SET validado = ? WHERE id = ?`, 
+          [0, tarefaId]
+        )
+      }
+      return res.status(200).json({message:"Tarefa validada com sucesso"})
+    } catch(err){
+      return res.status(400).json({error: err.sqlMessage})
     }
   }
 

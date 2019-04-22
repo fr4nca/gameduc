@@ -151,6 +151,7 @@ class UserController {
     }
   }
 
+
   static async deleteUser(req, res, next) {
     try {
       const { id } = req.user;
