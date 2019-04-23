@@ -1,12 +1,12 @@
 let config = {};
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   config = {
-    dbhost: 'localhost',
-    dbuser: 'root',
-    dbpassword: '62013',
-    dbname: 'gameduc',
-    jwtsecret: 'secret'
+    dbhost: "localhost",
+    dbuser: "root",
+    dbpassword: "62013",
+    dbname: "gameduc",
+    jwtsecret: "secret"
   };
 } else {
   config = {
