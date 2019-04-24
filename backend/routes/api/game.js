@@ -42,7 +42,7 @@ router.post(
 // @params  Game id
 // @access  private
 router.get(
-  "/getAlunoGame",
+  "/getAlunoGame/:id",
   passport.authenticate("jwt", { session: false }),
   GameController.getAlunoGame
 );
@@ -88,6 +88,17 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   GameController.updateGame
+);
+
+// @route   GET api/game/ranking/:id
+// @desc    Get ranking
+// @params  Game ID
+// @access  private
+router.get(
+  "/ranking/:id",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  GameController.getRanking
 );
 
 module.exports = router;

@@ -7,6 +7,7 @@ import axios from "../../services/api";
 
 import Tarefas from "../../components/Tarefa/Tarefas";
 import Regras from "../../components/Regra/Regras";
+import Grafico from "../../components/Ranking/Grafico";
 import Ranking from "../../components/Ranking/Ranking";
 
 class Game extends Component {
@@ -40,12 +41,10 @@ class Game extends Component {
         </h1>
         <div className="columns is-multiline">
           <div className="column is-6">
-            <div className="box">
-              <p>Ranking aqui</p>
-            </div>
+            <Ranking />
           </div>
           <div className="column is-6">
-            <Ranking />
+            <Grafico />
           </div>
           <div className="column is-6">
             <Regras />

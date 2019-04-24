@@ -100,17 +100,10 @@ class TarefaController {
   static async updateValidado(req, res, next) {
     try {
       const { tarefaId, validado } = req.body;
-      if (validado == 0) {
-        await db.query(`UPDATE tb_tarefa SET validado = ? WHERE id = ?`, [
-          1,
-          tarefaId
-        ]);
-      } else {
-        await db.query(`UPDATE tb_tarefa SET validado = ? WHERE id = ?`, [
-          0,
-          tarefaId
-        ]);
-      }
+      await db.query(`UPDATE tb_tarefa SET validado = ? WHERE id = ?`, [
+        validado === 1 ? 0 : 1,
+        tarefaId
+      ]);
       return res.status(200).json({ message: "Tarefa validada com sucesso" });
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
@@ -119,8 +112,8 @@ class TarefaController {
 
   static async deleteTarefa(req, res, next) {
     try {
-      const { tarefaId } = req.body;
-      await db.query(`DELETE FROM tb_tarefa WHERE id = ?`, [tarefaId]);
+      const { id } = req.params;
+      await db.query(`DELETE FROM tb_tarefa WHERE id = ?`, [id]);
       return res.status(200).json({ message: "Tarefa deletada" });
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });

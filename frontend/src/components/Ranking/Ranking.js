@@ -1,58 +1,90 @@
 import React, { Component } from "react";
-import Chart from "chart.js";
 
-export class Ranking extends Component {
+import { connect } from "react-redux";
+import { getRanking } from "../../store/actions/gameActions";
+
+class Ranking extends Component {
   componentDidMount() {
-    const ctx = document.querySelector("#ranking");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [
-          {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
+    this.props.getRanking(this.props.game.game.id);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.game.game !== nextProps.game.game) {
+      this.props.getRanking(nextProps.game.game.id);
+    }
+  }
+
   render() {
+    const { ranking } = this.props.game;
+    let posicao = 0;
+
     return (
-      <div className="box">
-        <canvas id="ranking" />
+      <div>
+        {/* {this.state.editarRegra && (
+          <EditarTarefa
+            toggleEditModal={this.toggleEditModal}
+            tarefa={this.state.tarefa}
+          />
+        )} */}
+
+        <div className="box">
+          <h3 className="subtitle is-3 is-pulled-left">Ranking</h3>
+          <h3 className="subtitle is-3 is-pulled-right">
+            <a href="#!">
+              <i className="fas fa-plus" onClick={this.toggleAddModal} />
+              {/* {this.state.adicionarTarefa && (
+                <AdicionarTarefa toggleAddModal={this.toggleAddModal} />
+              )} */}
+            </a>
+          </h3>
+
+          {ranking.length > 0 ? (
+            <table className="table is-fullwidth">
+              <thead>
+                <tr>
+                  <th>
+                    <abbr title="Posição">Posição</abbr>
+                  </th>
+                  <th>
+                    <abbr title="Matricula">Matricula</abbr>
+                  </th>
+                  <th>
+                    <abbr title="Nome">Nome</abbr>
+                  </th>
+                  <th>
+                    <abbr title="Pontuação">Pontuação</abbr>
+                  </th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {ranking.map(aluno => {
+                  posicao++;
+                  return (
+                    <tr key={aluno.matricula}>
+                      <td>{posicao}</td>
+                      <td>{aluno.matricula}</td>
+                      <td>{aluno.nome}</td>
+                      <td>{aluno.soma}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <table className="table is-fullwidth">
+              <h2>Não há nenhum aluno no game</h2>
+            </table>
+          )}
+        </div>
       </div>
     );
   }
 }
 
-export default Ranking;
+const mapStateToProps = ({ game }) => ({ game });
+
+export default connect(
+  mapStateToProps,
+  { getRanking }
+)(Ranking);

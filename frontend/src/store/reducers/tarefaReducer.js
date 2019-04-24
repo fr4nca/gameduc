@@ -1,4 +1,9 @@
-import { GET_TAREFAS, ADD_TAREFA } from "../actions/types";
+import {
+  GET_TAREFAS,
+  ADD_TAREFA,
+  DELETE_TAREFA,
+  VALIDAR_TAREFA
+} from "../actions/types";
 
 const initalState = {
   tarefas: []
@@ -12,6 +17,14 @@ export default (state = initalState, action) => {
         tarefas: action.payload
       };
     case ADD_TAREFA:
+      return {
+        ...state
+      };
+    case DELETE_TAREFA:
+      return {
+        ...state
+      };
+    case VALIDAR_TAREFA:
       return {
         ...state
       };

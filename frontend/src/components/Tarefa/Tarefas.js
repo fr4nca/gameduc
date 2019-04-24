@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getTarefas } from "../../store/actions/tarefaActions";
+import {
+  getTarefas,
+  deleteTarefa,
+  validarTarefa
+} from "../../store/actions/tarefaActions";
 
 import Tarefa from "./Tarefa";
 import AdicionarTarefa from "./AdicionarTarefa";
@@ -89,11 +93,22 @@ class Tarefas extends Component {
                         <td>
                           {tarefa.validado ? null : (
                             <i
-                              style={{ marginRight: 20 + "px" }}
+                              style={{
+                                marginRight: 20 + "px",
+                                cursor: "pointer"
+                              }}
                               className="fas fa-check"
+                              onClick={this.props.validarTarefa.bind(
+                                this,
+                                tarefa
+                              )}
                             />
                           )}
-                          <i className="fas fa-trash" />
+                          <i
+                            style={{ cursor: "pointer" }}
+                            className="fas fa-trash"
+                            onClick={this.props.deleteTarefa.bind(this, tarefa)}
+                          />
                         </td>
                       </>
                     )}
@@ -116,5 +131,5 @@ const mapStateToProps = ({ tarefa, game, auth }) => ({ tarefa, game, auth });
 
 export default connect(
   mapStateToProps,
-  { getTarefas }
+  { getTarefas, deleteTarefa, validarTarefa }
 )(Tarefas);

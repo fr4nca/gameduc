@@ -31,7 +31,7 @@ class AdicionarTarefa extends Component {
       tag: regra.tag,
       dta_resolucao: this.state.dta_resolucao,
       gameId: this.props.game.game.id,
-      matricula: 11111111
+      matricula: 12121212
     };
     this.props.addTarefa(tarefa);
     this.props.toggleAddModal();

@@ -1,6 +1,6 @@
 import axios from "../../services/api";
 
-import { GET_TAREFAS, ADD_TAREFA } from "../actions/types";
+import { GET_TAREFAS, ADD_TAREFA, DELETE_TAREFA } from "../actions/types";
 
 export const getTarefas = id => async dispatch => {
   try {
@@ -24,6 +24,37 @@ export const addTarefa = tarefa => async dispatch => {
     });
 
     dispatch(getTarefas(tarefa.gameId));
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const deleteTarefa = tarefa => async dispatch => {
+  try {
+    await axios.delete(`/tarefa/${tarefa.id}`);
+
+    dispatch({
+      type: DELETE_TAREFA
+    });
+
+    dispatch(getTarefas(tarefa.tb_game_id));
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const validarTarefa = tarefa => async dispatch => {
+  try {
+    await axios.put(`/tarefa/updateValidado`, {
+      tarefaId: tarefa.id,
+      validado: tarefa.validado
+    });
+
+    dispatch({
+      type: DELETE_TAREFA
+    });
+
+    dispatch(getTarefas(tarefa.tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }

@@ -55,6 +55,7 @@ export const editRegra = regra => async dispatch => {
     dispatch({
       type: EDIT_REGRA
     });
+    dispatch(getRegras(regra.tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }

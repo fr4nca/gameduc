@@ -36,12 +36,12 @@ router.post(
   TarefaController.createTarefa
 );
 
-// @route   DELETE api/tarefa/deleteTarefa
+// @route   DELETE api/tarefa
 // @desc    Delete a tarefa
 // @params  TarefaID
 // @access  private
 router.delete(
-  "/deleteTarefa",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   TarefaController.deleteTarefa

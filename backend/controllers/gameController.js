@@ -55,10 +55,10 @@ class GameController {
 
   static async getAlunoGame(req, res, next) {
     try {
-      const { gameId } = req.body;
+      const { id } = req.params;
       const results = await db.query(
         "SELECT A.* FROM ta_game_aluno as GA INNER JOIN tb_aluno as A ON GA.tb_aluno_matricula = A.matricula WHERE GA.tb_game_id = ?",
-        [gameId]
+        [id]
       );
 
       return res.json(results);
@@ -113,6 +113,20 @@ class GameController {
         [gameId, matricula]
       );
       return res.status(200).json({ message: "GameAluno deletado" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
+    }
+  }
+
+  static async getRanking(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      let ranking = await db.query(
+        `SELECT * FROM ranking WHERE tb_game_id = ?`,
+        [id]
+      );
+      return res.json(ranking);
     } catch (err) {
       return res.status(400).json({ erro: err.sqlMessage });
     }
