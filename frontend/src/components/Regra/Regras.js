@@ -22,6 +22,11 @@ class Regras extends Component {
       const { id } = nextProps.game.game;
       this.props.getRegras(id);
     }
+
+    if (this.props.regra !== nextProps.regra) {
+      const { id } = nextProps.game.game;
+      this.props.getRegras(id);
+    }
   }
 
   toggleModal = () => {
@@ -42,7 +47,7 @@ class Regras extends Component {
           <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
           {this.props.auth.user.papel === "professor" && (
             <h3 className="subtitle is-3 is-pulled-right">
-              <a>
+              <a href="#!">
                 <i className="fas fa-plus" onClick={this.toggleModal} />
               </a>
             </h3>
@@ -64,6 +69,7 @@ class Regras extends Component {
                   <th>
                     <abbr title="Pontuação">Pontuação</abbr>
                   </th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
@@ -72,7 +78,7 @@ class Regras extends Component {
                     <Regra regra={regra} />
                     {this.props.auth.user.papel === "professor" && (
                       <td>
-                        <a className="delete" />
+                        <i className="delete" />
                       </td>
                     )}
                   </tr>

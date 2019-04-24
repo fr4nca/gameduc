@@ -1,4 +1,4 @@
-import { GET_REGRAS } from "../actions/types";
+import { GET_REGRAS, ADD_REGRA } from "../actions/types";
 
 const initalState = {
   regras: []
@@ -10,6 +10,10 @@ export default (state = initalState, action) => {
       return {
         ...state,
         regras: action.payload
+      };
+    case ADD_REGRA:
+      return {
+        ...state
       };
     default:
       return state;

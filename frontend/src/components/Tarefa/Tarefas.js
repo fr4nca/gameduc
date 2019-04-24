@@ -27,7 +27,7 @@ class Tarefas extends Component {
           <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
           {this.props.auth.user.papel === "professor" && (
             <h3 className="subtitle is-3 is-pulled-right">
-              <a>
+              <a href="#!">
                 <i className="fas fa-plus" />
               </a>
             </h3>
@@ -46,6 +46,7 @@ class Tarefas extends Component {
                   <th>
                     <abbr title="Tags">Tags</abbr>
                   </th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
@@ -54,7 +55,7 @@ class Tarefas extends Component {
                     <Tarefa tarefa={tarefa} />
                     {this.props.auth.user.papel === "professor" && (
                       <td>
-                        <a className="delete" />
+                        <i className="delete" />
                       </td>
                     )}
                   </tr>
