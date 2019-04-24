@@ -24,15 +24,17 @@ class Tarefas extends Component {
     return (
       <div>
         <div className="box">
-          {this.props.auth.user.papel === "professor" && (
+          {this.props.auth.user.papel === "professor" ? (
             <>
-              <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
+              <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
               <h3 className="subtitle is-3 is-pulled-right">
                 <a href="#!">
                   <i className="fas fa-plus" />
                 </a>
               </h3>
             </>
+          ) : (
+            <h3 className="subtitle is-3">Regras</h3>
           )}
 
           {tarefas.length > 0 ? (
