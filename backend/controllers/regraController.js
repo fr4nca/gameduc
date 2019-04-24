@@ -3,7 +3,7 @@ const db = require("../config/db");
 class RegraController {
   static async getRegras(req, res, next) {
     try {
-      const { gameId } = req.body;
+      const { gameId } = req.params;
       const results = await db.query(
         "SELECT * FROM tb_regra WHERE tb_game_id = ?",
         [gameId]
@@ -27,16 +27,22 @@ class RegraController {
     }
   }
 
-  static async updateRegra(req, res, next){
-    try{
-      const { regraId, newDescricao, newClassificacao, newTag, newPontuacao} = req.body
+  static async updateRegra(req, res, next) {
+    try {
+      const {
+        regraId,
+        newDescricao,
+        newClassificacao,
+        newTag,
+        newPontuacao
+      } = req.body;
       await db.query(
         `UPDATE tb_regra SET descricao = ?, classificacao = ?, tag = ?, pontuacao = ? WHERE id = ?`,
-        [newDescricao, newClassificacao, newTag, newPontuacao, regraId] 
-      )
-      return res.status(200).json({message:'Regra alterada com sucesso'})
-    } catch(err){
-      return res.status(400).json({error: err.sqlMessage})
+        [newDescricao, newClassificacao, newTag, newPontuacao, regraId]
+      );
+      return res.status(200).json({ message: "Regra alterada com sucesso" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
     }
   }
 
