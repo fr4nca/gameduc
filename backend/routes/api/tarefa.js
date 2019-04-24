@@ -47,4 +47,26 @@ router.delete(
   TarefaController.deleteTarefa
 );
 
+// @route   UPDATE api/tarefa/updateTarefa
+// @desc    Update a tarefa
+// @params  TarefaID, Classificação, Descrição e Tag
+// @access  private
+router.put(
+  "/updateTarefa",
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(['professor']),
+  TarefaController.updateTarefa
+)
+
+// @route   UPDATE api/tarefa/updateValidado
+// @desc    Update validado
+// @params  TarefaID and Validado
+// @access  private
+router.put(
+  '/updateValidado',
+  passport.authenticate("jwt", {session: false}),
+  checkUserRole(['professor']),
+  TarefaController.updateValidado
+)
+
 module.exports = router;

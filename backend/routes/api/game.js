@@ -71,7 +71,7 @@ router.delete(
 
 // @route   DELETE api/game/deleteGameAluno
 // @desc    Delete a aluno to a game
-// @params  Game ID and Matricula
+// @params  Game ID and matricula
 // @access  private
 router.delete(
   "/deleteGameAluno",
@@ -81,7 +81,7 @@ router.delete(
 
 // @route   UPDATE api/game/updateGame
 // @desc    Update a game
-// @params  Game ID, Nome, Data inicio, Data Fim
+// @params  Game ID, nome, data inicio, data Fim
 // @access  private
 router.put(
   "/updateGame",

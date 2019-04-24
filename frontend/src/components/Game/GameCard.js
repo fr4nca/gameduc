@@ -50,7 +50,7 @@ class GameCard extends Component {
               <strong>Início:</strong>{" "}
               {moment(game.dta_inicio).format("DD/MM/YYYY")}
             </p>
-            <p>
+            <p>header
               <strong>Finalização:</strong>{" "}
               {moment(game.dta_fim).format("DD/MM/YYYY")}
             </p>
