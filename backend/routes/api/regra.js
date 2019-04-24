@@ -32,7 +32,7 @@ router.post(
 // // @params  RegraID
 // // @access  private
 router.delete(
-  "/deleteRegra",
+  "/:regraId",
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   RegraController.deleteRegra
@@ -43,7 +43,7 @@ router.delete(
 // @params  Regra ID, Descrição, Classificação, Tag, Pontuação
 // @access  private
 router.put(
-  "/updateRegra",
+  "/:regraId",
   passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   RegraController.updateRegra

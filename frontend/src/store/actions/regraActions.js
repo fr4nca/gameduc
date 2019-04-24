@@ -1,6 +1,11 @@
 import axios from "../../services/api";
 
-import { ADD_REGRA, GET_REGRAS } from "../actions/types";
+import {
+  ADD_REGRA,
+  GET_REGRAS,
+  DELETE_REGRA,
+  EDIT_REGRA
+} from "../actions/types";
 
 export const getRegras = id => async dispatch => {
   try {
@@ -29,10 +34,22 @@ export const addRegra = regra => async dispatch => {
 
 export const deleteRegra = id => async dispatch => {
   try {
-    await axios.post(`/regra/`);
+    await axios.delete(`/regra/${id}`);
 
     dispatch({
-      type: ADD_REGRA
+      type: DELETE_REGRA
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const editRegra = regra => async dispatch => {
+  try {
+    await axios.put(`/regra/${regra.id}`, { ...regra });
+
+    dispatch({
+      type: EDIT_REGRA
     });
   } catch (e) {
     console.log(e.response.data);

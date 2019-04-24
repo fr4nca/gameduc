@@ -29,16 +29,12 @@ class RegraController {
 
   static async updateRegra(req, res, next) {
     try {
-      const {
-        regraId,
-        newDescricao,
-        newClassificacao,
-        newTag,
-        newPontuacao
-      } = req.body;
+      const { regraId } = req.params;
+      const { descricao, classificacao, tag, pontuacao } = req.body;
+
       await db.query(
         `UPDATE tb_regra SET descricao = ?, classificacao = ?, tag = ?, pontuacao = ? WHERE id = ?`,
-        [newDescricao, newClassificacao, newTag, newPontuacao, regraId]
+        [descricao, classificacao, tag, pontuacao, regraId]
       );
       return res.status(200).json({ message: "Regra alterada com sucesso" });
     } catch (err) {
@@ -48,7 +44,7 @@ class RegraController {
 
   static async deleteRegra(req, res, next) {
     try {
-      const { regraId } = req.body;
+      const { regraId } = req.params;
       await db.query(`DELETE FROM tb_regra WHERE id = ?`, [regraId]);
       return res.status(200).json({ message: "Regra deletada" });
     } catch (err) {

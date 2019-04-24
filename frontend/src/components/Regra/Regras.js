@@ -2,14 +2,17 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { getRegras } from "../../store/actions/regraActions";
+import { getRegras, deleteRegra } from "../../store/actions/regraActions";
 
 import Regra from "./Regra";
 import AdicionarRegra from "./AdicionarRegra";
+import EditarRegra from "./EditarRegra";
 
 class Regras extends Component {
   state = {
-    adicionarRegra: false
+    adicionarRegra: false,
+    editarRegra: false,
+    regra: null
   };
 
   async componentDidMount() {
@@ -29,10 +32,18 @@ class Regras extends Component {
     }
   }
 
-  toggleModal = () => {
+  toggleAddModal = () => {
     this.setState({
       ...this.state,
       adicionarRegra: !this.state.adicionarRegra
+    });
+  };
+
+  toggleEditModal = regra => {
+    this.setState({
+      ...this.state,
+      editarRegra: !this.state.editarRegra,
+      regra
     });
   };
 
@@ -40,17 +51,28 @@ class Regras extends Component {
     const { regras } = this.props.regra;
     return (
       <div>
-        {this.state.adicionarRegra && (
-          <AdicionarRegra toggleModal={this.toggleModal} />
+        {this.state.editarRegra && (
+          <EditarRegra
+            toggleEditModal={this.toggleEditModal}
+            regra={this.state.regra}
+          />
         )}
+
         <div className="box">
-          <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
-          {this.props.auth.user.papel === "professor" && (
-            <h3 className="subtitle is-3 is-pulled-right">
-              <a href="#!">
-                <i className="fas fa-plus" onClick={this.toggleModal} />
-              </a>
-            </h3>
+          {this.props.auth.user.papel === "professor" ? (
+            <>
+              <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
+              <h3 className="subtitle is-3 is-pulled-right">
+                <a href="#!">
+                  <i className="fas fa-plus" onClick={this.toggleAddModal} />
+                  {this.state.adicionarRegra && (
+                    <AdicionarRegra toggleAddModal={this.toggleAddModal} />
+                  )}
+                </a>
+              </h3>
+            </>
+          ) : (
+            <h3 className="subtitle is-3">Regras</h3>
           )}
 
           {regras.length > 0 ? (
@@ -78,7 +100,27 @@ class Regras extends Component {
                     <Regra regra={regra} />
                     {this.props.auth.user.papel === "professor" && (
                       <td>
-                        <i className="delete" />
+                        <span
+                          style={{ marginRight: 10 + "px", cursor: "pointer" }}
+                        >
+                          <i
+                            className="fas fa-edit"
+                            onClick={this.toggleEditModal.bind(this, regra)}
+                          />
+                        </span>
+                        <span
+                          style={{
+                            cursor: "pointer"
+                          }}
+                        >
+                          <i
+                            className="fas fa-trash"
+                            onClick={this.props.deleteRegra.bind(
+                              this,
+                              regra.id
+                            )}
+                          />
+                        </span>
                       </td>
                     )}
                   </tr>
@@ -86,7 +128,9 @@ class Regras extends Component {
               </tbody>
             </table>
           ) : (
-            <h2>Não há nenhum game cadastrado</h2>
+            <table className="table is-fullwidth">
+              <h2>Não há regras cadastradas</h2>
+            </table>
           )}
         </div>
       </div>
@@ -98,5 +142,5 @@ const mapStateToProps = ({ regra, game, auth }) => ({ regra, game, auth });
 
 export default connect(
   mapStateToProps,
-  { getRegras }
+  { getRegras, deleteRegra }
 )(Regras);

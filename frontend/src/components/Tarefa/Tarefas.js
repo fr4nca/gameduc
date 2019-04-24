@@ -24,13 +24,15 @@ class Tarefas extends Component {
     return (
       <div>
         <div className="box">
-          <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
           {this.props.auth.user.papel === "professor" && (
-            <h3 className="subtitle is-3 is-pulled-right">
-              <a href="#!">
-                <i className="fas fa-plus" />
-              </a>
-            </h3>
+            <>
+              <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
+              <h3 className="subtitle is-3 is-pulled-right">
+                <a href="#!">
+                  <i className="fas fa-plus" />
+                </a>
+              </h3>
+            </>
           )}
 
           {tarefas.length > 0 ? (
@@ -63,7 +65,9 @@ class Tarefas extends Component {
               </tbody>
             </table>
           ) : (
-            <h2>Não há nenhuma tarefa cadastrado</h2>
+            <table className="table is-fullwidth">
+              <h2>Não há nenhum game cadastrado</h2>
+            </table>
           )}
         </div>
       </div>

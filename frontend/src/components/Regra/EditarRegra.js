@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { addRegra } from "../../store/actions/regraActions";
+import { editRegra } from "../../store/actions/regraActions";
 
-class AdicionarRegra extends Component {
+class EditarRegra extends Component {
   state = {
     classificacao: "",
-    tag: "",
     descricao: "",
-    pontuacao: ""
+    tag: "",
+    pontuacao: 0,
+    id: 0
   };
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      ...this.props.regra
+    });
+  }
 
   handleChange = e => {
     this.setState({
@@ -18,18 +26,11 @@ class AdicionarRegra extends Component {
     });
   };
 
-  criarRegra = e => {
+  editarRegra = e => {
     e.preventDefault();
-    const regra = {
-      classificacao: this.state.classificacao,
-      tag: this.state.tag,
-      descricao: this.state.descricao,
-      pontuacao: this.state.pontuacao,
-      gameId: this.props.game.game.id
-    };
 
-    this.props.addRegra(regra);
-    this.props.toggleAddModal();
+    this.props.editRegra(this.state);
+    this.props.toggleEditModal();
   };
 
   render() {
@@ -42,10 +43,10 @@ class AdicionarRegra extends Component {
             <button
               className="delete"
               aria-label="close"
-              onClick={this.props.toggleAddModal}
+              onClick={this.props.toggleEditModal}
             />
           </header>
-          <form onSubmit={this.criarRegra}>
+          <form onSubmit={this.editarRegra}>
             <section className="modal-card-body">
               <div className="field">
                 <label className="label">Descrição</label>
@@ -104,8 +105,8 @@ class AdicionarRegra extends Component {
               </div>
             </section>
             <footer className="modal-card-foot">
-              <input type="submit" className="button is-link" value="Criar" />
-              <button className="button" onClick={this.props.toggleAddModal}>
+              <input type="submit" className="button is-link" value="Editar" />
+              <button className="button" onClick={this.props.toggleEditModal}>
                 Cancelar
               </button>
             </footer>
@@ -120,5 +121,5 @@ const mapStateToProps = ({ game }) => ({ game });
 
 export default connect(
   mapStateToProps,
-  { addRegra }
-)(AdicionarRegra);
+  { editRegra }
+)(EditarRegra);

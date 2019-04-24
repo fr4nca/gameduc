@@ -14,3 +14,5 @@ export const GET_TAREFAS = "GET_TAREFAS";
 
 export const GET_REGRAS = "GET_REGRAS";
 export const ADD_REGRA = "ADD_REGRA";
+export const DELETE_REGRA = "DELETE_REGRA";
+export const EDIT_REGRA = "EDIT_REGRA";
