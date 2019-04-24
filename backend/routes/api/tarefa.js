@@ -6,12 +6,12 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const TarefaController = require("../../controllers/tarefaController");
 
-// @route   GET api/tarefa/getTarefasByGame
+// @route   GET api/tarefa/getTarefasByGame/id
 // @desc    Get all tarefas for the current game
 // @returns All tarefas
 // @access  private
 router.get(
-  "/getTarefasByGame",
+  "/getTarefasByGame/:id",
   passport.authenticate("jwt", { session: false }),
   TarefaController.getTarefasByGame
 );
@@ -42,9 +42,9 @@ router.post(
 // @access  private
 router.delete(
   "/deleteTarefa",
-  passport.authenticate("jwt", {session: false}),
-  checkUserRole(['professor']),
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
   TarefaController.deleteTarefa
-)
+);
 
 module.exports = router;
