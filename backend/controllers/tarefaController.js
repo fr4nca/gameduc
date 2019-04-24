@@ -2,10 +2,10 @@ const db = require("../config/db");
 
 class TarefaController {
   static async getTarefasByGame(req, res, next) {
-    const { gameId } = req.body;
+    const { id } = req.params;
     const results = await db.query(
       "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
-      [gameId]
+      [id]
     );
     return res.json(results);
   } 
@@ -15,7 +15,7 @@ class TarefaController {
       const { regraId } = req.body;
       const results = await db.query(
         "SELECT * FROM tb_tarefa WHERE tb_regra_id = ?",
-        [regraId] 
+        [regraId]
       );
       return res.json(results);
     } catch (err) {
@@ -113,15 +113,12 @@ class TarefaController {
 
   static async deleteTarefa (req, res, next) {
     try {
-      const { tarefaId } = req.body
-      await db.query (
-        `DELETE FROM tb_tarefa WHERE id = ?`, [tarefaId]
-      )
-      return res.status(200).json({message: "Tarefa deletada"})
+      const { tarefaId } = req.body;
+      await db.query(`DELETE FROM tb_tarefa WHERE id = ?`, [tarefaId]);
+      return res.status(200).json({ message: "Tarefa deletada" });
     } catch (err) {
-      return res.status(400).json({error: err.sqlMessage})
+      return res.status(400).json({ error: err.sqlMessage });
     }
-    
   }
 }
 

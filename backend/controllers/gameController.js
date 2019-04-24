@@ -81,40 +81,40 @@ class GameController {
     }
   }
 
-  static async updateGame (req, res, next){
-    try{
-      const{ gameId, newNome, newDataInicio, newDataFim} = req.body
+  static async updateGame(req, res, next) {
+    try {
+      const { gameId, newNome, newDataInicio, newDataFim } = req.body;
       await db.query(
-        `UPDATE tb_game SET nome = ?, dta_inicio = ?, dta_fim = ? WHERE id = ?`, [newNome, newDataInicio, newDataFim, gameId]
-      )
-      return res.status(200).json({message:"Game alterado com sucesso"})
-    }catch (err){
-      return res.status(400).json({erro: err.sqlMessage})
+        `UPDATE tb_game SET nome = ?, dta_inicio = ?, dta_fim = ? WHERE id = ?`,
+        [newNome, newDataInicio, newDataFim, gameId]
+      );
+      return res.status(200).json({ message: "Game alterado com sucesso" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
     }
   }
 
-  static async deleteGame (req, res, next) {
+  static async deleteGame(req, res, next) {
     try {
-      const { gameId } = req.body
-      await db.query(
-        `DELETE FROM tb_game WHERE id = ?`, [gameId]
-      )
-      return res.status(200).json({message: "Game deletado"})
-    } catch(err) {
-      return res.status(400).json({erro: err.sqlMessage})
+      const { gameId } = req.body;
+      await db.query(`DELETE FROM tb_game WHERE id = ?`, [gameId]);
+      return res.status(200).json({ message: "Game deletado" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
     }
   }
 
-  static async deleteGameAluno (req, res, next) {
+  static async deleteGameAluno(req, res, next) {
     try {
-      const {gameId, matricula} = req.body
+      const { gameId, matricula } = req.body;
 
       await db.query(
-        `DELETE FROM ta_game_aluno WHERE  tb_game_id = ? AND tb_aluno_matricula = ?`, [gameId, matricula]
-      )
-      return res.status(200).json({message: "GameAluno deletado"})
-    } catch (err){
-      return res.status(400).json({erro: err.sqlMessage})
+        `DELETE FROM ta_game_aluno WHERE  tb_game_id = ? AND tb_aluno_matricula = ?`,
+        [gameId, matricula]
+      );
+      return res.status(200).json({ message: "GameAluno deletado" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
     }
   }
 }

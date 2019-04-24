@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
-import moment from "moment";
-
 import { connect } from "react-redux";
 import { getGame } from "../../store/actions/gameActions";
 
 import axios from "../../services/api";
+
+import Tarefas from "../../components/Tarefa/Tarefas";
+import Regras from "../../components/Regra/Regras";
+import Ranking from "../../components/Ranking/Ranking";
 
 class Game extends Component {
   state = { disciplina: "" };
@@ -20,6 +22,7 @@ class Game extends Component {
     } = this.props.game;
 
     const { data: disciplina } = await axios.get(`/disciplina/${disciplinaId}`);
+
     this.setState({
       ...this.state,
       disciplina
@@ -35,14 +38,21 @@ class Game extends Component {
             <i className="fas fa-gamepad has-text-link" /> {game.nome}
           </span>
         </h1>
-        <div className="box">
-          <h3 className="subtitle is-3">Detalhes</h3>
-          <hr />
-          <p>Data de início: {moment(game.dta_inicio).format("DD/MM/YYYY")}</p>
-          <p>
-            Data de finalização: {moment(game.dta_fim).format("DD/MM/YYYY")}
-          </p>
-          <p>Disciplina: {this.state.disciplina.nome}</p>
+        <div className="columns is-multiline">
+          <div className="column is-6">
+            <div className="box">
+              <p>Ranking aqui</p>
+            </div>
+          </div>
+          <div className="column is-6">
+            <Ranking />
+          </div>
+          <div className="column is-6">
+            <Regras />
+          </div>
+          <div className="column is-6">
+            <Tarefas />
+          </div>
         </div>
       </>
     );
