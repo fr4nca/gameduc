@@ -1,4 +1,4 @@
-import { GET_TAREFAS } from "../actions/types";
+import { GET_TAREFAS, ADD_TAREFA } from "../actions/types";
 
 const initalState = {
   tarefas: []
@@ -10,6 +10,10 @@ export default (state = initalState, action) => {
       return {
         ...state,
         tarefas: action.payload
+      };
+    case ADD_TAREFA:
+      return {
+        ...state
       };
     default:
       return state;

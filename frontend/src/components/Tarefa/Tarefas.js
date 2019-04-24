@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { getTarefas } from "../../store/actions/tarefaActions";
 
 import Tarefa from "./Tarefa";
+import AdicionarTarefa from "./AdicionarTarefa";
+import EditarTarefa from "./EditarTarefa";
 
 class Tarefas extends Component {
+  state = {
+    adicionarTarefa: false,
+    editarTarefa: false,
+    tarefa: null
+  };
+
   componentDidMount() {
     const { id } = this.props.game.game;
     this.props.getTarefas(id);
@@ -18,24 +26,43 @@ class Tarefas extends Component {
     }
   }
 
+  toggleAddModal = () => {
+    this.setState({
+      ...this.state,
+      adicionarTarefa: !this.state.adicionarTarefa
+    });
+  };
+
+  toggleEditModal = tarefa => {
+    this.setState({
+      ...this.state,
+      editarTarefa: !this.state.editarTarefa,
+      tarefa
+    });
+  };
+
   render() {
     const { tarefas } = this.props.tarefa;
 
     return (
       <div>
+        {this.state.editarRegra && (
+          <EditarTarefa
+            toggleEditModal={this.toggleEditModal}
+            tarefa={this.state.tarefa}
+          />
+        )}
+
         <div className="box">
-          {this.props.auth.user.papel === "professor" ? (
-            <>
-              <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
-              <h3 className="subtitle is-3 is-pulled-right">
-                <a href="#!">
-                  <i className="fas fa-plus" />
-                </a>
-              </h3>
-            </>
-          ) : (
-            <h3 className="subtitle is-3">Regras</h3>
-          )}
+          <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
+          <h3 className="subtitle is-3 is-pulled-right">
+            <a href="#!">
+              <i className="fas fa-plus" onClick={this.toggleAddModal} />
+              {this.state.adicionarTarefa && (
+                <AdicionarTarefa toggleAddModal={this.toggleAddModal} />
+              )}
+            </a>
+          </h3>
 
           {tarefas.length > 0 ? (
             <table className="table is-fullwidth">
@@ -58,9 +85,17 @@ class Tarefas extends Component {
                   <tr key={tarefa.id}>
                     <Tarefa tarefa={tarefa} />
                     {this.props.auth.user.papel === "professor" && (
-                      <td>
-                        <i className="delete" />
-                      </td>
+                      <>
+                        <td>
+                          {tarefa.validado ? null : (
+                            <i
+                              style={{ marginRight: 20 + "px" }}
+                              className="fas fa-check"
+                            />
+                          )}
+                          <i className="fas fa-trash" />
+                        </td>
+                      </>
                     )}
                   </tr>
                 ))}

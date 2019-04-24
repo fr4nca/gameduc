@@ -27,6 +27,8 @@ export const addRegra = regra => async dispatch => {
     dispatch({
       type: ADD_REGRA
     });
+
+    dispatch(getRegras(regra.gameId));
   } catch (e) {
     console.log(e.response.data);
   }

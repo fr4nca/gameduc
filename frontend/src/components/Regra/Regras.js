@@ -15,18 +15,13 @@ class Regras extends Component {
     regra: null
   };
 
-  async componentDidMount() {
-    const { id } = await this.props.game.game;
+  componentDidMount() {
+    const { id } = this.props.game.game;
     this.props.getRegras(id);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game !== nextProps.game) {
-      const { id } = nextProps.game.game;
-      this.props.getRegras(id);
-    }
-
-    if (this.props.regra !== nextProps.regra) {
       const { id } = nextProps.game.game;
       this.props.getRegras(id);
     }
