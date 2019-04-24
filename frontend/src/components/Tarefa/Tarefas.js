@@ -24,8 +24,15 @@ class Tarefas extends Component {
     return (
       <div>
         <div className="box">
-          <h3 className="subtitle is-3">Regras</h3>
-          <hr />
+          <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
+          {this.props.auth.user.papel === "professor" && (
+            <h3 className="subtitle is-3 is-pulled-right">
+              <a>
+                <i className="fas fa-plus" />
+              </a>
+            </h3>
+          )}
+
           {tarefas.length > 0 ? (
             <table className="table is-fullwidth">
               <thead>
@@ -39,12 +46,18 @@ class Tarefas extends Component {
                   <th>
                     <abbr title="Tags">Tags</abbr>
                   </th>
-                  <th />
                 </tr>
               </thead>
               <tbody>
                 {tarefas.map(tarefa => (
-                  <Tarefa key={tarefa.id} tarefa={tarefa} />
+                  <tr key={tarefa.id}>
+                    <Tarefa tarefa={tarefa} />
+                    {this.props.auth.user.papel === "professor" && (
+                      <td>
+                        <a className="delete" />
+                      </td>
+                    )}
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -57,7 +70,7 @@ class Tarefas extends Component {
   }
 }
 
-const mapStateToProps = ({ tarefa, game }) => ({ tarefa, game });
+const mapStateToProps = ({ tarefa, game, auth }) => ({ tarefa, game, auth });
 
 export default connect(
   mapStateToProps,

@@ -5,8 +5,13 @@ import { connect } from "react-redux";
 import { getRegras } from "../../store/actions/regraActions";
 
 import Regra from "./Regra";
+import AdicionarRegra from "./AdicionarRegra";
 
 class Regras extends Component {
+  state = {
+    adicionarRegra: false
+  };
+
   async componentDidMount() {
     const { id } = await this.props.game.game;
     this.props.getRegras(id);
@@ -19,13 +24,30 @@ class Regras extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState({
+      ...this.state,
+      adicionarRegra: !this.state.adicionarRegra
+    });
+  };
+
   render() {
     const { regras } = this.props.regra;
     return (
       <div>
+        {this.state.adicionarRegra && (
+          <AdicionarRegra toggleModal={this.toggleModal} />
+        )}
         <div className="box">
-          <h3 className="subtitle is-3">Regras</h3>
-          <hr />
+          <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
+          {this.props.auth.user.papel === "professor" && (
+            <h3 className="subtitle is-3 is-pulled-right">
+              <a>
+                <i className="fas fa-plus" onClick={this.toggleModal} />
+              </a>
+            </h3>
+          )}
+
           {regras.length > 0 ? (
             <table className="table is-fullwidth">
               <thead>
@@ -46,7 +68,14 @@ class Regras extends Component {
               </thead>
               <tbody>
                 {regras.map(regra => (
-                  <Regra key={regra.id} regra={regra} />
+                  <tr key={regra.id}>
+                    <Regra regra={regra} />
+                    {this.props.auth.user.papel === "professor" && (
+                      <td>
+                        <a className="delete" />
+                      </td>
+                    )}
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -59,7 +88,7 @@ class Regras extends Component {
   }
 }
 
-const mapStateToProps = ({ regra, game }) => ({ regra, game });
+const mapStateToProps = ({ regra, game, auth }) => ({ regra, game, auth });
 
 export default connect(
   mapStateToProps,
