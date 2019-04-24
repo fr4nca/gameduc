@@ -34,13 +34,15 @@ export const addRegra = regra => async dispatch => {
   }
 };
 
-export const deleteRegra = id => async dispatch => {
+export const deleteRegra = ({ id, tb_game_id }) => async dispatch => {
   try {
     await axios.delete(`/regra/${id}`);
 
     dispatch({
       type: DELETE_REGRA
     });
+
+    dispatch(getRegras(tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }

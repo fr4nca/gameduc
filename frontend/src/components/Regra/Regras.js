@@ -110,10 +110,7 @@ class Regras extends Component {
                         >
                           <i
                             className="fas fa-trash"
-                            onClick={this.props.deleteRegra.bind(
-                              this,
-                              regra.id
-                            )}
+                            onClick={this.props.deleteRegra.bind(this, regra)}
                           />
                         </span>
                       </td>
