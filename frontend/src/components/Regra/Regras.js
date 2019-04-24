@@ -101,7 +101,7 @@ class Regras extends Component {
                     {this.props.auth.user.papel === "professor" && (
                       <td>
                         <span
-                          style={{ marginRight: 10 + "px", cursor: "pointer" }}
+                          style={{ marginRight: 20 + "px", cursor: "pointer" }}
                         >
                           <i
                             className="fas fa-edit"
