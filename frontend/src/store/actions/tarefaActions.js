@@ -1,6 +1,13 @@
 import axios from "../../services/api";
 
-import { GET_TAREFAS, ADD_TAREFA, DELETE_TAREFA } from "../actions/types";
+import {
+  GET_TAREFAS,
+  ADD_TAREFA,
+  DELETE_TAREFA,
+  VALIDAR_TAREFA
+} from "./types";
+
+import { getRanking } from "./gameActions";
 
 export const getTarefas = id => async dispatch => {
   try {
@@ -38,6 +45,7 @@ export const deleteTarefa = tarefa => async dispatch => {
     });
 
     dispatch(getTarefas(tarefa.tb_game_id));
+    dispatch(getRanking(tarefa.tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }
@@ -51,10 +59,11 @@ export const validarTarefa = tarefa => async dispatch => {
     });
 
     dispatch({
-      type: DELETE_TAREFA
+      type: VALIDAR_TAREFA
     });
 
     dispatch(getTarefas(tarefa.tb_game_id));
+    dispatch(getRanking(tarefa.tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }

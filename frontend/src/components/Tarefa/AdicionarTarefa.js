@@ -42,7 +42,10 @@ class AdicionarTarefa extends Component {
       tag: regra.tag,
       dta_resolucao: this.state.dta_resolucao,
       gameId: this.props.game.game.id,
-      matricula: this.state.tb_aluno_matricula
+      matricula:
+        this.props.auth.user.papel === "professor"
+          ? this.state.tb_aluno_matricula
+          : this.props.auth.profile.matricula
     };
 
     this.props.addTarefa(tarefa);
