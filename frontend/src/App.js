@@ -2,6 +2,7 @@ import 'bulma/css/bulma.css';
 import './App.css';
 import 'bulma-dashboard/dist/bulma-dashboard.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import "./pages/Landing/Landing.css"
 
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -19,6 +20,7 @@ import setAuthToken from './utils/setAuthToken';
 
 import Navbar from './pages/layout/Navbar';
 import Footer from './pages/layout/Footer';
+import Landing from "./pages/Landing/Landing";
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
@@ -48,6 +50,7 @@ const App = () => (
       <Switch>
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
+        <Route exact path="/" component={Landing} />
         <PrivateRoute
           allowed={['professor', 'aluno']}
           path='/dashboard'
