@@ -64,30 +64,30 @@ router.post(
 // @access  private
 router.delete(
   "/deleteGame",
-  passport.authenticate("jwt", {session: false}),
+  passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   GameController.deleteGame
-)
+);
 
 // @route   DELETE api/game/deleteGameAluno
 // @desc    Delete a aluno to a game
-// @params  Game ID and Matricula
+// @params  Game ID and matricula
 // @access  private
 router.delete(
   "/deleteGameAluno",
-  passport.authenticate("jwt", {session: false}),
+  passport.authenticate("jwt", { session: false }),
   GameController.deleteGameAluno
-)
+);
 
 // @route   UPDATE api/game/updateGame
 // @desc    Update a game
-// @params  Game ID, Nome, Data inicio, Data Fim
+// @params  Game ID, nome, data inicio, data Fim
 // @access  private
 router.put(
   "/updateGame",
-  passport.authenticate("jwt", {session: false}),
+  passport.authenticate("jwt", { session: false }),
   checkUserRole(["professor"]),
   GameController.updateGame
-)
+);
 
 module.exports = router;
