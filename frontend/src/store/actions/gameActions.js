@@ -55,6 +55,8 @@ export const addAluno = (matricula, gameId) => async dispatch => {
     dispatch({
       type: ADD_ALUNO
     });
+
+    dispatch(getAlunos(gameId));
   } catch (e) {
     console.log(e.response.data);
   }

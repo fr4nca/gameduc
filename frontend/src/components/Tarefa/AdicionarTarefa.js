@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { addTarefa } from "../../store/actions/tarefaActions";
+import { getAlunos, getRanking } from "../../store/actions/gameActions";
 
 class AdicionarTarefa extends Component {
   state = {
@@ -13,6 +14,16 @@ class AdicionarTarefa extends Component {
     regra: {},
     tb_aluno_matricula: ""
   };
+
+  componentDidMount() {
+    this.props.getAlunos(this.props.game.game.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.game.game !== nextProps.game.game) {
+      this.props.getAlunos(nextProps.game.game.id);
+    }
+  }
 
   handleChange = e => {
     this.setState({
@@ -31,13 +42,16 @@ class AdicionarTarefa extends Component {
       tag: regra.tag,
       dta_resolucao: this.state.dta_resolucao,
       gameId: this.props.game.game.id,
-      matricula: 12121212
+      matricula: this.state.tb_aluno_matricula
     };
+
     this.props.addTarefa(tarefa);
+    this.props.getRanking(tarefa.gameId);
     this.props.toggleAddModal();
   };
 
   render() {
+    const { alunos } = this.props.game;
     return (
       <div className="modal is-active">
         <div className="modal-background" />
@@ -111,6 +125,11 @@ class AdicionarTarefa extends Component {
                       <option value="" disabled>
                         Selecione a opção
                       </option>
+                      {alunos.map(aluno => (
+                        <option key={aluno.matricula} value={aluno.matricula}>
+                          {aluno.nome}/{aluno.matricula}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -133,5 +152,5 @@ const mapStateToProps = ({ game, regra, auth }) => ({ game, regra, auth });
 
 export default connect(
   mapStateToProps,
-  { addTarefa }
+  { addTarefa, getAlunos, getRanking }
 )(AdicionarTarefa);

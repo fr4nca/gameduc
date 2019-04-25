@@ -46,11 +46,13 @@ class Alunos extends Component {
           )}
 
           {alunos.length > 0 ? (
-            <ul>
-              {alunos.map(aluno => (
-                <li>{aluno.nome}</li>
-              ))}
-            </ul>
+            <table className="table is-fullwidth">
+              <ul className="list">
+                {alunos.map(aluno => (
+                  <li className="list-item">{aluno.nome}</li>
+                ))}
+              </ul>
+            </table>
           ) : (
             <table className="table is-fullwidth">
               <h2>Nenhum aluno cadastrado no game</h2>

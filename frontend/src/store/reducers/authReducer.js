@@ -1,10 +1,15 @@
 import isEmpty from "../../utils/isEmpty";
-import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "../actions/types";
+import {
+  SET_CURRENT_USER,
+  SET_CURRENT_PROFILE,
+  GET_ALL_ALUNOS
+} from "../actions/types";
 
 const initalState = {
   isAuthenticated: false,
   user: {},
-  profile: {}
+  profile: {},
+  alunos: []
 };
 
 export default (state = initalState, action) => {
@@ -19,6 +24,11 @@ export default (state = initalState, action) => {
       return {
         ...state,
         profile: action.payload
+      };
+    case GET_ALL_ALUNOS:
+      return {
+        ...state,
+        alunos: action.payload
       };
     default:
       return state;

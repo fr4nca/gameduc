@@ -4,7 +4,7 @@ import setAuthToken from "../../utils/setAuthToken";
 
 import axios from "../../services/api";
 
-import { SET_CURRENT_USER, SET_CURRENT_PROFILE } from "./types";
+import { SET_CURRENT_USER, SET_CURRENT_PROFILE, GET_ALL_ALUNOS } from "./types";
 
 export const loginUser = userData => async dispatch => {
   try {
@@ -64,4 +64,17 @@ export const setCurrentUser = decoded => {
     type: SET_CURRENT_USER,
     payload: decoded
   };
+};
+
+export const getAllAlunos = () => async dispatch => {
+  try {
+    const { data } = await axios.get("/user/getAlunos");
+
+    dispatch({
+      type: GET_ALL_ALUNOS,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response);
+  }
 };

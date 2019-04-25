@@ -23,3 +23,4 @@ export const EDIT_REGRA = "EDIT_REGRA";
 
 export const ADD_ALUNO = "ADD_ALUNO";
 export const GET_ALUNOS = "GET_ALUNOS";
+export const GET_ALL_ALUNOS = "GET_ALL_ALUNOS";

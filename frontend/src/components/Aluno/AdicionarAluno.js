@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { addAluno } from "../../store/actions/gameActions";
+import { getAllAlunos } from "../../store/actions/authActions";
 
 class AdicionarAluno extends Component {
   state = {
     matricula: ""
   };
+
+  componentDidMount() {
+    this.props.getAllAlunos();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.auth !== nextProps.auth) {
+      this.props.getAllAlunos();
+    }
+  }
 
   handleChange = e => {
     this.setState({
@@ -23,6 +34,8 @@ class AdicionarAluno extends Component {
   };
 
   render() {
+    const { alunos } = this.props.auth;
+
     return (
       <div className="modal is-active">
         <div className="modal-background" />
@@ -35,7 +48,7 @@ class AdicionarAluno extends Component {
               onClick={this.props.toggleAddModal}
             />
           </header>
-          <form onSubmit={this.criarRegra}>
+          <form onSubmit={this.adicionarAluno}>
             <section className="modal-card-body">
               <div className="field">
                 <label className="label">Aluno</label>
@@ -49,11 +62,11 @@ class AdicionarAluno extends Component {
                     <option value="" disabled>
                       Nome/RA
                     </option>
-                    {/* {this.props.game.alunos.map(aluno => (
+                    {alunos.map(aluno => (
                       <option key={aluno.matricula} value={aluno.matricula}>
                         {aluno.nome}/{aluno.matricula}
                       </option>
-                    ))} */}
+                    ))}
                   </select>
                 </div>
               </div>
@@ -75,9 +88,9 @@ class AdicionarAluno extends Component {
   }
 }
 
-const mapStateToProps = ({ game }) => ({ game });
+const mapStateToProps = ({ game, auth }) => ({ game, auth });
 
 export default connect(
   mapStateToProps,
-  { addAluno }
+  { addAluno, getAllAlunos }
 )(AdicionarAluno);
