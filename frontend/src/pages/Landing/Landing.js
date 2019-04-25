@@ -76,7 +76,7 @@ const Landing = () => {
             Participe também!
             <br />
             <br />
-            <a class="button is-primary">Registrar</a>
+            <a class="button is-primary" href="/register">Registrar</a>
           </p>
 
 
