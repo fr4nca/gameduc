@@ -97,7 +97,6 @@ router.put(
 router.get(
   "/ranking/:id",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole(["professor"]),
   GameController.getRanking
 );
 

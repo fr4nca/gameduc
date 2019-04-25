@@ -42,7 +42,7 @@ class Alunos extends Component {
               </h3>
             </>
           ) : (
-            <h3 className="subtitle is-3">Regras</h3>
+            <h3 className="subtitle is-3">Alunos</h3>
           )}
 
           {alunos.length > 0 ? (
