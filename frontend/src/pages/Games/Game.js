@@ -9,6 +9,7 @@ import Tarefas from "../../components/Tarefa/Tarefas";
 import Regras from "../../components/Regra/Regras";
 import Grafico from "../../components/Ranking/Grafico";
 import Ranking from "../../components/Ranking/Ranking";
+import Alunos from "../../components/Aluno/Alunos";
 
 class Game extends Component {
   state = { disciplina: "" };
@@ -51,6 +52,9 @@ class Game extends Component {
           </div>
           <div className="column is-6">
             <Tarefas />
+          </div>
+          <div className="column is-6">
+            <Alunos />
           </div>
         </div>
       </>

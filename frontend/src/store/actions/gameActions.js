@@ -4,7 +4,8 @@ import {
   CREATE_GAME,
   GET_GAME,
   ADD_ALUNO,
-  GET_RANKING
+  GET_RANKING,
+  GET_ALUNOS
 } from "./types";
 
 export const getGames = matricula => async dispatch => {
@@ -47,12 +48,25 @@ export const criarGame = game => async dispatch => {
   }
 };
 
-export const addAluno = ({ gameId, matricula }) => async dispatch => {
+export const addAluno = (matricula, gameId) => async dispatch => {
   try {
     await axios.post("/game/addAlunoGame", { gameId, matricula });
 
     dispatch({
       type: ADD_ALUNO
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const getAlunos = gameId => async dispatch => {
+  try {
+    const { data } = await axios.get(`/game/getAlunoGame/${gameId}`);
+
+    dispatch({
+      type: GET_ALUNOS,
+      payload: data
     });
   } catch (e) {
     console.log(e.response.data);

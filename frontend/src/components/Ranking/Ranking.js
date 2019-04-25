@@ -20,23 +20,8 @@ class Ranking extends Component {
 
     return (
       <div>
-        {/* {this.state.editarRegra && (
-          <EditarTarefa
-            toggleEditModal={this.toggleEditModal}
-            tarefa={this.state.tarefa}
-          />
-        )} */}
-
         <div className="box">
-          <h3 className="subtitle is-3 is-pulled-left">Ranking</h3>
-          <h3 className="subtitle is-3 is-pulled-right">
-            <a href="#!">
-              <i className="fas fa-plus" onClick={this.toggleAddModal} />
-              {/* {this.state.adicionarTarefa && (
-                <AdicionarTarefa toggleAddModal={this.toggleAddModal} />
-              )} */}
-            </a>
-          </h3>
+          <h3 className="subtitle is-3 ">Ranking</h3>
 
           {ranking.length > 0 ? (
             <table className="table is-fullwidth">
@@ -73,7 +58,7 @@ class Ranking extends Component {
             </table>
           ) : (
             <table className="table is-fullwidth">
-              <h2>Não há nenhum aluno no game</h2>
+              <h2>Nenhum aluno pontuou</h2>
             </table>
           )}
         </div>
