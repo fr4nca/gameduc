@@ -124,6 +124,7 @@ class AdicionarTarefa extends Component {
                       value={this.state.tb_aluno_matricula}
                       onChange={this.handleChange}
                       name="tb_aluno_matricula"
+                      required
                     >
                       <option value="" disabled>
                         Selecione a opção
