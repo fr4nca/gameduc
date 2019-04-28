@@ -106,11 +106,11 @@ class GameController {
 
   static async deleteGameAluno(req, res, next) {
     try {
-      const { gameId, matricula } = req.body;
+      const { id, matricula } = req.params;
 
       await db.query(
-        `DELETE FROM ta_game_aluno WHERE  tb_game_id = ? AND tb_aluno_matricula = ?`,
-        [gameId, matricula]
+        `DELETE FROM ta_game_aluno WHERE tb_game_id = ? AND tb_aluno_matricula = ?`,
+        [id, matricula]
       );
       return res.status(200).json({ message: "GameAluno deletado" });
     } catch (err) {

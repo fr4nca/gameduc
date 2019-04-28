@@ -69,13 +69,14 @@ router.delete(
   GameController.deleteGame
 );
 
-// @route   DELETE api/game/deleteGameAluno
+// @route   DELETE api/game/deleteGameAluno/:id/:matricula
 // @desc    Delete a aluno to a game
 // @params  Game ID and matricula
 // @access  private
 router.delete(
-  "/deleteGameAluno",
+  "/deleteGameAluno/:id/:matricula",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
   GameController.deleteGameAluno
 );
 

@@ -4,7 +4,8 @@ import {
   GET_GAME,
   ADD_ALUNO,
   GET_RANKING,
-  GET_ALUNOS
+  GET_ALUNOS,
+  DELETE_ALUNO
 } from "../actions/types";
 
 const initalState = {
@@ -31,6 +32,10 @@ export default (state = initalState, action) => {
         game: action.payload
       };
     case ADD_ALUNO:
+      return {
+        ...state
+      };
+    case DELETE_ALUNO:
       return {
         ...state
       };

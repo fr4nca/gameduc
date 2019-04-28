@@ -5,7 +5,8 @@ import {
   GET_GAME,
   ADD_ALUNO,
   GET_RANKING,
-  GET_ALUNOS
+  GET_ALUNOS,
+  DELETE_ALUNO
 } from "./types";
 
 export const getGames = matricula => async dispatch => {
@@ -57,6 +58,20 @@ export const addAluno = (matricula, gameId) => async dispatch => {
     });
 
     dispatch(getAlunos(gameId));
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const deleteAluno = (matricula, gameId) => async dispatch => {
+  try {
+    await axios.delete(`/game/deleteGameAluno/${gameId}/${matricula}`);
+
+    dispatch({
+      type: DELETE_ALUNO
+    });
+    dispatch(getAlunos(gameId));
+    dispatch(getRanking(gameId));
   } catch (e) {
     console.log(e.response.data);
   }

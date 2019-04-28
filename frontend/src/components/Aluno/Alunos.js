@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAlunos } from "../../store/actions/gameActions";
+import { getAlunos, deleteAluno } from "../../store/actions/gameActions";
 import AdicionarAluno from "./AdicionarAluno";
 
 class Alunos extends Component {
@@ -49,7 +49,18 @@ class Alunos extends Component {
             <table className="table is-fullwidth">
               <ul className="list">
                 {alunos.map(aluno => (
-                  <li className="list-item">{aluno.nome}</li>
+                  <li key={aluno.matricula} className="list-item">
+                    {aluno.nome}
+                    <i
+                      style={{ cursor: "pointer" }}
+                      className="fas fa-trash is-pulled-right is-vcentered"
+                      onClick={this.props.deleteAluno.bind(
+                        this,
+                        aluno.matricula,
+                        this.props.game.game.id
+                      )}
+                    />
+                  </li>
                 ))}
               </ul>
             </table>
@@ -68,5 +79,5 @@ const mapStateToProps = ({ game, auth }) => ({ game, auth });
 
 export default connect(
   mapStateToProps,
-  { getAlunos }
+  { getAlunos, deleteAluno }
 )(Alunos);

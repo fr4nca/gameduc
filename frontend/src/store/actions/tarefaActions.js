@@ -31,6 +31,7 @@ export const addTarefa = tarefa => async dispatch => {
     });
 
     dispatch(getTarefas(tarefa.gameId));
+    dispatch(getRanking(tarefa.gameId));
   } catch (e) {
     console.log(e.response.data);
   }

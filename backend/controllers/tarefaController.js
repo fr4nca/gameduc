@@ -2,12 +2,16 @@ const db = require("../config/db");
 
 class TarefaController {
   static async getTarefasByGame(req, res, next) {
-    const { id } = req.params;
-    const results = await db.query(
-      "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
-      [id]
-    );
-    return res.json(results);
+    try {
+      const { id } = req.params;
+      const results = await db.query(
+        "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
+        [id]
+      );
+      return res.json(results);
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
   }
 
   static async getTarefasByRegra(req, res, next) {
