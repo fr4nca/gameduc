@@ -51,15 +51,17 @@ class Alunos extends Component {
                 {alunos.map(aluno => (
                   <li key={aluno.matricula} className="list-item">
                     {aluno.nome}
-                    <i
-                      style={{ cursor: "pointer" }}
-                      className="fas fa-trash is-pulled-right is-vcentered"
-                      onClick={this.props.deleteAluno.bind(
-                        this,
-                        aluno.matricula,
-                        this.props.game.game.id
-                      )}
-                    />
+                    {this.props.auth.user.papel === "professor" ? (
+                      <i
+                        style={{ cursor: "pointer" }}
+                        className="fas fa-trash is-pulled-right is-vcentered"
+                        onClick={this.props.deleteAluno.bind(
+                          this,
+                          aluno.matricula,
+                          this.props.game.game.id
+                        )}
+                      />
+                    ) : null}
                   </li>
                 ))}
               </ul>

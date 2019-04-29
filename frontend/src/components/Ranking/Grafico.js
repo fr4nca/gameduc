@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 
+import { connect } from "react-redux";
+import { getRanking } from "../../store/actions/gameActions";
+
 export class Grafico extends Component {
-  componentDidMount() {
+  iniciaGrafico(ranking) {
+    const nomes = ranking.map(aluno => aluno.nome);
+    const pontos = ranking.map(aluno => aluno.soma);
+
     const ctx = document.querySelector("#ranking");
 
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: nomes,
         datasets: [
           {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
+            label: "Pontuação",
+            data: pontos,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -47,6 +53,16 @@ export class Grafico extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.game.ranking !== nextProps.game.ranking) {
+      this.iniciaGrafico(nextProps.game.ranking);
+    }
+  }
+
+  componentDidMount() {
+    this.iniciaGrafico(this.props.game.ranking);
+  }
+
   render() {
     return (
       <div className="box">
@@ -56,4 +72,9 @@ export class Grafico extends Component {
   }
 }
 
-export default Grafico;
+const mapStateToProps = ({ game }) => ({ game });
+
+export default connect(
+  mapStateToProps,
+  { getRanking }
+)(Grafico);

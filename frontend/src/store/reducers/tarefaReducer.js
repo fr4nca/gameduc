@@ -2,7 +2,8 @@ import {
   GET_TAREFAS,
   ADD_TAREFA,
   DELETE_TAREFA,
-  VALIDAR_TAREFA
+  VALIDAR_TAREFA,
+  DELETE_ALUNO_TAREFAS
 } from "../actions/types";
 
 const initalState = {
@@ -25,6 +26,10 @@ export default (state = initalState, action) => {
         ...state
       };
     case VALIDAR_TAREFA:
+      return {
+        ...state
+      };
+    case DELETE_ALUNO_TAREFAS:
       return {
         ...state
       };

@@ -123,6 +123,20 @@ class TarefaController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async deleteAlunoTarefas(req, res, next) {
+    try {
+      const { matricula, gameId } = req.params;
+
+      await db.query(
+        `DELETE FROM tb_tarefa WHERE tb_aluno_matricula = ? AND tb_game_id = ?`,
+        [matricula, gameId]
+      );
+      return res.status(200).json({ message: "Tarefas deletadas" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
 }
 
 module.exports = TarefaController;

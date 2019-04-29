@@ -137,7 +137,11 @@ class AdicionarTarefa extends Component {
                     </select>
                   </div>
                 </div>
-              ) : null}
+              ) : (
+                <small className="is-size-7">
+                  Suas tarefas ainda precisam ser validadas pelo professor.
+                </small>
+              )}
             </section>
             <footer className="modal-card-foot">
               <input type="submit" className="button is-link" value="Criar" />

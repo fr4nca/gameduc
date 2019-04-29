@@ -8,6 +8,7 @@ import {
   GET_ALUNOS,
   DELETE_ALUNO
 } from "./types";
+import { deleteAlunoTarefas } from "./tarefaActions";
 
 export const getGames = matricula => async dispatch => {
   try {
@@ -70,6 +71,7 @@ export const deleteAluno = (matricula, gameId) => async dispatch => {
     dispatch({
       type: DELETE_ALUNO
     });
+    dispatch(deleteAlunoTarefas(matricula, gameId));
     dispatch(getAlunos(gameId));
     dispatch(getRanking(gameId));
   } catch (e) {

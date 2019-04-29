@@ -4,7 +4,8 @@ import {
   GET_TAREFAS,
   ADD_TAREFA,
   DELETE_TAREFA,
-  VALIDAR_TAREFA
+  VALIDAR_TAREFA,
+  DELETE_ALUNO_TAREFAS
 } from "./types";
 
 import { getRanking } from "./gameActions";
@@ -65,6 +66,21 @@ export const validarTarefa = tarefa => async dispatch => {
 
     dispatch(getTarefas(tarefa.tb_game_id));
     dispatch(getRanking(tarefa.tb_game_id));
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const deleteAlunoTarefas = (matricula, gameId) => async dispatch => {
+  try {
+    await axios.delete(`/tarefa/aluno/${matricula}/${gameId}`);
+
+    dispatch({
+      type: DELETE_ALUNO_TAREFAS
+    });
+
+    dispatch(getTarefas(gameId));
+    dispatch(getRanking(gameId));
   } catch (e) {
     console.log(e.response.data);
   }

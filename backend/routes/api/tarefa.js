@@ -69,4 +69,14 @@ router.put(
   TarefaController.updateValidado
 );
 
+// @route   DELETE api/tarefa
+// @desc    Delete a tarefa
+// @params  TarefaID
+// @access  private
+router.delete(
+  "/aluno/:matricula/:gameId",
+  passport.authenticate("jwt", { session: false }),
+  TarefaController.deleteAlunoTarefas
+);
+
 module.exports = router;

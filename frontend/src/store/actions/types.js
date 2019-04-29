@@ -15,6 +15,7 @@ export const GET_TAREFAS = "GET_TAREFAS";
 export const DELETE_TAREFA = "DELETE_TAREFA";
 export const ADD_TAREFA = "ADD_TAREFA";
 export const VALIDAR_TAREFA = "VALIDAR_TAREFA";
+export const DELETE_ALUNO_TAREFAS = "DELETE_ALUNO_TAREFAS";
 
 export const GET_REGRAS = "GET_REGRAS";
 export const ADD_REGRA = "ADD_REGRA";
