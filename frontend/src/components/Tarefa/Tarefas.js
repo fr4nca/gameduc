@@ -15,18 +15,22 @@ class Tarefas extends Component {
   state = {
     adicionarTarefa: false,
     editarTarefa: false,
-    tarefa: null
+    tarefa: null,
+
+    finished: false
   };
 
   componentDidMount() {
     const { id } = this.props.game.game;
     this.props.getTarefas(id);
+    this.isFinished(this.props.game.game.dta_fim);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game !== nextProps.game) {
       const { id } = nextProps.game.game;
       this.props.getTarefas(id);
+      this.isFinished(nextProps.game.game.dta_fim);
     }
   }
 
@@ -45,6 +49,16 @@ class Tarefas extends Component {
     });
   };
 
+  isFinished = dta_fim => {
+    let fim = new Date(dta_fim).getTime() / 1000;
+    let hoje = new Date().getTime() / 1000;
+
+    this.setState({
+      ...this.state,
+      finished: fim < hoje
+    });
+  };
+
   render() {
     const { tarefas } = this.props.tarefa;
 
@@ -58,15 +72,21 @@ class Tarefas extends Component {
         )}
 
         <div className="box">
-          <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
-          <h3 className="subtitle is-3 is-pulled-right">
-            <a href="#!">
-              <i className="fas fa-plus" onClick={this.toggleAddModal} />
-              {this.state.adicionarTarefa && (
-                <AdicionarTarefa toggleAddModal={this.toggleAddModal} />
-              )}
-            </a>
-          </h3>
+          {!this.state.finished ? (
+            <>
+              <h3 className="subtitle is-3 is-pulled-left">Tarefas</h3>
+              <h3 className="subtitle is-3 is-pulled-right">
+                <a href="#!">
+                  <i className="fas fa-plus" onClick={this.toggleAddModal} />
+                  {this.state.adicionarTarefa && (
+                    <AdicionarTarefa toggleAddModal={this.toggleAddModal} />
+                  )}
+                </a>
+              </h3>
+            </>
+          ) : (
+            <h3 className="subtitle is-3">Tarefas</h3>
+          )}
 
           {tarefas.length > 0 ? (
             <table className="table is-fullwidth">

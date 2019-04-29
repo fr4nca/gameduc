@@ -12,20 +12,33 @@ class Regras extends Component {
   state = {
     adicionarRegra: false,
     editarRegra: false,
-    regra: null
+    regra: null,
+    finished: false
   };
 
   componentDidMount() {
-    const { id } = this.props.game.game;
+    const { id, dta_fim } = this.props.game.game;
     this.props.getRegras(id);
+    this.isFinished(dta_fim);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game !== nextProps.game) {
-      const { id } = nextProps.game.game;
+      const { id, dta_fim } = nextProps.game.game;
       this.props.getRegras(id);
+      this.isFinished(dta_fim);
     }
   }
+
+  isFinished = dta_fim => {
+    let fim = new Date(dta_fim).getTime() / 1000;
+    let hoje = new Date().getTime() / 1000;
+
+    this.setState({
+      ...this.state,
+      finished: fim < hoje
+    });
+  };
 
   toggleAddModal = () => {
     this.setState({
@@ -44,6 +57,7 @@ class Regras extends Component {
 
   render() {
     const { regras } = this.props.regra;
+
     return (
       <div>
         {this.state.editarRegra && (
@@ -54,15 +68,16 @@ class Regras extends Component {
         )}
 
         <div className="box">
-          {this.props.auth.user.papel === "professor" ? (
+          {this.props.auth.user.papel === "professor" &&
+          !this.state.finished ? (
             <>
               <h3 className="subtitle is-3 is-pulled-left">Regras</h3>
               <h3 className="subtitle is-3 is-pulled-right">
                 <a href="#!">
                   <i className="fas fa-plus" onClick={this.toggleAddModal} />
-                  {this.state.adicionarRegra && (
+                  {this.state.adicionarRegra ? (
                     <AdicionarRegra toggleAddModal={this.toggleAddModal} />
-                  )}
+                  ) : null}
                 </a>
               </h3>
             </>

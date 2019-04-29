@@ -6,11 +6,13 @@ import AdicionarAluno from "./AdicionarAluno";
 class Alunos extends Component {
   componentDidMount() {
     this.props.getAlunos(this.props.game.game.id);
+    this.isFinished(this.props.game.game.dta_fim);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game.game !== nextProps.game.game)
       this.props.getAlunos(nextProps.game.game.id);
+    this.isFinished(nextProps.game.game.dta_fim);
   }
 
   state = {
@@ -24,12 +26,23 @@ class Alunos extends Component {
     });
   };
 
+  isFinished = dta_fim => {
+    let fim = new Date(dta_fim).getTime() / 1000;
+    let hoje = new Date().getTime() / 1000;
+
+    this.setState({
+      ...this.state,
+      finished: fim < hoje
+    });
+  };
+
   render() {
     const { alunos } = this.props.game;
     return (
       <div>
         <div className="box">
-          {this.props.auth.user.papel === "professor" ? (
+          {this.props.auth.user.papel === "professor" &&
+          !this.state.finished ? (
             <>
               <h3 className="subtitle is-3 is-pulled-left">Alunos</h3>
               <h3 className="subtitle is-3 is-pulled-right">

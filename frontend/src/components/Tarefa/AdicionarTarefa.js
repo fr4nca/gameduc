@@ -11,7 +11,7 @@ class AdicionarTarefa extends Component {
     tag: "",
     dta_resolucao: "",
     validado: 0,
-    regra: {},
+    regra: "",
     tb_aluno_matricula: ""
   };
 
@@ -105,7 +105,7 @@ class AdicionarTarefa extends Component {
                     name="regra"
                     required
                   >
-                    <option value={{}} disabled>
+                    <option value="" disabled>
                       Classificação/Tag
                     </option>
                     {this.props.regra.regras.map(regra => (

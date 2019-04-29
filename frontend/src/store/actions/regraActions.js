@@ -6,6 +6,8 @@ import {
   DELETE_REGRA,
   EDIT_REGRA
 } from "../actions/types";
+import { getTarefas } from "./tarefaActions";
+import { getRanking } from "./gameActions";
 
 export const getRegras = id => async dispatch => {
   try {
@@ -43,6 +45,8 @@ export const deleteRegra = ({ id, tb_game_id }) => async dispatch => {
     });
 
     dispatch(getRegras(tb_game_id));
+    dispatch(getTarefas(tb_game_id));
+    dispatch(getRanking(tb_game_id));
   } catch (e) {
     console.log(e.response.data);
   }
