@@ -13,7 +13,16 @@ class Painel extends Component {
 
   render() {
     const { papel } = this.props.auth.user;
-    return papel === "professor" ? <PainelProfessor /> : <PainelAluno />;
+    return (
+      <>
+        <h1 className="title is-1">
+          <span>
+            <i className="fas fa-chalkboard has-text-link" /> Painel
+          </span>
+        </h1>
+        {papel === "professor" ? <PainelProfessor /> : <PainelAluno />}
+      </>
+    );
   }
 }
 

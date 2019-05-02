@@ -22,9 +22,9 @@ function Sidebar({ location, auth, logoutUser }) {
             <li>
               <Link
                 className={classNames("has-text-grey-lighter", {
-                  "is-active": pathname === "/dashboard/painel"
+                  "is-active": pathname === "/dashboard"
                 })}
-                to="/dashboard/painel"
+                to="/dashboard"
               >
                 Painel
               </Link>

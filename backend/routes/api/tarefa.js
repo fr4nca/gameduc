@@ -26,6 +26,16 @@ router.get(
   TarefaController.getTarefasByRegra
 );
 
+// @route   GET api/tarefa/pendentes
+// @desc    Get all tarefas not validated
+// @returns All tarefas
+// @access  private
+router.get(
+  "/pendentes/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  TarefaController.getPendentes
+);
+
 // @route   POST api/tarefa/
 // @desc    Create tarefa
 // @params  Classificacao, descricao, data de resolucao, tag, matricula, game id
