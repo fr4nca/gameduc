@@ -29,24 +29,24 @@ class PainelProfessor extends Component {
               <h3 className="subtitle is-3">Validar tarefas pendentes</h3>
               <hr />
               <ul>
-                {tarefas.map(tarefa => (
-                  <li key={tarefa.id} className="list-item">
-                    {tarefa.descricao}
-                    <i
-                      style={{ cursor: "pointer" }}
-                      className="fas fa-check is-pulled-right is-vcentered"
-                      onClick={this.props.validarTarefaPendente.bind(
-                        this,
-                        tarefa,
-                        this.props.auth.profile.matricula
-                      )}
-                    />
-                  </li>
-                ))}
-                <li className="list-item">
-                  <span>oi</span>
-                  <span className="is-pulled-right">oi</span>
-                </li>
+                {tarefas.length > 0 ? (
+                  tarefas.map(tarefa => (
+                    <li key={tarefa.id} className="list-item">
+                      {tarefa.descricao}
+                      <i
+                        style={{ cursor: "pointer" }}
+                        className="fas fa-check is-pulled-right is-vcentered"
+                        onClick={this.props.validarTarefaPendente.bind(
+                          this,
+                          tarefa,
+                          this.props.auth.profile.matricula
+                        )}
+                      />
+                    </li>
+                  ))
+                ) : (
+                  <p>Não há tarefas a serem validadas</p>
+                )}
               </ul>
             </div>
           </div>

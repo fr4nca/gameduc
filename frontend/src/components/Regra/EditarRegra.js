@@ -52,6 +52,7 @@ class EditarRegra extends Component {
                 <label className="label">Descrição</label>
                 <div className="control">
                   <textarea
+                    maxLength="45"
                     className="textarea"
                     placeholder="Descrição"
                     name="descricao"
