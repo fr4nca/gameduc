@@ -11,6 +11,7 @@ import Disciplinas from "../Disciplinas/Disciplinas";
 import Games from "../Games/Games";
 import Sidebar from "../layout/Sidebar";
 import Game from "../Games/Game";
+import Painel from "../Painel/Painel";
 
 class Dashboard extends Component {
   render() {
@@ -25,6 +26,12 @@ class Dashboard extends Component {
                 exact
                 path="/dashboard/disciplina"
                 component={Disciplinas}
+              />
+              <PrivateRoute
+                allowed={["professor", "aluno"]}
+                exact
+                path="/dashboard"
+                component={Painel}
               />
               <Route exact path="/dashboard/games" component={Games} />
               <Route exact path="/dashboard/perfil" component={Perfil} />

@@ -60,7 +60,7 @@ class Alunos extends Component {
 
           {alunos.length > 0 ? (
             <table className="table is-fullwidth">
-              <ul className="list">
+              <ul>
                 {alunos.map(aluno => (
                   <li key={aluno.matricula} className="list-item">
                     {aluno.nome}

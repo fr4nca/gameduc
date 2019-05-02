@@ -27,6 +27,19 @@ class TarefaController {
     }
   }
 
+  static async getPendentes(req, res, next) {
+    try {
+      const { matricula } = req.params;
+      const results = await db.query(
+        "SELECT T.* FROM tb_tarefa as T INNER JOIN tb_game as G ON T.tb_game_id = G.id WHERE validado = 0 AND G.ta_professor_disciplina_tb_professor_matricula = ?",
+        [matricula]
+      );
+      return res.json(results);
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
+
   static async createTarefa(req, res, next) {
     try {
       const {

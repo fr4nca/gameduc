@@ -5,7 +5,8 @@ import {
   ADD_TAREFA,
   DELETE_TAREFA,
   VALIDAR_TAREFA,
-  DELETE_ALUNO_TAREFAS
+  DELETE_ALUNO_TAREFAS,
+  GET_TAREFAS_PENDENTES
 } from "./types";
 
 import { getRanking } from "./gameActions";
@@ -16,6 +17,19 @@ export const getTarefas = id => async dispatch => {
 
     dispatch({
       type: GET_TAREFAS,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const getTarefasPendentes = matricula => async dispatch => {
+  try {
+    const { data } = await axios.get(`/tarefa/pendentes/${matricula}`);
+
+    dispatch({
+      type: GET_TAREFAS_PENDENTES,
       payload: data
     });
   } catch (e) {
@@ -66,6 +80,23 @@ export const validarTarefa = tarefa => async dispatch => {
 
     dispatch(getTarefas(tarefa.tb_game_id));
     dispatch(getRanking(tarefa.tb_game_id));
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const validarTarefaPendente = (tarefa, matricula) => async dispatch => {
+  try {
+    await axios.put(`/tarefa/updateValidado`, {
+      tarefaId: tarefa.id,
+      validado: tarefa.validado
+    });
+
+    dispatch({
+      type: VALIDAR_TAREFA
+    });
+
+    dispatch(getTarefasPendentes(matricula));
   } catch (e) {
     console.log(e.response.data);
   }

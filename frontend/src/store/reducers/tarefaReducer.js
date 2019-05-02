@@ -3,7 +3,8 @@ import {
   ADD_TAREFA,
   DELETE_TAREFA,
   VALIDAR_TAREFA,
-  DELETE_ALUNO_TAREFAS
+  DELETE_ALUNO_TAREFAS,
+  GET_TAREFAS_PENDENTES
 } from "../actions/types";
 
 const initalState = {
@@ -13,6 +14,11 @@ const initalState = {
 export default (state = initalState, action) => {
   switch (action.type) {
     case GET_TAREFAS:
+      return {
+        ...state,
+        tarefas: action.payload
+      };
+    case GET_TAREFAS_PENDENTES:
       return {
         ...state,
         tarefas: action.payload
