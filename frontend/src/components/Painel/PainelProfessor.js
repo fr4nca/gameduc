@@ -50,6 +50,13 @@ class PainelProfessor extends Component {
               </ul>
             </div>
           </div>
+
+          <div className="column is-6">
+            <div className="box">
+              <h3 className="subtitle is-3">Games</h3>
+              <hr />
+            </div>
+          </div>
         </div>
       </>
     );
