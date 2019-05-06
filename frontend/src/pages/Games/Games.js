@@ -57,7 +57,7 @@ class Games extends Component {
             ) : null}
           </div>
         </div>
-        {createGame ? <CriarGame /> : null}
+        {createGame ? <CriarGame toggle={this.createGame} /> : null}
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
           <hr />

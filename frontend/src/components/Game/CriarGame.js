@@ -37,6 +37,7 @@ class CriarGame extends Component {
     game.matricula = matricula;
 
     this.props.criarGame(game);
+    this.props.toggle();
 
     this.setState({
       nome: "",
