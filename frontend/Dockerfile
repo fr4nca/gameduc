@@ -8,8 +8,8 @@ RUN npm install
 
 COPY . .
 
-RUN cd client; yarn; yarn build
+RUN yarn; yarn build
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "prod"]

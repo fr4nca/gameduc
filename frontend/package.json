@@ -9,6 +9,7 @@
     "bulma-dashboard": "^0.1.40",
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
+    "express": "^4.16.4",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "react": "^16.8.4",
@@ -24,6 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prod": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
