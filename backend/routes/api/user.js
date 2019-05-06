@@ -51,7 +51,6 @@ router.delete(
   UserController.deleteUser
 );
 
-
 // @route   UPDATE api/user/updateUser
 // @desc    Update a user
 // @params  Matricula, nome, sobrenome, data de nascimento, graduação, curso, email, senha, papel
