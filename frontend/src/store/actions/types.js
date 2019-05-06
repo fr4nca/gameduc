@@ -27,3 +27,8 @@ export const ADD_ALUNO = "ADD_ALUNO";
 export const DELETE_ALUNO = "DELETE_ALUNO";
 export const GET_ALUNOS = "GET_ALUNOS";
 export const GET_ALL_ALUNOS = "GET_ALL_ALUNOS";
+
+export const GET_ERRORS = "GET_ERRORS";
+
+export const GET_MESSAGES = "GET_MESSAGES";
+export const CREATE_MESSAGE = "CREATE_MESSAGE";

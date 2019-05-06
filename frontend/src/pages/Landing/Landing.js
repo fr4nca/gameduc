@@ -1,7 +1,7 @@
 import React from "react";
-import Primeiro from "../../image/primeiro.png";
-import Segundo from "../../image/segundo.png";
-import Terceiro from "../../image/terceiro.png";
+import Primeiro from "../../static/img/primeiro.png";
+import Segundo from "../../static/img/segundo.png";
+import Terceiro from "../../static/img/terceiro.png";
 
 import { connect } from "react-redux";
 

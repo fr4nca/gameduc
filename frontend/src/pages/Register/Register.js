@@ -65,8 +65,7 @@ export class Register extends Component {
     };
 
     newUser.dta_nascimento = moment(dta_nascimento).format("YYYY-MM-DD");
-    this.props.registerUser(newUser);
-    this.props.history.push("/login");
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {

@@ -14,6 +14,10 @@ import {
   setCurrentProfile
 } from "./store/actions/authActions";
 
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+import Alerts from "./components/common/Alerts";
+
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
@@ -42,22 +46,30 @@ if (localStorage.getItem("@Gameduc:userToken")) {
   }
 }
 
+const alertOptions = {
+  timeout: 3000,
+  position: "top center"
+};
+
 const App = () => (
   <Provider store={store}>
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/" component={Landing} />
-        <PrivateRoute
-          allowed={["professor", "aluno"]}
-          path="/dashboard"
-          component={Dashboard}
-        />
-      </Switch>
-      <Footer />
-    </Router>
+    <AlertProvider template={AlertTemplate} {...alertOptions}>
+      <Router>
+        <Navbar />
+        <Alerts />
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/" component={Landing} />
+          <PrivateRoute
+            allowed={["professor", "aluno"]}
+            path="/dashboard"
+            component={Dashboard}
+          />
+        </Switch>
+        <Footer />
+      </Router>
+    </AlertProvider>
   </Provider>
 );
 
