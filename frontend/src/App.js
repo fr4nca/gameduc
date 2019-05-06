@@ -58,9 +58,9 @@ const App = () => (
         <Navbar />
         <Alerts />
         <Switch>
+          <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/" component={Landing} />
           <PrivateRoute
             allowed={["professor", "aluno"]}
             path="/dashboard"

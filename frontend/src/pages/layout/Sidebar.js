@@ -26,7 +26,13 @@ function Sidebar({ location, auth, logoutUser }) {
                 })}
                 to="/dashboard"
               >
-                Painel
+                <span>
+                  <i
+                    className="fas fa-tachometer-alt"
+                    style={{ marginRight: 10 + "px" }}
+                  />
+                  Painel
+                </span>
               </Link>
             </li>
             {papel === "professor" ? (
@@ -37,7 +43,13 @@ function Sidebar({ location, auth, logoutUser }) {
                   })}
                   to="/dashboard/disciplina"
                 >
-                  Disciplina
+                  <span>
+                    <i
+                      className="fas fa-chalkboard"
+                      style={{ marginRight: 10 + "px" }}
+                    />
+                    Disciplina
+                  </span>
                 </Link>
               </li>
             ) : null}
@@ -48,7 +60,13 @@ function Sidebar({ location, auth, logoutUser }) {
                 })}
                 to="/dashboard/games"
               >
-                Games
+                <span>
+                  <i
+                    className="fas fa-gamepad"
+                    style={{ marginRight: 10 + "px" }}
+                  />
+                  Games
+                </span>
               </Link>
             </li>
           </ul>
@@ -61,7 +79,13 @@ function Sidebar({ location, auth, logoutUser }) {
                 })}
                 to="/dashboard/perfil"
               >
-                Perfil
+                <span>
+                  <i
+                    className="fas fa-user"
+                    style={{ marginRight: 10 + "px" }}
+                  />
+                  Perfil
+                </span>
               </Link>
             </li>
             <li>
@@ -72,7 +96,13 @@ function Sidebar({ location, auth, logoutUser }) {
                 }}
                 className="has-text-grey-lighter"
               >
-                Sair
+                <span>
+                  <i
+                    className="fas fa-sign-out-alt"
+                    style={{ marginRight: 10 + "px" }}
+                  />
+                  Sair
+                </span>
               </Link>
             </li>
           </ul>

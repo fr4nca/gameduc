@@ -17,7 +17,7 @@ class Painel extends Component {
       <>
         <h1 className="title is-1">
           <span>
-            <i className="fas fa-chalkboard has-text-link" /> Painel
+            <i className="fas fa-tachometer-alt has-text-link" /> Painel
           </span>
         </h1>
         {papel === "professor" ? <PainelProfessor /> : <PainelAluno />}
