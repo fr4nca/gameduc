@@ -7,7 +7,8 @@ import {
   GET_RANKING,
   GET_ALUNOS,
   DELETE_ALUNO,
-  CREATE_MESSAGE
+  CREATE_MESSAGE,
+  GET_ERRORS
 } from "./types";
 import { deleteAlunoTarefas } from "./tarefaActions";
 
@@ -69,7 +70,10 @@ export const addAluno = (matricula, gameId) => async dispatch => {
 
     dispatch(getAlunos(gameId));
   } catch (e) {
-    console.log(e.response.data);
+    dispatch({
+      type: GET_ERRORS,
+      payload: { msg: { error: "Aluno ja vinculado" }, status: 400 }
+    });
   }
 };
 
