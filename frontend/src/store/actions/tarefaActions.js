@@ -6,7 +6,8 @@ import {
   DELETE_TAREFA,
   VALIDAR_TAREFA,
   DELETE_ALUNO_TAREFAS,
-  GET_TAREFAS_PENDENTES
+  GET_TAREFAS_PENDENTES,
+  CREATE_MESSAGE
 } from "./types";
 
 import { getRanking } from "./gameActions";
@@ -45,6 +46,11 @@ export const addTarefa = tarefa => async dispatch => {
       type: ADD_TAREFA
     });
 
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { addTarefa: "Tarefa adicionada com sucesso" }
+    });
+
     dispatch(getTarefas(tarefa.gameId));
     dispatch(getRanking(tarefa.gameId));
   } catch (e) {
@@ -58,6 +64,11 @@ export const deleteTarefa = tarefa => async dispatch => {
 
     dispatch({
       type: DELETE_TAREFA
+    });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { deleteTarefa: "Tarefa deletada com sucesso" }
     });
 
     dispatch(getTarefas(tarefa.tb_game_id));
@@ -78,6 +89,11 @@ export const validarTarefa = tarefa => async dispatch => {
       type: VALIDAR_TAREFA
     });
 
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { validateTarefa: "Tarefa validada com sucesso" }
+    });
+
     dispatch(getTarefas(tarefa.tb_game_id));
     dispatch(getRanking(tarefa.tb_game_id));
   } catch (e) {
@@ -94,6 +110,11 @@ export const validarTarefaPendente = (tarefa, matricula) => async dispatch => {
 
     dispatch({
       type: VALIDAR_TAREFA
+    });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { validateTarefa: "Tarefa validada com sucesso" }
     });
 
     dispatch(getTarefasPendentes(matricula));

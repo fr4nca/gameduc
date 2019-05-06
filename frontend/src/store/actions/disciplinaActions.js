@@ -4,7 +4,9 @@ import {
   GET_DISCIPLINAS,
   CREATE_DISCIPLINA,
   GET_DISCIPLINAS_PROFESSOR,
-  VINCULATE_DISCIPLINA_PROFESSOR
+  VINCULATE_DISCIPLINA_PROFESSOR,
+  CREATE_MESSAGE,
+  GET_ERRORS
 } from "./types";
 
 export const getDisciplinas = () => async dispatch => {
@@ -26,6 +28,11 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
 
     dispatch({
       type: CREATE_DISCIPLINA
+    });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { createDisciplina: "Disciplina criada com sucesso" }
     });
 
     dispatch(getDisciplinas());
@@ -60,8 +67,17 @@ export const vincularDisciplina = (
     dispatch({
       type: VINCULATE_DISCIPLINA_PROFESSOR
     });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { vincularDisciplina: "Disciplina vinculada com sucesso" }
+    });
+
     dispatch(getDisciplinasProfessor(matricula));
   } catch (e) {
-    console.log(e.response.data);
+    dispatch({
+      type: GET_ERRORS,
+      payload: { msg: { error: "Disciplina ja vinculada" }, status: 400 }
+    });
   }
 };
