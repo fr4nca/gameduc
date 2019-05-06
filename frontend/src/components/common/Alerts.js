@@ -25,6 +25,8 @@ class Alerts extends Component {
       if (messages.createDisciplina) alert.success(messages.createDisciplina);
       if (messages.vincularDisciplina)
         alert.success(messages.vincularDisciplina);
+      if (messages.desvincularDisciplina)
+        alert.success(messages.desvincularDisciplina);
     }
   }
 

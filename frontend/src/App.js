@@ -48,7 +48,7 @@ if (localStorage.getItem("@Gameduc:userToken")) {
 
 const alertOptions = {
   timeout: 3000,
-  position: "top center"
+  position: "top right"
 };
 
 const App = () => (

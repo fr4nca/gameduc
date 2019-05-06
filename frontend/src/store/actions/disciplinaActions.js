@@ -6,7 +6,8 @@ import {
   GET_DISCIPLINAS_PROFESSOR,
   VINCULATE_DISCIPLINA_PROFESSOR,
   CREATE_MESSAGE,
-  GET_ERRORS
+  GET_ERRORS,
+  DELETE_DISCIPLINA_PROFESSOR
 } from "./types";
 
 export const getDisciplinas = () => async dispatch => {
@@ -79,5 +80,24 @@ export const vincularDisciplina = (
       type: GET_ERRORS,
       payload: { msg: { error: "Disciplina ja vinculada" }, status: 400 }
     });
+  }
+};
+
+export const desvincularDisciplina = (matricula, id) => async dispatch => {
+  try {
+    await axios.delete(`/disciplina/deleteProfDisciplina/${matricula}/${id}`);
+
+    dispatch({
+      type: DELETE_DISCIPLINA_PROFESSOR
+    });
+
+    dispatch(getDisciplinasProfessor(matricula));
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { desvincularDisciplina: "Disciplina desvinculada com sucesso" }
+    });
+  } catch (e) {
+    console.log(e.response.data);
   }
 };

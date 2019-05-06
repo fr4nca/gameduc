@@ -2,7 +2,8 @@ import {
   CREATE_DISCIPLINA,
   GET_DISCIPLINAS,
   GET_DISCIPLINAS_PROFESSOR,
-  VINCULATE_DISCIPLINA_PROFESSOR
+  VINCULATE_DISCIPLINA_PROFESSOR,
+  DELETE_DISCIPLINA_PROFESSOR
 } from "../actions/types";
 
 const initalState = {
@@ -27,6 +28,10 @@ export default (state = initalState, action) => {
         disciplinasProf: action.payload
       };
     case VINCULATE_DISCIPLINA_PROFESSOR:
+      return {
+        ...state
+      };
+    case DELETE_DISCIPLINA_PROFESSOR:
       return {
         ...state
       };
