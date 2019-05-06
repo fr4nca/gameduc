@@ -63,6 +63,7 @@ export const addAluno = (matricula, gameId) => async dispatch => {
     dispatch({
       type: ADD_ALUNO
     });
+
     dispatch({
       type: CREATE_MESSAGE,
       payload: { addAluno: "Aluno adicionado com sucesso" }
