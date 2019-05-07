@@ -133,6 +133,8 @@ export const relatorioProfessor = matricula => async dispatch => {
       type: RELATORIO_PROFESSOR,
       payload: data
     });
+
+    dispatch(getGames(matricula));
   } catch (e) {
     console.log(e.response);
   }

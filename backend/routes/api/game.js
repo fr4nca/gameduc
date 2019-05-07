@@ -6,7 +6,7 @@ const checkUserRole = require("../../utils/checkUserRole");
 
 const GameController = require("../../controllers/gameController");
 
-// @route   GET api/game/
+// @route   GET api/game/all/:matricula
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private

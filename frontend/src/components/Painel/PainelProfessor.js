@@ -7,7 +7,7 @@ import {
   validarTarefaPendente
 } from "../../store/actions/tarefaActions";
 
-import { getGames, relatorioProfessor } from "../../store/actions/gameActions";
+import { relatorioProfessor } from "../../store/actions/gameActions";
 
 import GameMiniCard from "../Game/GameMiniCard";
 
@@ -16,7 +16,6 @@ class PainelProfessor extends Component {
     const { matricula } = this.props.auth.profile;
     this.props.getTarefasPendentes(matricula);
     this.props.relatorioProfessor(matricula);
-    this.props.getGames(matricula);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,11 +23,6 @@ class PainelProfessor extends Component {
       const { matricula } = nextProps.auth.profile;
       this.props.getTarefasPendentes(matricula);
       this.props.relatorioProfessor(matricula);
-    }
-
-    if (this.props.auth.profile !== nextProps.auth.profile) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getGames(matricula);
     }
   }
 
@@ -103,9 +97,11 @@ class PainelProfessor extends Component {
               <h3 className="subtitle is-3">Games</h3>
               <hr />
               <ul>
-                {games.map(game => (
-                  <GameMiniCard key={game.id} game={game} />
-                ))}
+                {games.length > 0 ? (
+                  games.map(game => <GameMiniCard key={game.id} game={game} />)
+                ) : (
+                  <p>Não há games ativos</p>
+                )}
               </ul>
             </div>
           </div>
@@ -119,5 +115,5 @@ const mapStateToProps = ({ tarefa, auth, game }) => ({ tarefa, auth, game });
 
 export default connect(
   mapStateToProps,
-  { getTarefasPendentes, validarTarefaPendente, relatorioProfessor, getGames }
+  { getTarefasPendentes, validarTarefaPendente, relatorioProfessor }
 )(PainelProfessor);

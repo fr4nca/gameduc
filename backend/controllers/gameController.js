@@ -5,7 +5,6 @@ class GameController {
     try {
       const { papel } = req.user;
       const { matricula } = req.params;
-
       if (papel === "professor") {
         const professor_results = await db.query(
           "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ?",

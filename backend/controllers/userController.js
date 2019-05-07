@@ -243,9 +243,10 @@ class UserController {
 
       const results = await db.query(
         `
-      SELECT count(G.id) AS games FROM tb_game as G WHERE G.ta_professor_disciplina_tb_professor_matricula = ?;
+      SELECT count(G.id) AS games FROM tb_game as G WHERE G.ta_professor_disciplina_tb_professor_matricula = ? AND G.dta_inicio <= now() AND G.dta_fim >= now();
       SELECT count(TA.tb_aluno_matricula) AS alunos FROM ta_game_aluno AS TA INNER JOIN tb_game AS G ON G.id = TA.tb_game_id WHERE G.ta_professor_disciplina_tb_professor_matricula = ?;
-      SELECT count(TA.tb_disciplina_id) as disciplinas FROM ta_professor_disciplina AS TA WHERE TA.tb_professor_matricula = ?;`,
+      SELECT count(TA.tb_disciplina_id) as disciplinas FROM ta_professor_disciplina AS TA WHERE TA.tb_professor_matricula = ?;
+      `,
         [matricula, matricula, matricula]
       );
 
