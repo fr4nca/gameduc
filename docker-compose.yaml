@@ -22,6 +22,6 @@ services:
   backend:
     container_name: backend
     restart: always
-    image: fr4nca/apieo
+    image: fr4nca/backend
     expose:
       - "5000"
