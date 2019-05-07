@@ -10,8 +10,8 @@ const GameController = require("../../controllers/gameController");
 // @desc    Get all games for the current logged in user
 // @returns All games
 // @access  private
-router.post(
-  "/",
+router.get(
+  "/all/:matricula",
   passport.authenticate("jwt", { session: false }),
   GameController.getGames
 );

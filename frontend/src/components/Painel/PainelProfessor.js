@@ -7,29 +7,34 @@ import {
   validarTarefaPendente
 } from "../../store/actions/tarefaActions";
 
-import { relatorioProfessor } from "../../store/actions/authActions";
+import { getGames, relatorioProfessor } from "../../store/actions/gameActions";
 
-import { getGames } from "../../store/actions/gameActions";
 import GameMiniCard from "../Game/GameMiniCard";
 
 class PainelProfessor extends Component {
   componentDidMount() {
-    this.props.getTarefasPendentes(this.props.auth.profile.matricula);
-    this.props.relatorioProfessor(this.props.auth.profile.matricula);
-    this.props.getGames(this.props.auth.profile.matricula);
+    const { matricula } = this.props.auth.profile;
+    this.props.getTarefasPendentes(matricula);
+    this.props.relatorioProfessor(matricula);
+    this.props.getGames(matricula);
   }
 
   componentWillReceiveProps(nextProps) {
+    if (this.props.auth !== nextProps.auth) {
+      const { matricula } = nextProps.auth.profile;
+      this.props.getTarefasPendentes(matricula);
+      this.props.relatorioProfessor(matricula);
+    }
+
     if (this.props.auth.profile !== nextProps.auth.profile) {
-      this.props.getTarefasPendentes(nextProps.auth.profile.matricula);
-      this.props.relatorioProfessor(nextProps.auth.profile.matricula);
-      this.props.getGames(nextProps.auth.profile.matricula);
+      const { matricula } = nextProps.auth.profile;
+      this.props.getGames(matricula);
     }
   }
 
   render() {
     const { tarefas } = this.props.tarefa;
-    const { games } = this.props.game;
+    const { games, relatorio } = this.props.game;
 
     return (
       <>
@@ -41,11 +46,20 @@ class PainelProfessor extends Component {
               <ul>
                 {tarefas.length > 0 ? (
                   tarefas.map(tarefa => (
-                    <li key={tarefa.id} className="list-item">
-                      {tarefa.descricao}
+                    <li
+                      key={tarefa.id}
+                      className="list-item"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between"
+                      }}
+                    >
+                      <span>{tarefa.descricao}</span>
+                      <span>{tarefa.nome}</span>
                       <i
                         style={{ cursor: "pointer" }}
-                        className="fas fa-check is-pulled-right is-vcentered"
+                        className="fas fa-check"
                         onClick={this.props.validarTarefaPendente.bind(
                           this,
                           tarefa,
@@ -68,20 +82,16 @@ class PainelProfessor extends Component {
               <ul>
                 <li className="list-item">
                   Quantidade de games ativos
-                  <span className="is-pulled-right">
-                    {this.props.auth.relatorio.games}
-                  </span>
+                  <span className="is-pulled-right">{relatorio.games}</span>
                 </li>
                 <li className="list-item">
                   Quantidade de alunos
-                  <span className="is-pulled-right">
-                    {this.props.auth.relatorio.alunos}
-                  </span>
+                  <span className="is-pulled-right">{relatorio.alunos}</span>
                 </li>
                 <li className="list-item">
                   Quantidade de disciplinas vinculadas
                   <span className="is-pulled-right">
-                    {this.props.auth.relatorio.disciplinas}
+                    {relatorio.disciplinas}
                   </span>
                 </li>
               </ul>

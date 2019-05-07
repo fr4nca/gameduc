@@ -10,8 +10,7 @@ import {
   SET_CURRENT_USER,
   SET_CURRENT_PROFILE,
   GET_ALL_ALUNOS,
-  GET_ERRORS,
-  RELATORIO_PROFESSOR
+  GET_ERRORS
 } from "./types";
 
 export const loginUser = userData => async dispatch => {
@@ -96,19 +95,6 @@ export const getAllAlunos = () => async dispatch => {
 
     dispatch({
       type: GET_ALL_ALUNOS,
-      payload: data
-    });
-  } catch (e) {
-    console.log(e.response);
-  }
-};
-
-export const relatorioProfessor = matricula => async dispatch => {
-  try {
-    const { data } = await axios.get(`/user/relatorioProfessor/${matricula}`);
-
-    dispatch({
-      type: RELATORIO_PROFESSOR,
       payload: data
     });
   } catch (e) {

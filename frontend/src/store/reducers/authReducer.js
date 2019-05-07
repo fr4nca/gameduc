@@ -2,20 +2,14 @@ import isEmpty from "../../utils/isEmpty";
 import {
   SET_CURRENT_USER,
   SET_CURRENT_PROFILE,
-  GET_ALL_ALUNOS,
-  RELATORIO_PROFESSOR
+  GET_ALL_ALUNOS
 } from "../actions/types";
 
 const initalState = {
   isAuthenticated: false,
   user: {},
   profile: {},
-  alunos: [],
-  relatorio: {
-    games: "",
-    alunos: "",
-    disciplinas: ""
-  }
+  alunos: []
 };
 
 export default (state = initalState, action) => {
@@ -36,15 +30,7 @@ export default (state = initalState, action) => {
         ...state,
         alunos: action.payload
       };
-    case RELATORIO_PROFESSOR:
-      return {
-        ...state,
-        relatorio: {
-          games: action.payload[0].games,
-          alunos: action.payload[1].alunos,
-          disciplinas: action.payload[2].disciplinas
-        }
-      };
+
     default:
       return state;
   }

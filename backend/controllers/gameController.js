@@ -4,7 +4,7 @@ class GameController {
   static async getGames(req, res, next) {
     try {
       const { papel } = req.user;
-      const { matricula } = req.body;
+      const { matricula } = req.params;
 
       if (papel === "professor") {
         const professor_results = await db.query(

@@ -31,7 +31,7 @@ class TarefaController {
     try {
       const { matricula } = req.params;
       const results = await db.query(
-        "SELECT T.* FROM tb_tarefa as T INNER JOIN tb_game as G ON T.tb_game_id = G.id WHERE validado = 0 AND G.ta_professor_disciplina_tb_professor_matricula = ?",
+        "SELECT T.*, A.nome FROM tb_tarefa as T INNER JOIN tb_game as G ON T.tb_game_id = G.id INNER JOIN tb_aluno AS A ON T.tb_aluno_matricula = A.matricula WHERE validado = 0 AND G.ta_professor_disciplina_tb_professor_matricula = ?",
         [matricula]
       );
       return res.json(results);

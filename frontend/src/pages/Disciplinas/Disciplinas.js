@@ -57,7 +57,7 @@ export class Disciplinas extends Component {
                 <li key={d.id} className="list-item">
                   {d.nome}
                   <i
-                    class="fas fa-trash is-pulled-right"
+                    className="fas fa-trash is-pulled-right"
                     style={{
                       marginTop: 4 + "px",
                       cursor: "pointer"
