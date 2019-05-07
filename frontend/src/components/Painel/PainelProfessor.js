@@ -10,6 +10,7 @@ import {
 import { relatorioProfessor } from "../../store/actions/gameActions";
 
 import GameMiniCard from "../Game/GameMiniCard";
+import Spinner from "../../pages/layout/Spinner";
 
 class PainelProfessor extends Component {
   componentDidMount() {
@@ -38,32 +39,36 @@ class PainelProfessor extends Component {
               <h3 className="subtitle is-3">Validar tarefas pendentes</h3>
               <hr />
               <ul>
-                {tarefas.length > 0 ? (
-                  tarefas.map(tarefa => (
-                    <li
-                      key={tarefa.id}
-                      className="list-item"
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between"
-                      }}
-                    >
-                      <span>{tarefa.descricao}</span>
-                      <span>{tarefa.nome}</span>
-                      <i
-                        style={{ cursor: "pointer" }}
-                        className="fas fa-check"
-                        onClick={this.props.validarTarefaPendente.bind(
-                          this,
-                          tarefa,
-                          this.props.auth.profile.matricula
-                        )}
-                      />
-                    </li>
-                  ))
+                {tarefas ? (
+                  tarefas.length > 0 ? (
+                    tarefas.map(tarefa => (
+                      <li
+                        key={tarefa.id}
+                        className="list-item"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between"
+                        }}
+                      >
+                        <span>{tarefa.descricao}</span>
+                        <span>{tarefa.nome}</span>
+                        <i
+                          style={{ cursor: "pointer" }}
+                          className="fas fa-check"
+                          onClick={this.props.validarTarefaPendente.bind(
+                            this,
+                            tarefa,
+                            this.props.auth.profile.matricula
+                          )}
+                        />
+                      </li>
+                    ))
+                  ) : (
+                    <p>Não há tarefas a serem validadas</p>
+                  )
                 ) : (
-                  <p>Não há tarefas a serem validadas</p>
+                  <Spinner />
                 )}
               </ul>
             </div>
