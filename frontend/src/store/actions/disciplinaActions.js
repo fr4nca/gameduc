@@ -4,7 +4,10 @@ import {
   GET_DISCIPLINAS,
   CREATE_DISCIPLINA,
   GET_DISCIPLINAS_PROFESSOR,
-  VINCULATE_DISCIPLINA_PROFESSOR
+  VINCULATE_DISCIPLINA_PROFESSOR,
+  CREATE_MESSAGE,
+  GET_ERRORS,
+  DELETE_DISCIPLINA_PROFESSOR
 } from "./types";
 
 export const getDisciplinas = () => async dispatch => {
@@ -26,6 +29,11 @@ export const criarDisciplina = ({ nome }) => async dispatch => {
 
     dispatch({
       type: CREATE_DISCIPLINA
+    });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { createDisciplina: "Disciplina criada com sucesso" }
     });
 
     dispatch(getDisciplinas());
@@ -60,7 +68,35 @@ export const vincularDisciplina = (
     dispatch({
       type: VINCULATE_DISCIPLINA_PROFESSOR
     });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { vincularDisciplina: "Disciplina vinculada com sucesso" }
+    });
+
     dispatch(getDisciplinasProfessor(matricula));
+  } catch (e) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: { msg: { error: "Disciplina ja vinculada" }, status: 400 }
+    });
+  }
+};
+
+export const desvincularDisciplina = (matricula, id) => async dispatch => {
+  try {
+    await axios.delete(`/disciplina/deleteProfDisciplina/${matricula}/${id}`);
+
+    dispatch({
+      type: DELETE_DISCIPLINA_PROFESSOR
+    });
+
+    dispatch(getDisciplinasProfessor(matricula));
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { desvincularDisciplina: "Disciplina desvinculada com sucesso" }
+    });
   } catch (e) {
     console.log(e.response.data);
   }

@@ -151,8 +151,8 @@ class UserController {
     }
   }
 
-  static async updateUser(req, res, next){
-    try{
+  static async updateUser(req, res, next) {
+    try {
       const { id } = req.user;
       const {
         matricula,
@@ -162,7 +162,7 @@ class UserController {
         graduacao,
         curso,
         email,
-        senha, 
+        senha,
         papel
       } = req.body;
 
@@ -170,7 +170,6 @@ class UserController {
         "SELECT * FROM tb_user where email = ?",
         [email]
       );
-      
 
       if (userResults.length > 0) {
         return res.status(400).json({ error: "Email ja cadastrado" });
@@ -220,21 +219,18 @@ class UserController {
           }
         });
       });
-
-    }catch(err){
+    } catch (err) {
       if (err.sqlMessage)
         return res.status(400).json({ error: err.sqlMessage });
       else return res.status(400).json({ error: err });
     }
   }
 
-
   static async deleteUser(req, res, next) {
     try {
       const { id } = req.user;
 
-      await db.query(
-        `DELETE FROM tb_user WHERE id = ?`, [id]);
+      await db.query(`DELETE FROM tb_user WHERE id = ?`, [id]);
       return res.status(200).json({ message: "Usuário deletado" });
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });

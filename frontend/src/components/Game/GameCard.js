@@ -57,10 +57,14 @@ class GameCard extends Component {
           </div>
           <progress
             className="progress is-link"
-            value={percent >= 100 ? 100 : percent}
+            value={percent >= 100 ? 100 : percent <= 0 ? 0 : percent}
             max="100"
           />
-          {percent >= 100 ? "Finalizado" : percent + "% completo"}
+          {percent >= 100
+            ? "Finalizado"
+            : percent <= 0
+            ? "Game ainda não começou"
+            : percent + "% completo"}
         </div>
         <footer className="card-footer">
           <Link to={`/dashboard/game/${game.id}`} className="card-footer-item">

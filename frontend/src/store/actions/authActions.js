@@ -2,9 +2,16 @@ import jwt_decode from "jwt-decode";
 
 import setAuthToken from "../../utils/setAuthToken";
 
+import { createMessage } from "./messagesActions";
+
 import axios from "../../services/api";
 
-import { SET_CURRENT_USER, SET_CURRENT_PROFILE, GET_ALL_ALUNOS } from "./types";
+import {
+  SET_CURRENT_USER,
+  SET_CURRENT_PROFILE,
+  GET_ALL_ALUNOS,
+  GET_ERRORS
+} from "./types";
 
 export const loginUser = userData => async dispatch => {
   try {
@@ -22,15 +29,31 @@ export const loginUser = userData => async dispatch => {
 
     dispatch(setCurrentProfile());
   } catch (e) {
-    console.log(e.response.data);
+    const error = {
+      msg: e.response.data,
+      status: e.response.status
+    };
+    dispatch({
+      type: GET_ERRORS,
+      payload: error
+    });
   }
 };
 
-export const registerUser = user => async dispatch => {
+export const registerUser = (user, history) => async dispatch => {
   try {
     await axios.post("/user/register", user);
+    dispatch(createMessage({ registerSuccess: "Registrado com sucesso." }));
+    history.push("/login");
   } catch (e) {
-    console.log(e.response.data);
+    const error = {
+      msg: e.response.data,
+      status: e.response.status
+    };
+    dispatch({
+      type: GET_ERRORS,
+      payload: error
+    });
   }
 };
 

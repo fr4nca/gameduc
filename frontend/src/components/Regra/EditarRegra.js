@@ -39,7 +39,7 @@ class EditarRegra extends Component {
         <div className="modal-background" />
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">Nova regra</p>
+            <p className="modal-card-title">Editar regra</p>
             <button
               className="delete"
               aria-label="close"
@@ -52,6 +52,7 @@ class EditarRegra extends Component {
                 <label className="label">Descrição</label>
                 <div className="control">
                   <textarea
+                    maxLength="45"
                     className="textarea"
                     placeholder="Descrição"
                     name="descricao"

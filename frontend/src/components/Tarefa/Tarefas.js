@@ -92,15 +92,9 @@ class Tarefas extends Component {
             <table className="table is-fullwidth">
               <thead>
                 <tr>
-                  <th>
-                    <abbr title="Id">Id</abbr>
-                  </th>
-                  <th>
-                    <abbr title="Classificação">Classificação</abbr>
-                  </th>
-                  <th>
-                    <abbr title="Tags">Tags</abbr>
-                  </th>
+                  <th>Descrição</th>
+                  <th>Classificação</th>
+                  <th>Tags</th>
                   <th />
                 </tr>
               </thead>

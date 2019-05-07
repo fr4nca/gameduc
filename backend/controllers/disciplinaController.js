@@ -86,43 +86,41 @@ class DisciplinaController {
     }
   }
 
-
-  static async updateDisciplina (req, res, next){
-    
-    try{
-      const { disciplinaId, newNome } = req.body
-
-      await db.query (
-        `UPDATE tb_disciplina SET nome = ? WHERE id = ?`, [ newNome, disciplinaId]
-      )
-      return res.json({message: 'Disciplina alterada com sucesso'});
-
-    } catch (err){
-      return res.status(400).json({error: err.sqlMessage});
-    }
-  }
-
-  static async deleteDisciplina (req, res, next) {
+  static async updateDisciplina(req, res, next) {
     try {
-      const { disciplinaId } = req.body
-      await db.query (
-        `DELETE FROM tb_disciplina WHERE id = ? `, [disciplinaId]
-      )
-      return res.status(200).json({message: "Disciplina deletada"})
-    }catch(err) {
-      return res.status(400).json({erro: err.sqlMessage})
+      const { disciplinaId, newNome } = req.body;
+
+      await db.query(`UPDATE tb_disciplina SET nome = ? WHERE id = ?`, [
+        newNome,
+        disciplinaId
+      ]);
+      return res.json({ message: "Disciplina alterada com sucesso" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
     }
   }
 
-  static async deleteProfDisciplina(req, res, next){
-    try{
-      const {matricula, disciplinaId} = req.body
+  static async deleteDisciplina(req, res, next) {
+    try {
+      const { disciplinaId } = req.body;
+      await db.query(`DELETE FROM tb_disciplina WHERE id = ? `, [disciplinaId]);
+      return res.status(200).json({ message: "Disciplina deletada" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
+    }
+  }
+
+  static async deleteProfDisciplina(req, res, next) {
+    try {
+      const { matricula, id } = req.params;
+
       await db.query(
-        `DELETE FROM ta_professor_disciplina WHERE tb_professor_matricula = ? AND tb_disciplina_id = ?`, [matricula, disciplinaId]
-      )
-      return res.status(200).json({message: "Disciplina desvinculada"})
-    }catch(err){
-      return res.status(400).json({erro: err.sqlMessage})
+        `DELETE FROM ta_professor_disciplina WHERE tb_professor_matricula = ? AND tb_disciplina_id = ?`,
+        [matricula, id]
+      );
+      return res.status(200).json({ message: "Disciplina desvinculada" });
+    } catch (err) {
+      return res.status(400).json({ erro: err.sqlMessage });
     }
   }
 }

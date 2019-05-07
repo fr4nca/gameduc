@@ -27,18 +27,10 @@ class Ranking extends Component {
             <table className="table is-fullwidth">
               <thead>
                 <tr>
-                  <th>
-                    <abbr title="Posição">Posição</abbr>
-                  </th>
-                  <th>
-                    <abbr title="Matricula">Matricula</abbr>
-                  </th>
-                  <th>
-                    <abbr title="Nome">Nome</abbr>
-                  </th>
-                  <th>
-                    <abbr title="Pontuação">Pontuação</abbr>
-                  </th>
+                  <th>Posição</th>
+                  <th>Matricula</th>
+                  <th>Nome</th>
+                  <th>Pontuação</th>
                   <th />
                 </tr>
               </thead>
@@ -47,7 +39,7 @@ class Ranking extends Component {
                   posicao++;
                   return (
                     <tr key={aluno.matricula}>
-                      <td>{posicao}</td>
+                      <td>{posicao}º</td>
                       <td>{aluno.matricula}</td>
                       <td>{aluno.nome}</td>
                       <td>{aluno.soma}</td>

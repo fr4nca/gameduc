@@ -6,7 +6,8 @@ import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
 import {
   getDisciplinas,
-  getDisciplinasProfessor
+  getDisciplinasProfessor,
+  desvincularDisciplina
 } from "../../store/actions/disciplinaActions";
 
 export class Disciplinas extends Component {
@@ -34,6 +35,10 @@ export class Disciplinas extends Component {
     });
   };
 
+  delete = id => {
+    this.props.desvincularDisciplina(this.props.auth.profile.matricula, id);
+  };
+
   render() {
     const { disciplinasProf } = this.props.disciplina;
     return (
@@ -50,7 +55,15 @@ export class Disciplinas extends Component {
             <div>
               {disciplinasProf.map(d => (
                 <li key={d.id} className="list-item">
-                  <p>{d.nome}</p>
+                  {d.nome}
+                  <i
+                    class="fas fa-trash is-pulled-right"
+                    style={{
+                      marginTop: 4 + "px",
+                      cursor: "pointer"
+                    }}
+                    onClick={this.delete.bind(this, d.id)}
+                  />
                 </li>
               ))}
             </div>
@@ -91,5 +104,5 @@ const mapStateToProps = ({ disciplina, auth }) => ({
 
 export default connect(
   mapStateToProps,
-  { getDisciplinas, getDisciplinasProfessor }
+  { getDisciplinas, getDisciplinasProfessor, desvincularDisciplina }
 )(Disciplinas);

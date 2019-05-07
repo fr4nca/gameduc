@@ -6,7 +6,9 @@ import {
   ADD_ALUNO,
   GET_RANKING,
   GET_ALUNOS,
-  DELETE_ALUNO
+  DELETE_ALUNO,
+  CREATE_MESSAGE,
+  GET_ERRORS
 } from "./types";
 import { deleteAlunoTarefas } from "./tarefaActions";
 
@@ -43,6 +45,10 @@ export const criarGame = game => async dispatch => {
     dispatch({
       type: CREATE_GAME
     });
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { createGame: "Game criado com sucesso" }
+    });
 
     dispatch(getGames(game.matricula));
   } catch (e) {
@@ -58,9 +64,17 @@ export const addAluno = (matricula, gameId) => async dispatch => {
       type: ADD_ALUNO
     });
 
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { addAluno: "Aluno adicionado com sucesso" }
+    });
+
     dispatch(getAlunos(gameId));
   } catch (e) {
-    console.log(e.response.data);
+    dispatch({
+      type: GET_ERRORS,
+      payload: { msg: { error: "Aluno ja vinculado" }, status: 400 }
+    });
   }
 };
 
@@ -71,6 +85,12 @@ export const deleteAluno = (matricula, gameId) => async dispatch => {
     dispatch({
       type: DELETE_ALUNO
     });
+
+    dispatch({
+      type: CREATE_MESSAGE,
+      payload: { deleteAluno: "Aluno deletado com sucesso" }
+    });
+
     dispatch(deleteAlunoTarefas(matricula, gameId));
     dispatch(getAlunos(gameId));
     dispatch(getRanking(gameId));
