@@ -236,6 +236,25 @@ class UserController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async getRelatorioPainelProfessor(req, res, next) {
+    try {
+      const { matricula } = req.params;
+
+      const results = await db.query(
+        `
+      SELECT count(G.id) AS games FROM tb_game as G WHERE G.ta_professor_disciplina_tb_professor_matricula = ?;
+      SELECT count(TA.tb_aluno_matricula) AS alunos FROM ta_game_aluno AS TA INNER JOIN tb_game AS G ON G.id = TA.tb_game_id WHERE G.ta_professor_disciplina_tb_professor_matricula = ?;
+      SELECT count(TA.tb_disciplina_id) as disciplinas FROM ta_professor_disciplina AS TA WHERE TA.tb_professor_matricula = ?;`,
+        [matricula, matricula, matricula]
+      );
+
+      const data = [...results[0], ...results[1], ...results[2]];
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
 }
 
 module.exports = UserController;

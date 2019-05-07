@@ -61,4 +61,14 @@ router.put(
   UserController.updateUser
 );
 
+// @route   GET api/user/relatorioProfessor/:matricula
+// @desc    Update a user
+// @params  Matricula, nome, sobrenome, data de nascimento, graduação, curso, email, senha, papel
+// @access  private
+router.get(
+  "/relatorioProfessor/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["professor"]),
+  UserController.getRelatorioPainelProfessor
+);
 module.exports = router;
