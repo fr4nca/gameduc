@@ -9,25 +9,31 @@ import {
 
 import { relatorioProfessor } from "../../store/actions/authActions";
 
+import { getGames } from "../../store/actions/gameActions";
+import GameMiniCard from "../Game/GameMiniCard";
+
 class PainelProfessor extends Component {
   componentDidMount() {
     this.props.getTarefasPendentes(this.props.auth.profile.matricula);
     this.props.relatorioProfessor(this.props.auth.profile.matricula);
+    this.props.getGames(this.props.auth.profile.matricula);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.auth.profile !== nextProps.auth.profile) {
       this.props.getTarefasPendentes(nextProps.auth.profile.matricula);
       this.props.relatorioProfessor(nextProps.auth.profile.matricula);
+      this.props.getGames(nextProps.auth.profile.matricula);
     }
   }
 
   render() {
     const { tarefas } = this.props.tarefa;
+    const { games } = this.props.game;
 
     return (
       <>
-        <div className="columns">
+        <div className="columns is-multiline">
           <div className="column is-6">
             <div className="box">
               <h3 className="subtitle is-3">Validar tarefas pendentes</h3>
@@ -81,15 +87,27 @@ class PainelProfessor extends Component {
               </ul>
             </div>
           </div>
+
+          <div className="column is-6">
+            <div className="box">
+              <h3 className="subtitle is-3">Games</h3>
+              <hr />
+              <ul>
+                {games.map(game => (
+                  <GameMiniCard key={game.id} game={game} />
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </>
     );
   }
 }
 
-const mapStateToProps = ({ tarefa, auth }) => ({ tarefa, auth });
+const mapStateToProps = ({ tarefa, auth, game }) => ({ tarefa, auth, game });
 
 export default connect(
   mapStateToProps,
-  { getTarefasPendentes, validarTarefaPendente, relatorioProfessor }
+  { getTarefasPendentes, validarTarefaPendente, relatorioProfessor, getGames }
 )(PainelProfessor);
