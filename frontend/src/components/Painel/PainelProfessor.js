@@ -39,7 +39,7 @@ class PainelProfessor extends Component {
               <h3 className="subtitle is-3">Validar tarefas pendentes</h3>
               <hr />
               <ul>
-                {tarefas ? (
+                {tarefas !== undefined ? (
                   tarefas.length > 0 ? (
                     tarefas.map(tarefa => (
                       <li
@@ -78,22 +78,45 @@ class PainelProfessor extends Component {
             <div className="box">
               <h3 className="subtitle is-3">Relatório</h3>
               <hr />
-              <ul>
-                <li className="list-item">
-                  Quantidade de games ativos
-                  <span className="is-pulled-right">{relatorio.games}</span>
-                </li>
-                <li className="list-item">
-                  Quantidade de alunos
-                  <span className="is-pulled-right">{relatorio.alunos}</span>
-                </li>
-                <li className="list-item">
-                  Quantidade de disciplinas vinculadas
-                  <span className="is-pulled-right">
-                    {relatorio.disciplinas}
-                  </span>
-                </li>
-              </ul>
+              {relatorio ? (
+                Object.keys(relatorio).length > 0 ? (
+                  <ul>
+                    <li className="list-item">
+                      Quantidade de games ativos
+                      <span className="is-pulled-right">{relatorio.games}</span>
+                    </li>
+                    <li className="list-item">
+                      Quantidade de alunos
+                      <span className="is-pulled-right">
+                        {relatorio.alunos}
+                      </span>
+                    </li>
+                    <li className="list-item">
+                      Quantidade de disciplinas vinculadas
+                      <span className="is-pulled-right">
+                        {relatorio.disciplinas}
+                      </span>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul>
+                    <li className="list-item">
+                      Quantidade de games ativos
+                      <span className="is-pulled-right">{0}</span>
+                    </li>
+                    <li className="list-item">
+                      Quantidade de alunos
+                      <span className="is-pulled-right">{0}</span>
+                    </li>
+                    <li className="list-item">
+                      Quantidade de disciplinas vinculadas
+                      <span className="is-pulled-right">{0}</span>
+                    </li>
+                  </ul>
+                )
+              ) : (
+                <Spinner />
+              )}
             </div>
           </div>
 
@@ -102,10 +125,16 @@ class PainelProfessor extends Component {
               <h3 className="subtitle is-3">Games</h3>
               <hr />
               <ul>
-                {games.length > 0 ? (
-                  games.map(game => <GameMiniCard key={game.id} game={game} />)
+                {games ? (
+                  games.length > 0 ? (
+                    games.map(game => (
+                      <GameMiniCard key={game.id} game={game} />
+                    ))
+                  ) : (
+                    <p>Não há games ativos</p>
+                  )
                 ) : (
-                  <p>Não há games ativos</p>
+                  <Spinner />
                 )}
               </ul>
             </div>

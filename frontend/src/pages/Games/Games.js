@@ -61,7 +61,7 @@ class Games extends Component {
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
           <hr />
-          {games.length > 0 ? (
+          {games && games.length > 0 ? (
             <div className="columns is-multiline">
               {games.map(game => (
                 <div key={game.id} className="column is-2">

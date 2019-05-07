@@ -10,15 +10,11 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  games: [],
+  games: undefined,
   game: {},
   ranking: [],
   alunos: [],
-  relatorio: {
-    games: "",
-    alunos: "",
-    disciplinas: ""
-  }
+  relatorio: undefined
 };
 
 export default (state = initalState, action) => {
