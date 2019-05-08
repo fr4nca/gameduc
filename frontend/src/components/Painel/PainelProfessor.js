@@ -9,8 +9,8 @@ import {
 
 import { relatorioProfessor } from "../../store/actions/gameActions";
 
-import GameMiniCard from "../Game/GameMiniCard";
 import Spinner from "../../pages/layout/Spinner";
+import Games from "./Games";
 
 class PainelProfessor extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class PainelProfessor extends Component {
 
   render() {
     const { tarefas } = this.props.tarefa;
-    const { games, relatorio } = this.props.game;
+    const { relatorio } = this.props.game;
 
     return (
       <>
@@ -113,23 +113,7 @@ class PainelProfessor extends Component {
           </div>
 
           <div className="column is-6">
-            <div className="box">
-              <h3 className="subtitle is-3">Games</h3>
-              <hr />
-              <ul>
-                {games ? (
-                  games.length >= 1 ? (
-                    games.map(game => (
-                      <GameMiniCard key={game.id} game={game} />
-                    ))
-                  ) : (
-                    <p>Não há games ativos</p>
-                  )
-                ) : (
-                  <Spinner />
-                )}
-              </ul>
-            </div>
+            <Games />
           </div>
         </div>
       </>
