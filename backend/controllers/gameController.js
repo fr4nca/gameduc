@@ -60,13 +60,17 @@ class GameController {
   static async getGame(req, res, next) {
     try {
       const { id } = req.params;
-      const results = await db.query("SELECT * FROM tb_game WHERE id = ?", [
-        id
-      ]);
+      if (id !== "undefined") {
+        const results = await db.query("SELECT * FROM tb_game WHERE id = ?", [
+          id
+        ]);
 
-      let game;
-      if (results.length > 0) game = results[0];
-      return res.json(game);
+        let game;
+        if (results.length > 0) game = results[0];
+        return res.json(game);
+      } else {
+        return res.status(400).json({ error: "Id não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }
@@ -154,12 +158,15 @@ class GameController {
   static async getRanking(req, res, next) {
     try {
       const { id } = req.params;
-
-      let ranking = await db.query(
-        `SELECT * FROM ranking WHERE tb_game_id = ?`,
-        [id]
-      );
-      return res.json(ranking);
+      if (id !== "undefined") {
+        let ranking = await db.query(
+          `SELECT * FROM ranking WHERE tb_game_id = ?`,
+          [id]
+        );
+        return res.json(ranking);
+      } else {
+        return res.status(400).json({ erro: "Id não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ erro: err.sqlMessage });
     }

@@ -107,7 +107,8 @@ class UserController {
       if (isMatch) {
         const payload = {
           id: user.id,
-          papel: user.papel
+          papel: user.papel,
+          email: user.email
         };
 
         const token = await jwt.sign(payload, keys.jwtsecret, {

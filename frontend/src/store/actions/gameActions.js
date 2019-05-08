@@ -12,6 +12,7 @@ import {
   RELATORIO_PROFESSOR,
   GET_GAMES_ATIVOS
 } from "./types";
+
 import { deleteAlunoTarefas } from "./tarefaActions";
 
 export const getGames = matricula => async dispatch => {
