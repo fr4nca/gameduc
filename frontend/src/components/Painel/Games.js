@@ -7,6 +7,12 @@ import { connect } from "react-redux";
 import { getGames } from "../../store/actions/gameActions";
 
 export class Games extends Component {
+  componentWillReceiveProps(nextProps) {
+    const { matricula } = this.props.auth.profile;
+    if (matricula !== nextProps.auth.profile.matricula)
+      this.props.getGames(nextProps.auth.profile.matricula);
+  }
+
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
     this.props.getGames(matricula);

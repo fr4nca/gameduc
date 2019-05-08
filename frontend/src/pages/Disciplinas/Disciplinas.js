@@ -15,10 +15,16 @@ export class Disciplinas extends Component {
     criarDisciplina: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    const { matricula } = this.props.auth.profile;
+    if (matricula !== nextProps.auth.profile.matricula)
+      this.props.getDisciplinasProfessor(nextProps.auth.profile.matricula);
+  }
+
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
-    this.props.getDisciplinasProfessor(matricula);
     this.props.getDisciplinas();
+    this.props.getDisciplinasProfessor(matricula);
   }
 
   criarDisciplina = () => {

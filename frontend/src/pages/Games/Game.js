@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getGame } from "../../store/actions/gameActions";
 
-import axios from "../../services/api";
-
 import Tarefas from "../../components/Tarefa/Tarefas";
 import Regras from "../../components/Regra/Regras";
 import Grafico from "../../components/Ranking/Grafico";
@@ -12,23 +10,10 @@ import Ranking from "../../components/Ranking/Ranking";
 import Alunos from "../../components/Aluno/Alunos";
 
 class Game extends Component {
-  state = { disciplina: "" };
-
   async componentDidMount() {
     const { id: gameId } = this.props.match.params;
 
-    await this.props.getGame(gameId);
-
-    const {
-      game: { ta_professor_disciplina_tb_disciplina_id: disciplinaId }
-    } = this.props.game;
-
-    const { data: disciplina } = await axios.get(`/disciplina/${disciplinaId}`);
-
-    this.setState({
-      ...this.state,
-      disciplina
-    });
+    this.props.getGame(gameId);
   }
 
   render() {

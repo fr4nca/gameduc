@@ -8,7 +8,7 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  tarefas: undefined
+  tarefas: []
 };
 
 export default (state = initalState, action) => {
