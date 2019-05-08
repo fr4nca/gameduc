@@ -4,26 +4,26 @@ import Spinner from "../../pages/layout/Spinner";
 
 import { connect } from "react-redux";
 
-import { getGames } from "../../store/actions/gameActions";
+import { getGamesAtivos } from "../../store/actions/gameActions";
 
 export class Games extends Component {
   componentWillReceiveProps(nextProps) {
     const { matricula } = this.props.auth.profile;
     if (matricula !== nextProps.auth.profile.matricula)
-      this.props.getGames(nextProps.auth.profile.matricula);
+      this.props.getGamesAtivos(nextProps.auth.profile.matricula);
   }
 
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
-    this.props.getGames(matricula);
+    this.props.getGamesAtivos(matricula);
   }
 
   render() {
-    const { games } = this.props.game;
+    const { gamesAtivos: games } = this.props.game;
 
     return (
       <div className="box">
-        <h3 className="subtitle is-3">Games</h3>
+        <h3 className="subtitle is-3">Games ativos</h3>
         <hr />
         <ul>
           {games ? (
@@ -45,5 +45,5 @@ const mapStateToProps = ({ auth, game }) => ({ auth, game });
 
 export default connect(
   mapStateToProps,
-  { getGames }
+  { getGamesAtivos }
 )(Games);

@@ -29,6 +29,34 @@ class GameController {
     }
   }
 
+  static async getGamesAtivos(req, res, next) {
+    try {
+      const { papel } = req.user;
+      const { matricula } = req.params;
+      if (matricula !== "undefined") {
+        if (papel === "professor") {
+          const professor_results = await db.query(
+            "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ? AND dta_inicio <= now() AND dta_fim >= now()",
+            [matricula]
+          );
+          return res.json(professor_results);
+        } else if (papel === "aluno") {
+          const aluno_results = await db.query(
+            "SELECT G.* FROM ta_game_aluno as GA INNER JOIN tb_game as G ON G.id = GA.tb_game_id WHERE GA.tb_aluno_matricula = ? AND dta_inicio <= now() AND dta_fim >= now()",
+            [matricula]
+          );
+          return res.json(aluno_results);
+        }
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
+
   static async getGame(req, res, next) {
     try {
       const { id } = req.params;

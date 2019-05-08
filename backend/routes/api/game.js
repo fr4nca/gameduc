@@ -16,6 +16,16 @@ router.get(
   GameController.getGames
 );
 
+// @route   GET api/game/ativos/:matricula
+// @desc    Get all games for the current logged in user
+// @returns All games
+// @access  private
+router.get(
+  "/ativos/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  GameController.getGamesAtivos
+);
+
 // @route   GET api/game/:id
 // @desc    Get a single game
 // @returns A game

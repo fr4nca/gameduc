@@ -9,7 +9,8 @@ import {
   DELETE_ALUNO,
   CREATE_MESSAGE,
   GET_ERRORS,
-  RELATORIO_PROFESSOR
+  RELATORIO_PROFESSOR,
+  GET_GAMES_ATIVOS
 } from "./types";
 import { deleteAlunoTarefas } from "./tarefaActions";
 
@@ -19,6 +20,19 @@ export const getGames = matricula => async dispatch => {
 
     dispatch({
       type: GET_GAMES,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const getGamesAtivos = matricula => async dispatch => {
+  try {
+    const { data } = await axios.get(`/game/ativos/${matricula}`);
+
+    dispatch({
+      type: GET_GAMES_ATIVOS,
       payload: data
     });
   } catch (e) {

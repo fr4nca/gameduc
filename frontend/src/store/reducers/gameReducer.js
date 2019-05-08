@@ -6,11 +6,13 @@ import {
   GET_RANKING,
   GET_ALUNOS,
   DELETE_ALUNO,
-  RELATORIO_PROFESSOR
+  RELATORIO_PROFESSOR,
+  GET_GAMES_ATIVOS
 } from "../actions/types";
 
 const initalState = {
   games: undefined,
+  gamesAtivos: undefined,
   game: {},
   ranking: [],
   alunos: [],
@@ -57,8 +59,14 @@ export default (state = initalState, action) => {
         relatorio: {
           games: action.payload[0].games,
           alunos: action.payload[1].alunos,
-          disciplinas: action.payload[2].disciplinas
+          disciplinas: action.payload[2].disciplinas,
+          tarefas: action.payload[3].tarefas
         }
+      };
+    case GET_GAMES_ATIVOS:
+      return {
+        ...state,
+        gamesAtivos: action.payload
       };
     default:
       return state;
