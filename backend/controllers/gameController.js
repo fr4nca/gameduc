@@ -5,18 +5,22 @@ class GameController {
     try {
       const { papel } = req.user;
       const { matricula } = req.params;
-      if (papel === "professor") {
-        const professor_results = await db.query(
-          "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ?",
-          [matricula]
-        );
-        return res.json(professor_results);
-      } else if (papel === "aluno") {
-        const aluno_results = await db.query(
-          "SELECT G.* FROM ta_game_aluno as GA INNER JOIN tb_game as G ON G.id = GA.tb_game_id WHERE GA.tb_aluno_matricula = ?",
-          [matricula]
-        );
-        return res.json(aluno_results);
+      if (matricula !== "undefined") {
+        if (papel === "professor") {
+          const professor_results = await db.query(
+            "SELECT * FROM tb_game WHERE ta_professor_disciplina_tb_professor_matricula = ?",
+            [matricula]
+          );
+          return res.json(professor_results);
+        } else if (papel === "aluno") {
+          const aluno_results = await db.query(
+            "SELECT G.* FROM ta_game_aluno as GA INNER JOIN tb_game as G ON G.id = GA.tb_game_id WHERE GA.tb_aluno_matricula = ?",
+            [matricula]
+          );
+          return res.json(aluno_results);
+        }
+      } else {
+        return res.status(400).json({ error: err.sqlMessage });
       }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
