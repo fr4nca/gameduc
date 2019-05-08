@@ -149,6 +149,6 @@ export const relatorioProfessor = matricula => async dispatch => {
       payload: data
     });
   } catch (e) {
-    console.log(e.response);
+    console.log(e.response.data);
   }
 };
