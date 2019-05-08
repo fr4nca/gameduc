@@ -58,6 +58,10 @@ export class Relatorio extends Component {
                 Quantidade de disciplinas vinculadas
                 <span className="is-pulled-right">{0}</span>
               </li>
+              <li className="list-item">
+                Quantidade de tarefas validadas
+                <span className="is-pulled-right">{0}</span>
+              </li>
             </ul>
           )
         ) : (
