@@ -28,6 +28,17 @@ export class Tarefas extends Component {
         <h3 className="subtitle is-3">Validar tarefas pendentes</h3>
         <hr />
         <ul>
+          <li
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <strong>Descrição</strong>
+            <strong>Aluno</strong>
+            <strong>Validar</strong>
+          </li>
           {tarefas ? (
             tarefas.length > 0 ? (
               tarefas.map(tarefa => (
