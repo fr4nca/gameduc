@@ -2,11 +2,11 @@ let config = {};
 
 if (process.env.NODE_ENV !== "production") {
   config = {
-    dbhost: "35.199.95.35",
-    dbuser: "main",
-    dbpassword: "eocc2019",
+    dbhost: "localhost",
+    dbuser: "root",
+    dbpassword: "62013",
     dbname: "gameduc",
-    jwtsecret: "abcd1234"
+    jwtsecret: "secret"
   };
 } else {
   config = {
