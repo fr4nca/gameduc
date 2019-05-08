@@ -30,11 +30,17 @@ class TarefaController {
   static async getPendentes(req, res, next) {
     try {
       const { matricula } = req.params;
-      const results = await db.query(
-        "SELECT T.*, A.nome FROM tb_tarefa as T INNER JOIN tb_game as G ON T.tb_game_id = G.id INNER JOIN tb_aluno AS A ON T.tb_aluno_matricula = A.matricula WHERE validado = 0 AND G.ta_professor_disciplina_tb_professor_matricula = ?",
-        [matricula]
-      );
-      return res.json(results);
+      if (matricula !== "undefined") {
+        const results = await db.query(
+          "SELECT T.*, A.nome FROM tb_tarefa as T INNER JOIN tb_game as G ON T.tb_game_id = G.id INNER JOIN tb_aluno AS A ON T.tb_aluno_matricula = A.matricula WHERE validado = 0 AND G.ta_professor_disciplina_tb_professor_matricula = ?",
+          [matricula]
+        );
+        return res.json(results);
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

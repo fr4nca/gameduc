@@ -20,7 +20,9 @@ class GameController {
           return res.json(aluno_results);
         }
       } else {
-        return res.status(400).json({ error: err.sqlMessage });
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
       }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
