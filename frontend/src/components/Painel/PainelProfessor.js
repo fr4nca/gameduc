@@ -19,14 +19,6 @@ class PainelProfessor extends Component {
     this.props.relatorioProfessor(matricula);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getTarefasPendentes(matricula);
-      this.props.relatorioProfessor(matricula);
-    }
-  }
-
   render() {
     const { tarefas } = this.props.tarefa;
     const { games, relatorio } = this.props.game;
@@ -126,7 +118,7 @@ class PainelProfessor extends Component {
               <hr />
               <ul>
                 {games ? (
-                  games.length > 0 ? (
+                  games.length >= 1 ? (
                     games.map(game => (
                       <GameMiniCard key={game.id} game={game} />
                     ))

@@ -28,8 +28,6 @@ class Tarefas extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game !== nextProps.game) {
-      const { id } = nextProps.game.game;
-      this.props.getTarefas(id);
       this.isFinished(nextProps.game.game.dta_fim);
     }
   }

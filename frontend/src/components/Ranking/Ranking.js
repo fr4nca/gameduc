@@ -8,12 +8,6 @@ class Ranking extends Component {
     this.props.getRanking(this.props.game.game.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.game.game !== nextProps.game.game) {
-      this.props.getRanking(nextProps.game.game.id);
-    }
-  }
-
   render() {
     const { ranking } = this.props.game;
     let posicao = 0;

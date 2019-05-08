@@ -21,13 +21,6 @@ export class Disciplinas extends Component {
     this.props.getDisciplinas();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getDisciplinasProfessor(matricula);
-    }
-  }
-
   criarDisciplina = () => {
     this.setState({
       ...this.state,

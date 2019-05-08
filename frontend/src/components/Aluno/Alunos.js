@@ -11,8 +11,7 @@ class Alunos extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game.game !== nextProps.game.game)
-      this.props.getAlunos(nextProps.game.game.id);
-    this.isFinished(nextProps.game.game.dta_fim);
+      this.isFinished(nextProps.game.game.dta_fim);
   }
 
   state = {

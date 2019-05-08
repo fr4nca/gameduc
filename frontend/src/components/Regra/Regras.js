@@ -24,8 +24,7 @@ class Regras extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.game !== nextProps.game) {
-      const { id, dta_fim } = nextProps.game.game;
-      this.props.getRegras(id);
+      const { dta_fim } = nextProps.game.game;
       this.isFinished(dta_fim);
     }
   }

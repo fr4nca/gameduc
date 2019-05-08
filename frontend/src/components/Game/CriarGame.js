@@ -18,13 +18,6 @@ class CriarGame extends Component {
     this.props.getDisciplinasProfessor(matricula);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getDisciplinasProfessor(matricula);
-    }
-  }
-
   handleSubmit = e => {
     e.preventDefault();
 

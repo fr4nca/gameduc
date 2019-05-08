@@ -10,7 +10,7 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  games: undefined,
+  games: [],
   game: {},
   ranking: [],
   alunos: [],

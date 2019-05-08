@@ -7,7 +7,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import store from "./store/";
+import { store, persistor } from "./store";
+
 import {
   setCurrentUser,
   logoutUser,
@@ -29,6 +30,8 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 
 import PrivateRoute from "./components/common/PrivateRoute";
+
+import { PersistGate } from "redux-persist/integration/react";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -53,23 +56,25 @@ const alertOptions = {
 
 const App = () => (
   <Provider store={store}>
-    <AlertProvider template={AlertTemplate} {...alertOptions}>
-      <Router>
-        <Navbar />
-        <Alerts />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <PrivateRoute
-            allowed={["professor", "aluno"]}
-            path="/dashboard"
-            component={Dashboard}
-          />
-        </Switch>
-        <Footer />
-      </Router>
-    </AlertProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Router>
+          <Navbar />
+          <Alerts />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <PrivateRoute
+              allowed={["professor", "aluno"]}
+              path="/dashboard"
+              component={Dashboard}
+            />
+          </Switch>
+          <Footer />
+        </Router>
+      </AlertProvider>
+    </PersistGate>
   </Provider>
 );
 
