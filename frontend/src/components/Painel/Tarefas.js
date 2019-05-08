@@ -3,7 +3,10 @@ import Spinner from "../../pages/layout/Spinner";
 
 import { connect } from "react-redux";
 
-import { getTarefasPendentes } from "../../store/actions/tarefaActions";
+import {
+  getTarefasPendentes,
+  validarTarefaPendente
+} from "../../store/actions/tarefaActions";
 
 export class Tarefas extends Component {
   componentWillReceiveProps(nextProps) {
@@ -66,5 +69,5 @@ const mapStateToProps = ({ tarefa, auth }) => ({ tarefa, auth });
 
 export default connect(
   mapStateToProps,
-  { getTarefasPendentes }
+  { getTarefasPendentes, validarTarefaPendente }
 )(Tarefas);
