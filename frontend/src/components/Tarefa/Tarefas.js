@@ -10,25 +10,27 @@ import {
 import Tarefa from "./Tarefa";
 import AdicionarTarefa from "./AdicionarTarefa";
 import EditarTarefa from "./EditarTarefa";
+import Spinner from "../../pages/layout/Spinner";
 
 class Tarefas extends Component {
   state = {
     adicionarTarefa: false,
     editarTarefa: false,
     tarefa: null,
-
     finished: false
   };
 
   componentDidMount() {
-    const { id } = this.props.game.game;
+    const { id, dta_fim } = this.props.game.game;
     this.props.getTarefas(id);
-    this.isFinished(this.props.game.game.dta_fim);
+    this.isFinished(dta_fim);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.game !== nextProps.game) {
-      this.isFinished(nextProps.game.game.dta_fim);
+    if (this.props.game.game !== nextProps.game.game) {
+      const { id, dta_fim } = nextProps.game.game;
+      this.props.getTarefas(id);
+      this.isFinished(dta_fim);
     }
   }
 
@@ -86,52 +88,59 @@ class Tarefas extends Component {
             <h3 className="subtitle is-3">Tarefas</h3>
           )}
 
-          {tarefas.length > 0 ? (
-            <table className="table is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Descrição</th>
-                  <th>Classificação</th>
-                  <th>Tags</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {tarefas.map(tarefa => (
-                  <tr key={tarefa.id}>
-                    <Tarefa tarefa={tarefa} />
-                    {this.props.auth.user.papel === "professor" && (
-                      <>
-                        <td>
-                          {tarefa.validado ? null : (
+          {tarefas ? (
+            tarefas.length > 0 ? (
+              <table className="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Classificação</th>
+                    <th>Tags</th>
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>
+                  {tarefas.map(tarefa => (
+                    <tr key={tarefa.id}>
+                      <Tarefa tarefa={tarefa} />
+                      {this.props.auth.user.papel === "professor" && (
+                        <>
+                          <td>
+                            {tarefa.validado ? null : (
+                              <i
+                                style={{
+                                  marginRight: 20 + "px",
+                                  cursor: "pointer"
+                                }}
+                                className="fas fa-check"
+                                onClick={this.props.validarTarefa.bind(
+                                  this,
+                                  tarefa
+                                )}
+                              />
+                            )}
                             <i
-                              style={{
-                                marginRight: 20 + "px",
-                                cursor: "pointer"
-                              }}
-                              className="fas fa-check"
-                              onClick={this.props.validarTarefa.bind(
+                              style={{ cursor: "pointer" }}
+                              className="fas fa-trash"
+                              onClick={this.props.deleteTarefa.bind(
                                 this,
                                 tarefa
                               )}
                             />
-                          )}
-                          <i
-                            style={{ cursor: "pointer" }}
-                            className="fas fa-trash"
-                            onClick={this.props.deleteTarefa.bind(this, tarefa)}
-                          />
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <table className="table is-fullwidth">
+                <h2>Não há nenhum game cadastrado</h2>
+              </table>
+            )
           ) : (
-            <table className="table is-fullwidth">
-              <h2>Não há nenhum game cadastrado</h2>
-            </table>
+            <Spinner />
           )}
         </div>
       </div>

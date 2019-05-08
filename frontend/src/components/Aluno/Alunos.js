@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAlunos, deleteAluno } from "../../store/actions/gameActions";
 import AdicionarAluno from "./AdicionarAluno";
-
+import Spinner from "../../pages/layout/Spinner";
 class Alunos extends Component {
   componentDidMount() {
-    this.props.getAlunos(this.props.game.game.id);
-    this.isFinished(this.props.game.game.dta_fim);
+    const { id, dta_fim } = this.props.game.game;
+    this.props.getAlunos(id);
+    this.isFinished(dta_fim);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.game.game !== nextProps.game.game)
-      this.isFinished(nextProps.game.game.dta_fim);
+    if (this.props.game.game !== nextProps.game.game) {
+      const { id, dta_fim } = nextProps.game.game;
+      this.props.getAlunos(id);
+      this.isFinished(dta_fim);
+    }
   }
 
   state = {
@@ -57,31 +61,35 @@ class Alunos extends Component {
             <h3 className="subtitle is-3">Alunos</h3>
           )}
 
-          {alunos.length > 0 ? (
-            <table className="table is-fullwidth">
-              <ul>
-                {alunos.map(aluno => (
-                  <li key={aluno.matricula} className="list-item">
-                    {aluno.nome}
-                    {this.props.auth.user.papel === "professor" ? (
-                      <i
-                        style={{ cursor: "pointer" }}
-                        className="fas fa-trash is-pulled-right is-vcentered"
-                        onClick={this.props.deleteAluno.bind(
-                          this,
-                          aluno.matricula,
-                          this.props.game.game.id
-                        )}
-                      />
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-            </table>
+          {alunos ? (
+            alunos.length > 0 ? (
+              <table className="table is-fullwidth">
+                <ul>
+                  {alunos.map(aluno => (
+                    <li key={aluno.matricula} className="list-item">
+                      {aluno.nome}
+                      {this.props.auth.user.papel === "professor" ? (
+                        <i
+                          style={{ cursor: "pointer" }}
+                          className="fas fa-trash is-pulled-right is-vcentered"
+                          onClick={this.props.deleteAluno.bind(
+                            this,
+                            aluno.matricula,
+                            this.props.game.game.id
+                          )}
+                        />
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </table>
+            ) : (
+              <table className="table is-fullwidth">
+                <h2>Nenhum aluno cadastrado no game</h2>
+              </table>
+            )
           ) : (
-            <table className="table is-fullwidth">
-              <h2>Nenhum aluno cadastrado no game</h2>
-            </table>
+            <Spinner />
           )}
         </div>
       </div>

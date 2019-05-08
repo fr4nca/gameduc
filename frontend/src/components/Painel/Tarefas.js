@@ -18,7 +18,7 @@ export class Tarefas extends Component {
   }
 
   render() {
-    const { tarefas } = this.props.tarefa;
+    const { tarefasPendentes: tarefas } = this.props.tarefa;
 
     return (
       <div className="box">

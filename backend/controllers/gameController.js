@@ -93,12 +93,16 @@ class GameController {
   static async getAlunoGame(req, res, next) {
     try {
       const { id } = req.params;
-      const results = await db.query(
-        "SELECT A.* FROM ta_game_aluno as GA INNER JOIN tb_aluno as A ON GA.tb_aluno_matricula = A.matricula WHERE GA.tb_game_id = ?",
-        [id]
-      );
+      if (id !== "undefined") {
+        const results = await db.query(
+          "SELECT A.* FROM ta_game_aluno as GA INNER JOIN tb_aluno as A ON GA.tb_aluno_matricula = A.matricula WHERE GA.tb_game_id = ?",
+          [id]
+        );
 
-      return res.json(results);
+        return res.json(results);
+      } else {
+        return res.status(400).json({ error: "ID não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

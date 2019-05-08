@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  regras: []
+  regras: undefined
 };
 
 export default (state = initalState, action) => {

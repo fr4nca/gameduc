@@ -7,6 +7,7 @@ import { getRegras, deleteRegra } from "../../store/actions/regraActions";
 import Regra from "./Regra";
 import AdicionarRegra from "./AdicionarRegra";
 import EditarRegra from "./EditarRegra";
+import Spinner from "../../pages/layout/Spinner";
 
 class Regras extends Component {
   state = {
@@ -23,8 +24,9 @@ class Regras extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.game !== nextProps.game) {
-      const { dta_fim } = nextProps.game.game;
+    if (this.props.game.game !== nextProps.game.game) {
+      const { id, dta_fim } = nextProps.game.game;
+      this.props.getRegras(id);
       this.isFinished(dta_fim);
     }
   }
@@ -84,51 +86,58 @@ class Regras extends Component {
             <h3 className="subtitle is-3">Regras</h3>
           )}
 
-          {regras.length > 0 ? (
-            <table className="table is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Descrição</th>
-                  <th>Classificação</th>
-                  <th>Tags</th>
-                  <th>Pontuação</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {regras.map(regra => (
-                  <tr key={regra.id}>
-                    <Regra regra={regra} />
-                    {this.props.auth.user.papel === "professor" && (
-                      <td>
-                        <span
-                          style={{ marginRight: 20 + "px", cursor: "pointer" }}
-                        >
-                          <i
-                            className="fas fa-edit"
-                            onClick={this.toggleEditModal.bind(this, regra)}
-                          />
-                        </span>
-                        <span
-                          style={{
-                            cursor: "pointer"
-                          }}
-                        >
-                          <i
-                            className="fas fa-trash"
-                            onClick={this.props.deleteRegra.bind(this, regra)}
-                          />
-                        </span>
-                      </td>
-                    )}
+          {regras ? (
+            regras.length > 0 ? (
+              <table className="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Classificação</th>
+                    <th>Tags</th>
+                    <th>Pontuação</th>
+                    <th />
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {regras.map(regra => (
+                    <tr key={regra.id}>
+                      <Regra regra={regra} />
+                      {this.props.auth.user.papel === "professor" && (
+                        <td>
+                          <span
+                            style={{
+                              marginRight: 20 + "px",
+                              cursor: "pointer"
+                            }}
+                          >
+                            <i
+                              className="fas fa-edit"
+                              onClick={this.toggleEditModal.bind(this, regra)}
+                            />
+                          </span>
+                          <span
+                            style={{
+                              cursor: "pointer"
+                            }}
+                          >
+                            <i
+                              className="fas fa-trash"
+                              onClick={this.props.deleteRegra.bind(this, regra)}
+                            />
+                          </span>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <table className="table is-fullwidth">
+                <h2>Não há regras cadastradas</h2>
+              </table>
+            )
           ) : (
-            <table className="table is-fullwidth">
-              <h2>Não há regras cadastradas</h2>
-            </table>
+            <Spinner />
           )}
         </div>
       </div>

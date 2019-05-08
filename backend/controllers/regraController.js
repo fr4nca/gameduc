@@ -4,11 +4,15 @@ class RegraController {
   static async getRegras(req, res, next) {
     try {
       const { gameId } = req.params;
-      const results = await db.query(
-        "SELECT * FROM tb_regra WHERE tb_game_id = ?",
-        [gameId]
-      );
-      return res.json(results);
+      if (gameId !== "undefined") {
+        const results = await db.query(
+          "SELECT * FROM tb_regra WHERE tb_game_id = ?",
+          [gameId]
+        );
+        return res.json(results);
+      } else {
+        return res.status(400).json({ error: "Id não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

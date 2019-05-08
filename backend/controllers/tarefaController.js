@@ -4,24 +4,15 @@ class TarefaController {
   static async getTarefasByGame(req, res, next) {
     try {
       const { id } = req.params;
-      const results = await db.query(
-        "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
-        [id]
-      );
-      return res.json(results);
-    } catch (err) {
-      return res.status(400).json({ error: err.sqlMessage });
-    }
-  }
-
-  static async getTarefasByRegra(req, res, next) {
-    try {
-      const { regraId } = req.body;
-      const results = await db.query(
-        "SELECT * FROM tb_tarefa WHERE tb_regra_id = ?",
-        [regraId]
-      );
-      return res.json(results);
+      if (id !== "undefined") {
+        const results = await db.query(
+          "SELECT * FROM tb_tarefa WHERE tb_game_id = ?",
+          [id]
+        );
+        return res.json(results);
+      } else {
+        return res.status(400).json({ error: "Id não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

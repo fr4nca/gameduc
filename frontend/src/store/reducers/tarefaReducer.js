@@ -8,7 +8,8 @@ import {
 } from "../actions/types";
 
 const initalState = {
-  tarefas: []
+  tarefas: undefined,
+  tarefasPendentes: undefined
 };
 
 export default (state = initalState, action) => {
@@ -21,7 +22,7 @@ export default (state = initalState, action) => {
     case GET_TAREFAS_PENDENTES:
       return {
         ...state,
-        tarefas: action.payload
+        tarefasPendentes: action.payload
       };
     case ADD_TAREFA:
       return {

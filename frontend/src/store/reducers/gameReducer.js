@@ -15,7 +15,7 @@ const initalState = {
   gamesAtivos: undefined,
   game: {},
   ranking: undefined,
-  alunos: [],
+  alunos: undefined,
   relatorio: undefined
 };
 

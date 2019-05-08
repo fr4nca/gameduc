@@ -16,16 +16,6 @@ router.get(
   TarefaController.getTarefasByGame
 );
 
-// @route   GET api/tarefa/getTarefasByRegra
-// @desc    Get all tarefas for a given regra
-// @returns All tarefas
-// @access  private
-router.get(
-  "/getTarefasByRegra",
-  passport.authenticate("jwt", { session: false }),
-  TarefaController.getTarefasByRegra
-);
-
 // @route   GET api/tarefa/pendentes
 // @desc    Get all tarefas not validated
 // @returns All tarefas
