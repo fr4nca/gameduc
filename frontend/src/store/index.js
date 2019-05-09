@@ -1,8 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 import rootReducer from "./reducers";
 
@@ -10,14 +7,8 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const persistConfig = {
-  key: "root",
-  storage: storage,
-  stateReconciler: autoMergeLevel2
-};
-
-export const store = createStore(
-  persistReducer(persistConfig, rootReducer),
+const store = createStore(
+  rootReducer,
   initialState,
   compose(
     applyMiddleware(...middleware),
@@ -30,4 +21,4 @@ export const store = createStore(
   )
 );
 
-export const persistor = persistStore(store);
+export default store;
