@@ -32,6 +32,10 @@ class Game extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.getGame(null);
+  }
+
   render() {
     const { game } = this.state;
 
