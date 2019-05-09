@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import PainelAluno from "../../components/Painel/PainelAluno";
-import PainelProfessor from "../../components/Painel/PainelProfessor";
+import PainelAluno from "../../components/PainelAluno/PainelAluno";
+import PainelProfessor from "../../components/PainelProfessor/PainelProfessor";
 
 class Painel extends Component {
   render() {
