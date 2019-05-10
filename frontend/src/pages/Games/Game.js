@@ -11,7 +11,7 @@ import Alunos from "../../components/Aluno/Alunos";
 
 import Spinner from "../layout/Spinner";
 
-import store from "../../store";
+import { store } from "../../store";
 import {
   GET_GAME,
   GET_RANKING,
