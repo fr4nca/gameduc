@@ -2,12 +2,34 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import moment from "moment";
+
+import EditarPerfil from "./EditarPerfil"
 export class Perfil extends Component {
+
+  state = {
+    editarRegra: false
+  };
+
+  toggleEditModal = perfil => {
+    this.setState({
+      ...this.state,
+      editarPerfil: !this.state.editarPerfil,
+      perfil
+    });
+  };
+
   render() {
     const { profile, user} = this.props.auth;
 
     return (
       <>
+      <div>
+        {this.state.editarPerfil && (
+          <EditarPerfil
+            toggleEditModal={this.toggleEditModal}
+            perfil={profile}
+          />
+        )}
         <div className="columns">
           <div className="column">
             <h1 className="title is-1">
@@ -18,7 +40,8 @@ export class Perfil extends Component {
           </div>
           <div className="column">
             <span>
-              <button className="button is-rounded is-link is-pulled-right">
+              <button className="button is-rounded is-link is-pulled-right"
+              onClick= {this.toggleEditModal.bind(this, profile)}>
                 Editar Perfil
               </button>
             </span>
@@ -43,6 +66,7 @@ export class Perfil extends Component {
             </div>)}
           <hr />
           <strong>Email: </strong>newthayprofessor@professor.com
+        </div>
         </div>
       </>
     );

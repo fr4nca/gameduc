@@ -153,72 +153,44 @@ class UserController {
 
   static async updateUser(req, res, next) {
     try {
-      const { id } = req.user;
+      const { papel } = req.user;
+      console.log(req.body);
       const {
         matricula,
         nome,
         sobrenome,
         dta_nascimento,
-        graduacao,
-        curso,
-        email,
-        senha,
-        papel
+        graduacao
       } = req.body;
 
-      const userResults = await db.query(
-        "SELECT * FROM tb_user where email = ?",
-        [email]
-      );
+      // const userResults = await db.query(
+      //   "SELECT * FROM tb_user where email = ?",
+      //   [email]
+      // );
 
-      if (userResults.length > 0) {
-        return res.status(400).json({ error: "Email ja cadastrado" });
+      // if (userResults.length > 0) {
+      //   return res.status(400).json({ error: "Email ja cadastrado" });
+      // }
+
+      if (papel === "professor") {
+        await db.query(
+          `UPDATE tb_professor SET nome = ?, sobrenome = ?, dta_nascimento = ?, graduacao = ? WHERE matricula = ?;
+          `,
+          [nome, sobrenome, dta_nascimento, graduacao, matricula]
+        );
+        return res
+          .status(200)
+          .json({ message: "Usuário alterado com sucesso" });
+        // } else if (papel === "aluno") {
+        //   await db.query(
+        //     `UPDATE tb_aluno SET nome = ?, sobrenome = ?, dta_nascimento = ?, curso = ?  WHERE matricula = ?;
+        //     `,
+        //     [nome, sobrenome, dta_nascimento, curso, matricula]
+        //   );
+        //   return res
+        //     .status(200)
+        //     .json({ message: "Usuário alterado com sucesso" });
       }
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(senha, salt, async (err, hashed) => {
-          if (err) throw err;
-          if (papel === "professor") {
-            await db.query(
-              `UPDATE tb_user SET email = ?, senha = ? WHERE id = ?;
-              UPDATE tb_professor SET nome = ?, sobrenome = ?, dta_nascimento = ?, graduacao = ? WHERE matricula = ?;
-              `,
-              [
-                email,
-                hashed,
-                id,
-                nome,
-                sobrenome,
-                dta_nascimento,
-                graduacao,
-                matricula
-              ]
-            );
-            return res
-              .status(200)
-              .json({ message: "Usuário alterado com sucesso" });
-          } else if (papel === "aluno") {
-            await db.query(
-              `UPDATE tb_user SET email = ?, senha = ? WHERE id = ?;
-              UPDATE tb_aluno SET nome = ?, sobrenome = ?, dta_nascimento = ?, curso = ?  WHERE matricula = ?;
-              `,
-              [
-                email,
-                hashed,
-                id,
-                nome,
-                sobrenome,
-                dta_nascimento,
-                curso,
-                matricula
-              ]
-            );
-            return res
-              .status(200)
-              .json({ message: "Usuário alterado com sucesso" });
-          }
-        });
-      });
     } catch (err) {
       if (err.sqlMessage)
         return res.status(400).json({ error: err.sqlMessage });
