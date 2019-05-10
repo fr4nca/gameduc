@@ -3,7 +3,8 @@ import {
   SET_CURRENT_USER,
   SET_CURRENT_PROFILE,
   GET_ALL_ALUNOS,
-  EDIT_PROFILE
+  EDIT_PROFILE,
+  EDIT_USER
 } from "../actions/types";
 
 const initalState = {
@@ -31,15 +32,19 @@ export default (state = initalState, action) => {
         ...state,
         alunos: action.payload
       };
-<<<<<<< HEAD
     case EDIT_PROFILE:
       return {
         ...state,
         profile: action.payload
       };
-=======
-
->>>>>>> 474b09c46ce4b100675c45721337e41122592d01
+    case EDIT_USER:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email
+        }
+      };
     default:
       return state;
   }

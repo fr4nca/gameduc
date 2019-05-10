@@ -1,14 +1,22 @@
 import axios from "../../services/api";
 
-import { EDIT_PROFILE, CREATE_MESSAGE } from "./types";
+import { EDIT_PROFILE, CREATE_MESSAGE, EDIT_USER } from "./types";
 
-export const editPerfil = perfil => async dispatch => {
+export const editPerfil = (perfil, user) => async dispatch => {
   try {
-    await axios.put(`/user/updateUser/${perfil.matricula}`, { ...perfil });
+    await axios.put(`/user/updateUser/${perfil.matricula}`, {
+      ...perfil,
+      ...user
+    });
 
     dispatch({
       type: EDIT_PROFILE,
       payload: perfil
+    });
+
+    dispatch({
+      type: EDIT_USER,
+      payload: user
     });
 
     dispatch({
