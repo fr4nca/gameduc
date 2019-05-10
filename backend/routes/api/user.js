@@ -56,7 +56,7 @@ router.delete(
 // @params  Matricula, nome, sobrenome, data de nascimento, graduação, curso, email, senha, papel
 // @access  private
 router.put(
-  "/updateUser",
+  "/updateUser/:matricula",
   passport.authenticate("jwt", { session: false }),
   UserController.updateUser
 );

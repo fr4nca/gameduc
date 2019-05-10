@@ -2,7 +2,9 @@ import isEmpty from "../../utils/isEmpty";
 import {
   SET_CURRENT_USER,
   SET_CURRENT_PROFILE,
-  GET_ALL_ALUNOS
+  GET_ALL_ALUNOS,
+  EDIT_PROFILE,
+  EDIT_USER
 } from "../actions/types";
 
 const initalState = {
@@ -30,7 +32,19 @@ export default (state = initalState, action) => {
         ...state,
         alunos: action.payload
       };
-
+    case EDIT_PROFILE:
+      return {
+        ...state,
+        profile: action.payload
+      };
+    case EDIT_USER:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email
+        }
+      };
     default:
       return state;
   }
