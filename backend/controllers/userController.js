@@ -268,6 +268,51 @@ class UserController {
       return res.status(400).json({ error: err.sqlMessage });
     }
   }
+
+  static async getRelatorioPainelAluno(req, res, next) {
+    try {
+      const { matricula } = req.params;
+
+      if (matricula !== "undefined") {
+        const results = await db.query(
+          `SELECT * FROM relatorio_aluno WHERE matricula = ?;`,
+          [matricula]
+        );
+
+        return res.status(200).json(results);
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
+
+  static async getPontuacao(req, res, next) {
+    try {
+      const { matricula } = req.params;
+
+      if (matricula !== "undefined") {
+        const results = await db.query(
+          `SELECT sum(R.pontuacao) AS pontuacao, count(T.id) AS tarefas FROM tb_tarefa as T INNER JOIN tb_regra AS R ON T.tb_regra_id = R.id WHERE T.validado = 1 AND T.tb_aluno_matricula = ?;
+          SELECT count(G.id) AS games FROM tb_game AS G INNER JOIN ta_game_aluno AS TA ON TA.tb_game_id = G.id WHERE TA.tb_aluno_matricula = ?;SELECT count(T.id) AS tarefasNaoValidadas FROM tb_tarefa AS T WHERE T.validado = 0 AND T.tb_aluno_matricula = ?;`,
+          [matricula, matricula, matricula]
+        );
+
+        const data = [...results[0], ...results[1], ...results[2]];
+
+        return res.json(data);
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
 }
 
 module.exports = UserController;

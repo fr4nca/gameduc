@@ -7,7 +7,9 @@ import {
   GET_ALUNOS,
   DELETE_ALUNO,
   RELATORIO_PROFESSOR,
-  GET_GAMES_ATIVOS
+  GET_GAMES_ATIVOS,
+  RELATORIO_ALUNO,
+  PONTUACAO
 } from "../actions/types";
 
 const initalState = {
@@ -16,7 +18,8 @@ const initalState = {
   game: {},
   ranking: undefined,
   alunos: undefined,
-  relatorio: undefined
+  relatorio: undefined,
+  pontuacao: undefined
 };
 
 export default (state = initalState, action) => {
@@ -63,10 +66,21 @@ export default (state = initalState, action) => {
           tarefas: action.payload[3].tarefas
         }
       };
+    case RELATORIO_ALUNO:
+      return {
+        ...state,
+        relatorio: action.payload
+      };
     case GET_GAMES_ATIVOS:
       return {
         ...state,
         gamesAtivos: action.payload
+      };
+
+    case PONTUACAO:
+      return {
+        ...state,
+        pontuacao: action.payload
       };
     default:
       return state;

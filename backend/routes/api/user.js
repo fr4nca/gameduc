@@ -71,4 +71,27 @@ router.get(
   checkUserRole(["professor"]),
   UserController.getRelatorioPainelProfessor
 );
+
+// @route   GET api/user/relatorioProfessor/:matricula
+// @desc    Update a user
+// @params  Matricula, nome, sobrenome, data de nascimento, graduação, curso, email, senha, papel
+// @access  private
+router.get(
+  "/relatorioAluno/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["aluno"]),
+  UserController.getRelatorioPainelAluno
+);
+
+// @route   GET api/user/relatorioProfessor/:matricula
+// @desc    Update a user
+// @params  Matricula, nome, sobrenome, data de nascimento, graduação, curso, email, senha, papel
+// @access  private
+router.get(
+  "/pontuacao/:matricula",
+  passport.authenticate("jwt", { session: false }),
+  checkUserRole(["aluno"]),
+  UserController.getPontuacao
+);
+
 module.exports = router;

@@ -10,7 +10,9 @@ import {
   CREATE_MESSAGE,
   GET_ERRORS,
   RELATORIO_PROFESSOR,
-  GET_GAMES_ATIVOS
+  RELATORIO_ALUNO,
+  GET_GAMES_ATIVOS,
+  PONTUACAO
 } from "./types";
 
 import { deleteAlunoTarefas } from "./tarefaActions";
@@ -146,6 +148,32 @@ export const relatorioProfessor = matricula => async dispatch => {
 
     dispatch({
       type: RELATORIO_PROFESSOR,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const relatorioAluno = matricula => async dispatch => {
+  try {
+    const { data } = await axios.get(`/user/relatorioAluno/${matricula}`);
+
+    dispatch({
+      type: RELATORIO_ALUNO,
+      payload: data
+    });
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+export const pontuacao = matricula => async dispatch => {
+  try {
+    const { data } = await axios.get(`/user/pontuacao/${matricula}`);
+
+    dispatch({
+      type: PONTUACAO,
       payload: data
     });
   } catch (e) {
