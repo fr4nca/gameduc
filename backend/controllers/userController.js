@@ -165,13 +165,17 @@ class UserController {
         email
       } = req.body;
 
-      const userResults = await db.query(
-        "SELECT * FROM tb_user where email = ?",
-        [email]
-      );
-
-      if (userResults.length > 0) {
-        return res.status(400).json({ error: "Email ja cadastrado" });
+      if (req.user.email != email){
+        const userResults = await db.query(
+          "SELECT * FROM tb_user where email = ?",
+          [email]
+        );
+  
+        console.log(req.user.email)
+        console.log(email)
+        if (userResults.length > 0  ) {
+          return res.status(400).json({ error: "Email ja cadastrado" });
+        }
       }
 
       if (papel === "professor") {

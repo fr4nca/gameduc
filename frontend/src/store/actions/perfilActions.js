@@ -1,6 +1,6 @@
 import axios from "../../services/api";
 
-import { EDIT_PROFILE, CREATE_MESSAGE, EDIT_USER } from "./types";
+import { EDIT_PROFILE, CREATE_MESSAGE, EDIT_USER, GET_ERRORS } from "./types";
 
 export const editPerfil = (perfil, user) => async dispatch => {
   try {
@@ -23,8 +23,14 @@ export const editPerfil = (perfil, user) => async dispatch => {
       type: CREATE_MESSAGE,
       payload: { editPerfil: "Perfil editado com sucesso" }
     });
-    //   dispatch(getRegras(regra.tb_game_id));
   } catch (e) {
-    console.log(e.response.data);
+    const error = {
+      msg: e.response.data,
+      status: e.response.status
+    };
+    dispatch({
+      type: GET_ERRORS,
+      payload: error
+    });
   }
 };
