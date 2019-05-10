@@ -65,7 +65,10 @@ export class Tarefas extends Component {
                 </li>
               ))
             ) : (
-              <p>Não há tarefas a serem validadas</p>
+              <>
+                <br />
+                <p>Não há tarefas a serem validadas</p>
+              </>
             )
           ) : (
             <Spinner />

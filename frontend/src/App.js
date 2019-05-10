@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 
 import {
   setCurrentUser,
@@ -30,8 +31,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 
 import PrivateRoute from "./components/common/PrivateRoute";
-
-import { PersistGate } from "redux-persist/integration/react";
+import Spinner from "./pages/layout/Spinner";
 
 if (localStorage.getItem("@Gameduc:userToken")) {
   setAuthToken(localStorage.getItem("@Gameduc:userToken"));
@@ -56,7 +56,7 @@ const alertOptions = {
 
 const App = () => (
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={<Spinner />} persistor={persistor}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <Router>
           <Navbar />

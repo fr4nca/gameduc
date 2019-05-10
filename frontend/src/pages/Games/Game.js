@@ -11,6 +11,15 @@ import Alunos from "../../components/Aluno/Alunos";
 
 import Spinner from "../layout/Spinner";
 
+import { store } from "../../store";
+import {
+  GET_GAME,
+  GET_RANKING,
+  GET_TAREFAS,
+  GET_REGRAS,
+  GET_ALUNOS
+} from "../../store/actions/types";
+
 class Game extends Component {
   state = {
     game: undefined
@@ -30,6 +39,33 @@ class Game extends Component {
         game: nextProps.game.game
       });
     }
+  }
+
+  componentWillUnmount() {
+    store.dispatch({
+      type: GET_GAME,
+      payload: {}
+    });
+
+    store.dispatch({
+      type: GET_RANKING,
+      payload: undefined
+    });
+
+    store.dispatch({
+      type: GET_TAREFAS,
+      payload: undefined
+    });
+
+    store.dispatch({
+      type: GET_REGRAS,
+      payload: undefined
+    });
+
+    store.dispatch({
+      type: GET_ALUNOS,
+      payload: undefined
+    });
   }
 
   render() {
