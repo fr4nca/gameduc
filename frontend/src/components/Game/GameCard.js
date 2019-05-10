@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import axios from "../../services/api";
-
 import moment from "moment";
 
 class GameCard extends Component {
   state = {
-    percent: "",
-    disciplina: ""
+    percent: ""
   };
 
   async componentDidMount() {
-    const {
-      game,
-      game: { ta_professor_disciplina_tb_disciplina_id: disciplinaId }
-    } = this.props;
-
-    const { data: disciplina } = await axios.get(`/disciplina/${disciplinaId}`);
+    const { game } = this.props;
 
     let fim = new Date(game.dta_fim).getTime() / 1000;
     let inicio = new Date(game.dta_inicio).getTime() / 1000;
@@ -27,13 +19,12 @@ class GameCard extends Component {
 
     this.setState({
       ...this.state,
-      percent,
-      disciplina
+      percent
     });
   }
 
   render() {
-    const { percent, disciplina } = this.state;
+    const { percent } = this.state;
     const { game } = this.props;
 
     return (
@@ -43,9 +34,6 @@ class GameCard extends Component {
         </header>
         <div className="card-content">
           <div className="content">
-            <p>
-              <strong>Disciplina:</strong> {disciplina.nome}
-            </p>
             <p>
               <strong>Início:</strong>{" "}
               {moment(game.dta_inicio).format("DD/MM/YYYY")}

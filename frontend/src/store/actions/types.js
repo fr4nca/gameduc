@@ -5,6 +5,7 @@ export const GET_GAMES = "GET_GAMES";
 export const GET_GAME = "GET_GAME";
 export const CREATE_GAME = "CREATE_GAME";
 export const GET_RANKING = "GET_RANKING";
+export const GET_GAMES_ATIVOS = "GET_GAMES_ATIVOS";
 
 export const GET_DISCIPLINAS = "GET_DISCIPLINAS";
 export const CREATE_DISCIPLINA = "CREATE_DISCIPLINA";
@@ -34,4 +35,8 @@ export const GET_ERRORS = "GET_ERRORS";
 export const GET_MESSAGES = "GET_MESSAGES";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
 
+<<<<<<< HEAD
 export const EDIT_PROFILE = "EDIT_PROFILE"
+=======
+export const RELATORIO_PROFESSOR = "RELATORIO_PROFESSOR";
+>>>>>>> 474b09c46ce4b100675c45721337e41122592d01

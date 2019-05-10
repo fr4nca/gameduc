@@ -107,7 +107,8 @@ class UserController {
       if (isMatch) {
         const payload = {
           id: user.id,
-          papel: user.papel
+          papel: user.papel,
+          email: user.email
         };
 
         const token = await jwt.sign(payload, keys.jwtsecret, {
@@ -204,6 +205,37 @@ class UserController {
 
       await db.query(`DELETE FROM tb_user WHERE id = ?`, [id]);
       return res.status(200).json({ message: "Usuário deletado" });
+    } catch (err) {
+      return res.status(400).json({ error: err.sqlMessage });
+    }
+  }
+
+  static async getRelatorioPainelProfessor(req, res, next) {
+    try {
+      const { matricula } = req.params;
+      if (matricula !== "undefined") {
+        const results = await db.query(
+          `
+      SELECT count(G.id) AS games FROM tb_game as G WHERE G.ta_professor_disciplina_tb_professor_matricula = ? AND G.dta_inicio <= now() AND G.dta_fim >= now();
+      SELECT count(TA.tb_aluno_matricula) AS alunos FROM ta_game_aluno AS TA INNER JOIN tb_game AS G ON G.id = TA.tb_game_id WHERE G.ta_professor_disciplina_tb_professor_matricula = ?;
+      SELECT count(TA.tb_disciplina_id) as disciplinas FROM ta_professor_disciplina AS TA WHERE TA.tb_professor_matricula = ?;
+      SELECT count(T.id) as tarefas FROM tb_tarefa AS T INNER JOIN tb_game as G ON G.id = T.tb_game_id WHERE G.ta_professor_disciplina_tb_professor_matricula = ? AND T.validado = 1;
+      `,
+          [matricula, matricula, matricula, matricula]
+        );
+
+        const data = [
+          ...results[0],
+          ...results[1],
+          ...results[2],
+          ...results[3]
+        ];
+        return res.status(200).json(data);
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

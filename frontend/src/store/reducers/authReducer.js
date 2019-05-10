@@ -31,11 +31,15 @@ export default (state = initalState, action) => {
         ...state,
         alunos: action.payload
       };
+<<<<<<< HEAD
     case EDIT_PROFILE:
       return {
         ...state,
         profile: action.payload
       };
+=======
+
+>>>>>>> 474b09c46ce4b100675c45721337e41122592d01
     default:
       return state;
   }

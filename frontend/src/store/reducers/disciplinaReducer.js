@@ -8,7 +8,7 @@ import {
 
 const initalState = {
   disciplinas: [],
-  disciplinasProf: []
+  disciplinasProf: undefined
 };
 
 export default (state = initalState, action) => {

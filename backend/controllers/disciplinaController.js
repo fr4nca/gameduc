@@ -59,13 +59,18 @@ class DisciplinaController {
   static async getDisciplinasProfessor(req, res, next) {
     try {
       const { matricula } = req.params;
+      if (matricula !== "undefined") {
+        const results = await db.query(
+          "SELECT D.id, D.nome FROM ta_professor_disciplina as DP INNER JOIN tb_disciplina as D ON D.id= DP.tb_disciplina_id WHERE DP.tb_professor_matricula = ?",
+          [matricula]
+        );
 
-      const results = await db.query(
-        "SELECT D.id, D.nome FROM ta_professor_disciplina as DP INNER JOIN tb_disciplina as D ON D.id= DP.tb_disciplina_id WHERE DP.tb_professor_matricula = ?",
-        [matricula]
-      );
-
-      return res.json(results);
+        return res.json(results);
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Matrícula não pode ser undefined" });
+      }
     } catch (err) {
       return res.status(400).json({ error: err.sqlMessage });
     }

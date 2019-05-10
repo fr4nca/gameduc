@@ -19,12 +19,6 @@ class AdicionarTarefa extends Component {
     this.props.getAlunos(this.props.game.game.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.game.game !== nextProps.game.game) {
-      this.props.getAlunos(nextProps.game.game.id);
-    }
-  }
-
   handleChange = e => {
     this.setState({
       ...this.state,

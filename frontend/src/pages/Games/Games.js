@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getGames } from "../../store/actions/gameActions";
 import GameCard from "../../components/Game/GameCard";
 import CriarGame from "../../components/Game/CriarGame";
+import Spinner from "../layout/Spinner";
 
 class Games extends Component {
   state = {
@@ -17,16 +18,15 @@ class Games extends Component {
     });
   };
 
+  componentWillReceiveProps(nextProps) {
+    const { matricula } = this.props.auth.profile;
+    if (matricula !== nextProps.auth.profile.matricula)
+      this.props.getGames(nextProps.auth.profile.matricula);
+  }
+
   componentDidMount() {
     const { matricula } = this.props.auth.profile;
     this.props.getGames(matricula);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getGames(matricula);
-    }
   }
 
   render() {
@@ -61,16 +61,20 @@ class Games extends Component {
         <div className="box">
           <h3 className="subtitle is-3">Seus games</h3>
           <hr />
-          {games.length > 0 ? (
-            <div className="columns is-multiline">
-              {games.map(game => (
-                <div key={game.id} className="column is-2">
-                  <GameCard game={game} />
-                </div>
-              ))}
-            </div>
+          {games ? (
+            games.length > 0 ? (
+              <div className="columns is-multiline">
+                {games.map(game => (
+                  <div key={game.id} className="column is-2">
+                    <GameCard game={game} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Não há nenhum game cadastrado</p>
+            )
           ) : (
-            <h2>Não há nenhum game cadastrado</h2>
+            <Spinner />
           )}
         </div>
       </>

@@ -19,11 +19,11 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/user", userRoutes);
-app.use("/game", gameRoutes);
-app.use("/disciplina", disciplinaRoutes);
-app.use("/regra", regraRoutes);
-app.use("/tarefa", tarefaRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/game", gameRoutes);
+app.use("/api/disciplina", disciplinaRoutes);
+app.use("/api/regra", regraRoutes);
+app.use("/api/tarefa", tarefaRoutes);
 
 app.use("/", (req, res) => {
   res.status(404).send("Route not found");

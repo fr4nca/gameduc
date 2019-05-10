@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import Spinner from "../layout/Spinner";
+
 import CriarDisciplina from "../../components/Disciplina/CriarDisciplina";
 import VincularDisciplina from "../../components/Disciplina/VincularDisciplina";
 
@@ -15,17 +17,18 @@ export class Disciplinas extends Component {
     criarDisciplina: false
   };
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
     const { matricula } = this.props.auth.profile;
-    this.props.getDisciplinasProfessor(matricula);
-    this.props.getDisciplinas();
+    if (matricula !== nextProps.auth.profile.matricula) {
+      this.props.getDisciplinas();
+      this.props.getDisciplinasProfessor(nextProps.auth.profile.matricula);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      const { matricula } = nextProps.auth.profile;
-      this.props.getDisciplinasProfessor(matricula);
-    }
+  componentDidMount() {
+    const { matricula } = this.props.auth.profile;
+    this.props.getDisciplinas();
+    this.props.getDisciplinasProfessor(matricula);
   }
 
   criarDisciplina = () => {
@@ -41,6 +44,7 @@ export class Disciplinas extends Component {
 
   render() {
     const { disciplinasProf } = this.props.disciplina;
+
     return (
       <>
         <h1 className="title is-1">
@@ -51,24 +55,28 @@ export class Disciplinas extends Component {
         <div className="box">
           <h3 className="subtitle is-3">Suas disciplinas</h3>
           <hr />
-          {disciplinasProf.length > 0 ? (
-            <div>
-              {disciplinasProf.map(d => (
-                <li key={d.id} className="list-item">
-                  {d.nome}
-                  <i
-                    class="fas fa-trash is-pulled-right"
-                    style={{
-                      marginTop: 4 + "px",
-                      cursor: "pointer"
-                    }}
-                    onClick={this.delete.bind(this, d.id)}
-                  />
-                </li>
-              ))}
-            </div>
+          {disciplinasProf ? (
+            disciplinasProf.length > 0 ? (
+              <div>
+                {disciplinasProf.map(d => (
+                  <li key={d.id} className="list-item">
+                    {d.nome}
+                    <i
+                      className="fas fa-trash is-pulled-right"
+                      style={{
+                        marginTop: 4 + "px",
+                        cursor: "pointer"
+                      }}
+                      onClick={this.delete.bind(this, d.id)}
+                    />
+                  </li>
+                ))}
+              </div>
+            ) : (
+              <p>Não há nenhuma disciplina vinculada</p>
+            )
           ) : (
-            <p>Não há nenhuma disciplina vinculada</p>
+            <Spinner />
           )}
           <ul />
         </div>

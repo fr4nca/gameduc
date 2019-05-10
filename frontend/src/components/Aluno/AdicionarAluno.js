@@ -13,12 +13,6 @@ class AdicionarAluno extends Component {
     this.props.getAllAlunos();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth !== nextProps.auth) {
-      this.props.getAllAlunos();
-    }
-  }
-
   handleChange = e => {
     this.setState({
       ...this.state,
