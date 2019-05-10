@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { getDisciplinasProfessor } from "../../store/actions/disciplinaActions";
 import { criarGame, getGames } from "../../store/actions/gameActions";
+import Spinner from "../../pages/layout/Spinner";
 
 class CriarGame extends Component {
   state = {
@@ -111,11 +112,19 @@ class CriarGame extends Component {
                 <option value="" disabled>
                   Selecione a opção
                 </option>
-                {disciplinasProf.map(d => (
-                  <option key={d.id} value={d.id}>
-                    {d.nome}
-                  </option>
-                ))}
+                {disciplinasProf ? (
+                  disciplinasProf.length > 0 ? (
+                    disciplinasProf.map(d => (
+                      <option key={d.id} value={d.id}>
+                        {d.nome}
+                      </option>
+                    ))
+                  ) : (
+                    <p>Você não possui disciplinas vinculadas</p>
+                  )
+                ) : (
+                  <Spinner />
+                )}
               </select>
             </div>
           </div>

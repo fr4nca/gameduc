@@ -19,9 +19,9 @@ export class EditarPerfil extends Component {
     this.setState({
       ...this.state,
       ...this.props.auth.profile,
-      dta_nascimento: moment(this.props.auth.profile.dta_nascimento).format(
-        "YYYY-MM-DD"
-      ),
+      dta_nascimento: moment
+        .utc(this.props.auth.profile.dta_nascimento)
+        .format("YYYY-MM-DD"),
       email: this.props.auth.user.email
     });
   }

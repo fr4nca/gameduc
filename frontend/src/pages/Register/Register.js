@@ -64,7 +64,7 @@ export class Register extends Component {
       papel
     };
 
-    newUser.dta_nascimento = moment(dta_nascimento).format("YYYY-MM-DD");
+    newUser.dta_nascimento = moment.utc(dta_nascimento).format("YYYY-MM-DD");
     this.props.registerUser(newUser, this.props.history);
   };
 

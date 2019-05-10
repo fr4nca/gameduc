@@ -36,11 +36,11 @@ class GameCard extends Component {
           <div className="content">
             <p>
               <strong>Início:</strong>{" "}
-              {moment(game.dta_inicio).format("DD/MM/YYYY")}
+              {moment.utc(game.dta_inicio).format("DD/MM/YYYY")}
             </p>
             <p>
               <strong>Finalização:</strong>{" "}
-              {moment(game.dta_fim).format("DD/MM/YYYY")}
+              {moment.utc(game.dta_fim).format("DD/MM/YYYY")}
             </p>
           </div>
           <progress

@@ -58,7 +58,7 @@ export class Perfil extends Component {
             {profile.nome} {profile.sobrenome}
             <hr />
             <strong>Data de nascimento: </strong>
-            {moment(profile.dta_nascimento).format("DD/MM/YYYY")}
+            {moment.utc(profile.dta_nascimento).format("DD/MM/YYYY")}
             <hr />
             {user.papel === "professor" ? (
               <div>
