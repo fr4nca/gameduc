@@ -165,21 +165,20 @@ class UserController {
         email
       } = req.body;
 
-      if (req.user.email != email){
+      if (req.user.email != email) {
         const userResults = await db.query(
           "SELECT * FROM tb_user where email = ?",
           [email]
         );
-  
-        console.log(req.user.email)
-        console.log(email)
-        if (userResults.length > 0  ) {
+
+        if (userResults.length > 0) {
           return res.status(400).json({ error: "Email ja cadastrado" });
         }
       }
 
       if (papel === "professor") {
-        await db.query(`UPDATE tb_user  SET email = ? WHERE id = ?; 
+        await db.query(
+          `UPDATE tb_user  SET email = ? WHERE id = ?; 
         UPDATE tb_professor SET nome = ?, sobrenome = ?, dta_nascimento = ?, graduacao = ? WHERE matricula = ?;`,
           [email, id, nome, sobrenome, dta_nascimento, graduacao, matricula]
         );
@@ -187,7 +186,8 @@ class UserController {
           .status(200)
           .json({ message: "Usuário alterado com sucesso" });
       } else if (papel === "aluno") {
-        await db.query(`UPDATE tb_user  SET email = ? WHERE id = ?;
+        await db.query(
+          `UPDATE tb_user  SET email = ? WHERE id = ?;
           UPDATE tb_aluno SET nome = ?, sobrenome = ?, dta_nascimento = ?, curso = ?  WHERE matricula = ?;
             `,
           [email, id, nome, sobrenome, dta_nascimento, curso, matricula]
