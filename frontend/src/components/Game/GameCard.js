@@ -50,7 +50,7 @@ class GameCard extends Component {
           />
           {percent >= 100
             ? "Finalizado"
-            : percent <= 0
+            : percent < 0
             ? "Game ainda não começou"
             : percent + "% completo"}
         </div>
