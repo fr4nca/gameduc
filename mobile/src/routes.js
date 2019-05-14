@@ -1,21 +1,30 @@
 import {
   createAppContainer,
   createSwitchNavigator,
-  createStackNavigator
+  createBottomTabNavigator
 } from "react-navigation";
 
-import LoginLoading from "~/components/Login/LoginLoading";
-import Login from "~/components/Login/Login";
-import Home from "~/components/Home/Home";
+import LoginLoading from "~/pages/Login/LoginLoading";
+import Login from "~/pages/Login/Login";
+import Dashboard from "~/pages/Dashboard/Dashboard";
 
-const AuthStack = createStackNavigator({ Login });
-const AppStack = createStackNavigator({ Home });
+const AppStack = createBottomTabNavigator(
+  {
+    Dashboard
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "tomato",
+      inactiveTintColor: "gray"
+    }
+  }
+);
 
 export default createAppContainer(
   createSwitchNavigator(
     {
       LoginLoading,
-      Auth: AuthStack,
+      Login,
       App: AppStack
     },
     {

@@ -29,16 +29,6 @@ export const loginUser = userData => async dispatch => {
 
     dispatch(setCurrentProfile());
   } catch (e) {
-    console.log(e.response.data);
-  }
-};
-
-export const registerUser = (user, history) => async dispatch => {
-  try {
-    await axios.post("/user/register", user);
-    dispatch(createMessage({ registerSuccess: "Registrado com sucesso." }));
-    history.push("/login");
-  } catch (e) {
     const error = {
       msg: e.response.data,
       status: e.response.status
