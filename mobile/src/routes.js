@@ -1,7 +1,25 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  createStackNavigator
+} from "react-navigation";
 
-import Main from '~/pages/Main';
+import LoginLoading from "~/components/Login/LoginLoading";
+import Login from "~/components/Login/Login";
+import Home from "~/components/Home/Home";
 
-const Routes = createAppContainer(createSwitchNavigator({ Main }));
+const AuthStack = createStackNavigator({ Login });
+const AppStack = createStackNavigator({ Home });
 
-export default Routes;
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      LoginLoading,
+      Auth: AuthStack,
+      App: AppStack
+    },
+    {
+      initialRouteName: "LoginLoading"
+    }
+  )
+);

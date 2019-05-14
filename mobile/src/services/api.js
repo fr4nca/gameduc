@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://api.github.com',
+  baseURL: "http://www.gameeduc.com.br/api"
 });
 
 export default api;

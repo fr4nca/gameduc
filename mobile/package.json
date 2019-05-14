@@ -8,12 +8,16 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "native-base": "^2.12.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-gesture-handler": "^1.2.1",
     "react-navigation": "^3.9.1",
+    "react-redux": "^7.0.3",
     "reactotron-react-native": "^3.4.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
