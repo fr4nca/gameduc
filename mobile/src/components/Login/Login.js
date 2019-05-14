@@ -14,14 +14,41 @@ import {
   Right
 } from "native-base";
 
-export default class Login extends Component {
-  login = async () => {
-    await AsyncStorage.setItem("@Gameduc:userToken", "oi");
-    this.props.navigation.navigate("App");
-  };
+import { connect } from "react-redux";
 
+import { loginUser } from "~/store/actions/authActions";
+
+class Login extends Component {
   static navigationOptions = {
     title: "Login"
+  };
+
+  state = {
+    email: "",
+    senha: ""
+  };
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.navigation.navigate("App");
+    }
+  }
+
+  componentWillReceiveProps(next) {
+    if (next.auth.isAuthenticated) {
+      this.props.navigation.navigate("App");
+    }
+  }
+
+  handleSubmit = () => {
+    const { email, senha } = this.state;
+
+    const loginUser = {
+      email,
+      senha
+    };
+
+    this.props.loginUser(loginUser);
   };
 
   render() {
@@ -31,15 +58,23 @@ export default class Login extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
-              <Input />
+              <Input
+                value={this.state.email}
+                onChangeText={email => this.setState({ ...this.state, email })}
+                name="email"
+              />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input />
+              <Input
+                value={this.state.senha}
+                onChangeText={senha => this.setState({ ...this.state, senha })}
+                name="senha"
+              />
             </Item>
           </Form>
           <Right>
-            <Button onPress={this.login} style={styles.button}>
+            <Button onPress={this.handleSubmit} style={styles.button}>
               <Text>Login</Text>
             </Button>
           </Right>
@@ -54,3 +89,10 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
+
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

@@ -1,7 +1,6 @@
 import axios from "axios";
+import config from "../config/keys";
 
-const api = axios.create({
-  baseURL: "http://www.gameeduc.com.br/api"
+export default axios.create({
+  baseURL: config.apiUrl
 });
-
-export default api;

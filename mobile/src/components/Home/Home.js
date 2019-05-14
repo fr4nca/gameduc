@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Container, Text } from "native-base";
 
-export default class Home extends Component {
+class Home extends Component {
   static navigationOptions = {
     title: "Home"
   };
@@ -15,3 +15,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default Home;

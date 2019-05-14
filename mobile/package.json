@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "react-devtool": "react-devtools",
+    "redux-devtool": "remotedev"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "jwt-decode": "^2.2.0",
     "native-base": "^2.12.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
@@ -35,7 +38,10 @@
     "eslint-plugin-react-native": "^3.7.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.0",
-    "react-test-renderer": "16.8.3"
+    "react-devtools": "^3.6.1",
+    "react-test-renderer": "16.8.3",
+    "remote-redux-devtools": "^0.5.16",
+    "remotedev-server": "^0.3.1"
   },
   "jest": {
     "preset": "react-native"
