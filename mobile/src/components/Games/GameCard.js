@@ -13,7 +13,12 @@ const GameCard = props => {
         <Text>{props.game.nome}</Text>
         <Right />
         <Right>
-          <Icon name="chevron-right" size={20} color="#4F8EF7" />
+          <Icon
+            name="chevron-right"
+            size={20}
+            color="#4F8EF7"
+            onPress={() => props.navigate("Game", { game: props.game })}
+          />
         </Right>
       </CardItem>
     </Card>
