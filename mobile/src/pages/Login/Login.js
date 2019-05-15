@@ -19,6 +19,8 @@ import { connect } from "react-redux";
 import { loginUser } from "~/store/actions/authActions";
 
 class Login extends Component {
+  _isMounted = false;
+
   static navigationOptions = {
     title: "Login"
   };
@@ -42,6 +44,10 @@ class Login extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   handleSubmit = () => {
     const { email, senha } = this.state;
 
@@ -51,15 +57,17 @@ class Login extends Component {
       senhaErr: senha === "" ? "Digite sua senha" : ""
     });
 
-    setTimeout(
-      () =>
-        this.setState({
-          ...this.state,
-          emailErr: "",
-          senhaErr: ""
-        }),
-      2350
-    );
+    setTimeout(() => {
+      this._isMounted
+        ? this.setState({
+            ...this.state,
+            emailErr: "",
+            senhaErr: ""
+          })
+        : null;
+    }, 2350);
+
+    clearTimeout();
 
     if (email !== "" && senha !== "") {
       const loginUser = {

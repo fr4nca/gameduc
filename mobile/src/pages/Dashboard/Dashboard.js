@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 
-import { Container, Text } from "native-base";
-
 import { connect } from "react-redux";
+
+import { ScrollView } from "react-native-gesture-handler";
+
+import GamesAtivos from "~/components/Games/GamesAtivos";
+import TarefasPendentes from "~/components/TarefasPendentes/TarefasPendentes";
+import RelatorioProfessor from "~/components/Relatorio/RelatorioProfessor";
 
 class Dashboard extends Component {
   render() {
     return (
-      <Container>
-        <Text>{this.props.auth.profile.nome}</Text>
-      </Container>
+      <ScrollView>
+        <GamesAtivos />
+        <TarefasPendentes />
+        <RelatorioProfessor />
+      </ScrollView>
     );
   }
 }
