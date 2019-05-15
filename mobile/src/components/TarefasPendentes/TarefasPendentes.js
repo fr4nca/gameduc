@@ -1,23 +1,69 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 
-import { Card, CardItem, Text, Body } from "native-base";
+import { connect } from "react-redux";
 
-const TarefasPendentes = () => {
+import Icon from "react-native-vector-icons/FontAwesome";
+
+import {
+  getTarefasPendentes,
+  validarTarefaPendente
+} from "~/store/actions/tarefaActions";
+
+import { relatorioProfessor } from "~/store/actions/gameActions";
+
+import { Card, CardItem, Text, Body, List, ListItem } from "native-base";
+
+const TarefasPendentes = props => {
+  useEffect(() => {
+    props.getTarefasPendentes(props.auth.profile.matricula);
+  }, [props.auth.profile.matricula]);
+
+  const { tarefasPendentes: tarefas } = props.tarefa;
+
   return (
     <Card>
       <CardItem header>
-        <Text>NativeBase</Text>
+        <Text>Tarefas pendentes</Text>
       </CardItem>
       <CardItem>
         <Body>
-          <Text>//Your text here</Text>
+          <List>
+            {tarefas ? (
+              tarefas.length > 0 ? (
+                tarefas.map(tarefa => (
+                  <ListItem key={tarefa.id}>
+                    <Text>{tarefa.descricao} </Text>
+                    <Icon
+                      onPress={() => {
+                        props.validarTarefaPendente(tarefa);
+                        props.getTarefasPendentes(props.auth.profile.matricula);
+                        props.relatorioProfessor(props.auth.profile.matricula);
+                      }}
+                      name="check"
+                      size={20}
+                      color="#4F8EF7"
+                    />
+                  </ListItem>
+                ))
+              ) : (
+                <ListItem>
+                  <Text>Nenhuma tarefa pendente</Text>
+                </ListItem>
+              )
+            ) : (
+              <ActivityIndicator />
+            )}
+          </List>
         </Body>
-      </CardItem>
-      <CardItem footer>
-        <Text>GeekyAnts</Text>
       </CardItem>
     </Card>
   );
 };
 
-export default TarefasPendentes;
+const mapStateToProps = ({ auth, tarefa }) => ({ auth, tarefa });
+
+export default connect(
+  mapStateToProps,
+  { getTarefasPendentes, validarTarefaPendente, relatorioProfessor }
+)(TarefasPendentes);

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { getGamesAtivos } from "~/store/actions/gameActions";
 import GameCard from "./GameCard";
 
-function GamesAtivos(props) {
+const GamesAtivos = props => {
   useEffect(() => {
     props.getGamesAtivos(props.auth.profile.matricula);
   }, [props.auth.profile.matricula]);
@@ -35,7 +35,7 @@ function GamesAtivos(props) {
       </CardItem>
     </Card>
   );
-}
+};
 
 const mapStateToProps = ({ auth, game }) => ({ auth, game });
 

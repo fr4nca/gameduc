@@ -89,11 +89,6 @@ export const validarTarefa = tarefa => async dispatch => {
       type: VALIDAR_TAREFA
     });
 
-    dispatch({
-      type: CREATE_MESSAGE,
-      payload: { validateTarefa: "Tarefa validada com sucesso" }
-    });
-
     dispatch(getTarefas(tarefa.tb_game_id));
     dispatch(getRanking(tarefa.tb_game_id));
   } catch (e) {

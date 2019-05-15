@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { relatorioProfessor } from "~/store/actions/gameActions";
 
-import { Card, CardItem, Text, Body, List, ListItem, Right } from "native-base";
+import { Card, CardItem, Text, Body, List, ListItem } from "native-base";
 
 const RelatorioProfessor = props => {
   useEffect(() => {
