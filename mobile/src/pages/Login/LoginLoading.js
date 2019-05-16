@@ -25,13 +25,12 @@ export default class LoginLoading extends Component {
   }
 
   _loginLoading = async () => {
+    const token = await AsyncStorage.getItem("@Gameduc:userToken");
     // await AsyncStorage.clear();
-    if (await AsyncStorage.getItem("@Gameduc:userToken")) {
-      setAuthToken(await AsyncStorage.getItem("@Gameduc:userToken"));
+    if (token) {
+      setAuthToken(token);
 
-      const decoded = jwt_decode(
-        await AsyncStorage.getItem("@Gameduc:userToken")
-      );
+      const decoded = jwt_decode(token);
 
       store.dispatch(setCurrentUser(decoded));
       store.dispatch(setCurrentProfile());
