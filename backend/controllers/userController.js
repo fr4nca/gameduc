@@ -91,6 +91,7 @@ class UserController {
 
   static async login(req, res, next) {
     try {
+      console.log("oi");
       const { email, senha } = req.body;
       const results = await db.query("SELECT * FROM tb_user where email = ?", [
         email

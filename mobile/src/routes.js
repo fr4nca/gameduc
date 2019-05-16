@@ -22,12 +22,10 @@ const GamesStack = createStackNavigator(
     Game: {
       screen: Game,
       navigationOptions: ({ navigation }) => ({
-        title:
-          navigation.state &&
-          navigation.state.params &&
-          navigation.state.params.title
-            ? navigation.state.params.title
-            : "Game"
+        title: navigation.state.params.title
+          ? navigation.state.params.title
+          : "Game",
+        game: navigation.state.params.game
       })
     }
   },

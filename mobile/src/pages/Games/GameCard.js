@@ -4,8 +4,6 @@ import axios from "~/services/api";
 
 import { ActivityIndicator } from "react-native";
 import { Card, CardItem, Text } from "native-base";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GameCard = props => {
   const [disc, setDisc] = useState(undefined);
@@ -20,7 +18,6 @@ const GameCard = props => {
 
   useEffect(() => {
     getDisciplina();
-    console.log("oi");
   }, [props]);
 
   return (
@@ -48,7 +45,12 @@ const GameCard = props => {
             alignSelf: "center",
             width: 100 + "%"
           }}
-          onPress={() => props.navigate("Game", { game: props.game })}
+          onPress={() =>
+            props.navigation.navigate("Game", {
+              game: props.game,
+              title: props.game.nome
+            })
+          }
         >
           Visitar
         </Text>

@@ -17,7 +17,12 @@ const GameCard = props => {
             name="chevron-right"
             size={20}
             color="#4F8EF7"
-            onPress={() => props.navigate("Game", { game: props.game })}
+            onPress={() =>
+              props.navigation.navigate("Game", {
+                game: props.game,
+                title: props.game.nome
+              })
+            }
           />
         </Right>
       </CardItem>

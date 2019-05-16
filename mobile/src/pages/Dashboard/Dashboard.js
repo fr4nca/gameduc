@@ -12,7 +12,7 @@ class Dashboard extends Component {
   render() {
     return (
       <ScrollView>
-        <GamesAtivos navigate={this.props.navigation.navigate} />
+        <GamesAtivos navigation={this.props.navigation} />
         <TarefasPendentes />
         <RelatorioProfessor />
       </ScrollView>

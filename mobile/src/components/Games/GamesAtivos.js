@@ -25,7 +25,11 @@ const GamesAtivos = props => {
           {games ? (
             games.length >= 1 ? (
               games.map(game => (
-                <GameCard key={game.id} game={game} navigate={props.navigate} />
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  navigation={props.navigation}
+                />
               ))
             ) : (
               <Text>Não há games ativos</Text>

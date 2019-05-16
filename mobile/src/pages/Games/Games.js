@@ -20,7 +20,7 @@ const Games = props => {
               <GameCard
                 key={game.id}
                 game={game}
-                navigate={props.navigation.navigate}
+                navigation={props.navigation}
               />
             ))
           : null
