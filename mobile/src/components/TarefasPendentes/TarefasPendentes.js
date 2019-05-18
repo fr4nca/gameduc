@@ -12,7 +12,7 @@ import {
 
 import { relatorioProfessor } from "~/store/actions/gameActions";
 
-import { Card, CardItem, Text, Body, List, ListItem, Right } from "native-base";
+import { Card, CardItem, Text, Right } from "native-base";
 
 const TarefasPendentes = props => {
   useEffect(() => {

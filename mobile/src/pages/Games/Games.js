@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { ActivityIndicator } from "react-native";
+
 import { ScrollView } from "react-native-gesture-handler";
 
 import { connect } from "react-redux";
 import { getGames } from "../../store/actions/gameActions";
 import GameCard from "./GameCard";
-import { Content } from "native-base";
+import { Content, Text } from "native-base";
 
 const Games = props => {
   useEffect(() => {
@@ -16,17 +18,21 @@ const Games = props => {
   return (
     <ScrollView>
       <Content padder>
-        {games
-          ? games.length > 0
-            ? games.map(game => (
-                <GameCard
-                  key={game.id}
-                  game={game}
-                  navigation={props.navigation}
-                />
-              ))
-            : null
-          : null}
+        {games ? (
+          games.length > 0 ? (
+            games.map(game => (
+              <GameCard
+                key={game.id}
+                game={game}
+                navigation={props.navigation}
+              />
+            ))
+          ) : (
+            <Text>Você não está cadastrado em nenhum game</Text>
+          )
+        ) : (
+          <ActivityIndicator />
+        )}
       </Content>
     </ScrollView>
   );

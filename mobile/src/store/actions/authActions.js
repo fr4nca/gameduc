@@ -15,7 +15,9 @@ import { AsyncStorage } from "react-native";
 
 export const loginUser = userData => async dispatch => {
   try {
-    const res = await axios.post("/user/login", userData);
+    const res = userData.tagId
+      ? await axios.post("/user/logintag", userData)
+      : await axios.post("/user/login", userData);
 
     const { token } = res.data;
 
@@ -28,6 +30,22 @@ export const loginUser = userData => async dispatch => {
     dispatch(setCurrentUser(decoded));
 
     dispatch(setCurrentProfile());
+  } catch (e) {
+    const error = {
+      msg: e.response.data,
+      status: e.response.status
+    };
+    dispatch({
+      type: GET_ERRORS,
+      payload: error
+    });
+  }
+};
+
+export const registerUser = (user, navigation) => async dispatch => {
+  try {
+    await axios.post("/user/register", user);
+    navigation.navigate("Login");
   } catch (e) {
     const error = {
       msg: e.response.data,

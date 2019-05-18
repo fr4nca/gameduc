@@ -6,6 +6,7 @@ const keys = require("../config/keys");
 
 class UserController {
   static async register(req, res, next) {
+    console.log(req.body);
     try {
       const {
         matricula,
@@ -16,7 +17,8 @@ class UserController {
         curso,
         email,
         senha,
-        papel
+        papel,
+        tagId
       } = req.body;
 
       const userResults = await db.query(
@@ -43,12 +45,13 @@ class UserController {
           if (err) throw err;
           if (papel === "professor") {
             await db.query(
-              `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+              `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(? ,?, ?, ?);
               INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
               `,
               [
                 email,
                 hashed,
+                tagId,
                 papel,
                 matricula,
                 nome,
@@ -62,12 +65,13 @@ class UserController {
               .json({ message: "Usuário criado com sucesso" });
           } else if (papel === "aluno") {
             await db.query(
-              `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+              `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(?, ?, ?, ?);
               INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
               `,
               [
                 email,
                 hashed,
+                tagId,
                 papel,
                 matricula,
                 nome,
@@ -117,6 +121,42 @@ class UserController {
         return res.json({ token: "Bearer " + token });
       } else {
         return res.status(400).json({ error: "Senha incorreta" });
+      }
+    } catch (err) {
+      if (err.sqlMessage)
+        return res.status(400).json({ error: err.sqlMessage });
+      else return res.status(400).json({ error: err });
+    }
+  }
+
+  static async loginWithTag(req, res, next) {
+    try {
+      const { tagId } = req.body;
+      const results = await db.query("SELECT * FROM tb_user where tagId = ?", [
+        tagId
+      ]);
+
+      let user;
+      if (results.length > 0) user = results[0];
+      if (!user) {
+        return res.status(400).json({ error: "Tag não cadastrada" });
+      }
+      const isMatch = tagId === user.tagId ? true : false;
+
+      if (isMatch) {
+        const payload = {
+          id: user.id,
+          papel: user.papel,
+          email: user.email
+        };
+
+        const token = await jwt.sign(payload, keys.jwtsecret, {
+          expiresIn: 3600
+        });
+
+        return res.json({ token: "Bearer " + token });
+      } else {
+        return res.status(400).json({ error: "Tag incorreta" });
       }
     } catch (err) {
       if (err.sqlMessage)

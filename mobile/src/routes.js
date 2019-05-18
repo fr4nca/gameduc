@@ -16,6 +16,7 @@ import Disciplinas from "~/pages/Disciplinas/Disciplinas";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
+import Register from "./pages/Register/Register";
 
 const GamesStack = createStackNavigator(
   {
@@ -103,6 +104,7 @@ const AppStack = createBottomTabNavigator(
         )
       }
     }
+    //TODO: Hide disciplinas when aluno
   },
   {
     tabBarOptions: {
@@ -118,6 +120,7 @@ export default createAppContainer(
     {
       LoginLoading,
       Login,
+      Register,
       App: AppStack
     },
     {

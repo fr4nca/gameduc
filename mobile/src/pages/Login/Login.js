@@ -1,16 +1,26 @@
 import React, { Component } from "react";
+import { startNFC, stopNFC, isNFCSupported } from "../../helpers/NFCHelper";
 
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 
-import { Form, Item, Input, Label, Button, Text, Right } from "native-base";
+import {
+  Form,
+  Item,
+  Input,
+  Label,
+  Button,
+  Right,
+  Text,
+  Content,
+  Left,
+  View
+} from "native-base";
 
 import { connect } from "react-redux";
 
 import { loginUser } from "~/store/actions/authActions";
 
 class Login extends Component {
-  _isMounted = false;
-
   static navigationOptions = {
     title: "Login"
   };
@@ -19,13 +29,30 @@ class Login extends Component {
     email: "",
     senha: "",
     emailErr: "",
-    senhaErr: ""
+    senhaErr: "",
+    isSupported: false,
+    isLoading: false
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    startNFC(this.handleNFCTagReading);
+  }
+
+  componentWillUnmount() {
+    stopNFC();
+    this._isMounted = false;
+  }
+
+  async componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.navigation.navigate("App");
     }
+
+    const isSupported = await isNFCSupported();
+    this.setState({
+      ...this.state,
+      isSupported
+    });
   }
 
   componentWillReceiveProps(next) {
@@ -34,9 +61,21 @@ class Login extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+  handleNFCTagReading = nfcResult => {
+    const tagId = nfcResult.id;
+
+    this.setState({
+      ...this.state,
+      isLoading: true
+    });
+
+    this.props.loginUser({ tagId });
+
+    this.setState({
+      ...this.state,
+      isLoading: false
+    });
+  };
 
   handleSubmit = () => {
     const { email, senha } = this.state;
@@ -47,38 +86,44 @@ class Login extends Component {
       senhaErr: senha === "" ? "Digite sua senha" : ""
     });
 
-    setTimeout(() => {
-      this._isMounted
-        ? this.setState({
-            ...this.state,
-            emailErr: "",
-            senhaErr: ""
-          })
-        : null;
-    }, 2350);
-
-    clearTimeout();
-
     if (email !== "" && senha !== "") {
+      this.setState({
+        ...this.state,
+        isLoading: true
+      });
+
       const loginUser = {
         email,
         senha
       };
 
       this.props.loginUser(loginUser);
+
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
     }
   };
 
   render() {
     return (
-      <View>
+      <Content
+        padder
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "center"
+        }}
+      >
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
             <Input
               keyboardType="email-address"
               value={this.state.email}
-              onChangeText={email => this.setState({ ...this.state, email })}
+              onChangeText={email =>
+                this.setState({ ...this.state, email, emailErr: "" })
+              }
               name="email"
             />
           </Item>
@@ -90,21 +135,40 @@ class Login extends Component {
             <Input
               secureTextEntry={true}
               value={this.state.senha}
-              onChangeText={senha => this.setState({ ...this.state, senha })}
+              onChangeText={senha =>
+                this.setState({ ...this.state, senha, senhaErr: "" })
+              }
               name="senha"
             />
           </Item>
+
           {this.state.senhaErr !== "" ? (
             <Text style={styles.error}>{this.state.senhaErr}</Text>
           ) : null}
+          {this.state.isSupported ? (
+            <Text style={styles.carteirinha}>Ou aproxime sua carteirinha</Text>
+          ) : null}
+
+          <Text style={styles.error}>{this.props.errors.msg.error}</Text>
+          {!this.state.isLoading ? (
+            <>
+              <Left>
+                <Button onPress={this.handleSubmit} style={styles.button}>
+                  <Text>Entrar</Text>
+                </Button>
+              </Left>
+              <Button
+                onPress={() => this.props.navigation.navigate("Register")}
+                style={styles.button}
+              >
+                <Text>Registrar</Text>
+              </Button>
+            </>
+          ) : (
+            <ActivityIndicator />
+          )}
         </Form>
-        <Text style={styles.error}>{this.props.errors.msg.error}</Text>
-        <Right>
-          <Button onPress={this.handleSubmit} style={styles.button}>
-            <Text>Entrar</Text>
-          </Button>
-        </Right>
-      </View>
+      </Content>
     );
   }
 }
@@ -118,6 +182,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 15,
     marginTop: 5
+  },
+  carteirinha: {
+    color: "#555",
+    marginLeft: 15,
+    marginTop: 10
   }
 });
 

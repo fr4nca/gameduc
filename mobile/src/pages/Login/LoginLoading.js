@@ -25,8 +25,8 @@ export default class LoginLoading extends Component {
   }
 
   _loginLoading = async () => {
+    await AsyncStorage.clear();
     const token = await AsyncStorage.getItem("@Gameduc:userToken");
-    // await AsyncStorage.clear();
     if (token) {
       setAuthToken(token);
 

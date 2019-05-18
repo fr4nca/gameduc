@@ -20,6 +20,13 @@ router.post("/register", UserController.register);
 // @access  public
 router.post("/login", UserController.login);
 
+// @route   POST api/user/login
+// @desc    Login a user
+// @returns JWT token
+// @params  email, password
+// @access  public
+router.post("/logintag", UserController.loginWithTag);
+
 // @route   GET api/user/current
 // @desc    Returns the current user's profile
 // @returns User's profile that's logged in
