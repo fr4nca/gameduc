@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { relatorioProfessor } from "~/store/actions/gameActions";
 
-import { Card, CardItem, Text, Body, List, ListItem } from "native-base";
+import { Card, CardItem, Text } from "native-base";
 
 const RelatorioProfessor = props => {
   useEffect(() => {
@@ -16,48 +16,46 @@ const RelatorioProfessor = props => {
 
   return (
     <Card>
-      <CardItem header>
+      <CardItem header bordered>
         <Text>Relatório</Text>
       </CardItem>
-      <CardItem>
-        <Body>
-          {relatorio ? (
-            Object.keys(relatorio).length > 0 ? (
-              <List>
-                <ListItem>
-                  <Text>{relatorio.games} games ativos</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>{relatorio.alunos} alunos nos seus games</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>{relatorio.disciplinas} disciplinas vinculadas</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>{relatorio.tarefas} tarefas validadas</Text>
-                </ListItem>
-              </List>
-            ) : (
-              <List>
-                <ListItem>
-                  <Text>0 games ativos</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>0 alunos nos seus games</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>0 disciplinas vinculadas</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>0 tarefas validadas</Text>
-                </ListItem>
-              </List>
-            )
-          ) : (
-            <ActivityIndicator />
-          )}
-        </Body>
-      </CardItem>
+      {relatorio ? (
+        Object.keys(relatorio).length > 0 ? (
+          <>
+            <CardItem>
+              <Text>{relatorio.games} games ativos</Text>
+            </CardItem>
+            <CardItem>
+              <Text>{relatorio.alunos} alunos nos seus games</Text>
+            </CardItem>
+            <CardItem>
+              <Text>{relatorio.disciplinas} disciplinas vinculadas</Text>
+            </CardItem>
+            <CardItem>
+              <Text>{relatorio.tarefas} tarefas validadas</Text>
+            </CardItem>
+          </>
+        ) : (
+          <>
+            <CardItem>
+              <Text>0 games ativos</Text>
+            </CardItem>
+            <CardItem>
+              <Text>0 alunos nos seus games</Text>
+            </CardItem>
+            <CardItem>
+              <Text>0 disciplinas vinculadas</Text>
+            </CardItem>
+            <CardItem>
+              <Text>0 tarefas validadas</Text>
+            </CardItem>
+          </>
+        )
+      ) : (
+        <CardItem>
+          <ActivityIndicator />
+        </CardItem>
+      )}
     </Card>
   );
 };

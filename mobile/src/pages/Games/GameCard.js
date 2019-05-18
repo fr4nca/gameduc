@@ -22,7 +22,7 @@ const GameCard = props => {
 
   return (
     <Card>
-      <CardItem header>
+      <CardItem header bordered>
         <Text>{props.game.nome}</Text>
       </CardItem>
       <CardItem>
@@ -35,22 +35,23 @@ const GameCard = props => {
           Finalização: {moment.utc(props.game.dta_fim).format("DD/MM/YYYY")}
         </Text>
       </CardItem>
-      <CardItem>
+      <CardItem bordered>
         {disc ? <Text>Disciplina: {disc.nome}</Text> : <ActivityIndicator />}
       </CardItem>
-      <CardItem>
+      <CardItem
+        button
+        onPress={() =>
+          props.navigation.navigate("Game", {
+            game: props.game,
+            title: props.game.nome
+          })
+        }
+      >
         <Text
           style={{
             color: "#4F8EF7",
-            alignSelf: "center",
-            width: 100 + "%"
+            alignSelf: "center"
           }}
-          onPress={() =>
-            props.navigation.navigate("Game", {
-              game: props.game,
-              title: props.game.nome
-            })
-          }
         >
           Visitar
         </Text>

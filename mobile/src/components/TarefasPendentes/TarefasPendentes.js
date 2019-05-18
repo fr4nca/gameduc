@@ -12,7 +12,7 @@ import {
 
 import { relatorioProfessor } from "~/store/actions/gameActions";
 
-import { Card, CardItem, Text, Body, List, ListItem } from "native-base";
+import { Card, CardItem, Text, Body, List, ListItem, Right } from "native-base";
 
 const TarefasPendentes = props => {
   useEffect(() => {
@@ -23,40 +23,38 @@ const TarefasPendentes = props => {
 
   return (
     <Card>
-      <CardItem header>
+      <CardItem header bordered>
         <Text>Tarefas pendentes</Text>
       </CardItem>
-      <CardItem>
-        <Body>
-          <List>
-            {tarefas ? (
-              tarefas.length > 0 ? (
-                tarefas.map(tarefa => (
-                  <ListItem key={tarefa.id}>
-                    <Text>{tarefa.descricao} </Text>
-                    <Icon
-                      onPress={() => {
-                        props.validarTarefaPendente(tarefa);
-                        props.getTarefasPendentes(props.auth.profile.matricula);
-                        props.relatorioProfessor(props.auth.profile.matricula);
-                      }}
-                      name="check"
-                      size={20}
-                      color="#4F8EF7"
-                    />
-                  </ListItem>
-                ))
-              ) : (
-                <ListItem>
-                  <Text>Nenhuma tarefa pendente</Text>
-                </ListItem>
-              )
-            ) : (
-              <ActivityIndicator />
-            )}
-          </List>
-        </Body>
-      </CardItem>
+      {tarefas ? (
+        tarefas.length > 0 ? (
+          tarefas.map(tarefa => (
+            <CardItem key={tarefa.id} bordered>
+              <Text>{tarefa.descricao}</Text>
+              <Right>
+                <Icon
+                  onPress={() => {
+                    props.validarTarefaPendente(tarefa);
+                    props.getTarefasPendentes(props.auth.profile.matricula);
+                    props.relatorioProfessor(props.auth.profile.matricula);
+                  }}
+                  name="check"
+                  size={20}
+                  color="#4F8EF7"
+                />
+              </Right>
+            </CardItem>
+          ))
+        ) : (
+          <CardItem>
+            <Text>Nenhuma tarefa pendente</Text>
+          </CardItem>
+        )
+      ) : (
+        <CardItem>
+          <ActivityIndicator />
+        </CardItem>
+      )}
     </Card>
   );
 };

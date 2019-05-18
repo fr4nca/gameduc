@@ -1,19 +1,21 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import { ScrollView } from "react-native-gesture-handler";
 
 import { connect } from "react-redux";
+import Ranking from "~/components/Game/Ranking";
+import { Content } from "native-base";
 
-export class Game extends Component {
-  render() {
-    const game = this.props.navigation.getParam("game", {});
+const Game = props => {
+  const game = props.navigation.getParam("game", {});
 
-    return (
-      <View>
-        <Text> {game.nome} </Text>
-      </View>
-    );
-  }
-}
+  return (
+    <ScrollView>
+      <Content padder>
+        <Ranking currentGame={game} />
+      </Content>
+    </ScrollView>
+  );
+};
 
 const mapStateToProps = ({ auth }) => ({ auth });
 

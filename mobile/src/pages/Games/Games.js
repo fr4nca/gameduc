@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { getGames } from "../../store/actions/gameActions";
 import GameCard from "./GameCard";
+import { Content } from "native-base";
 
 const Games = props => {
   useEffect(() => {
@@ -14,17 +15,19 @@ const Games = props => {
 
   return (
     <ScrollView>
-      {games
-        ? games.length > 0
-          ? games.map(game => (
-              <GameCard
-                key={game.id}
-                game={game}
-                navigation={props.navigation}
-              />
-            ))
-          : null
-        : null}
+      <Content padder>
+        {games
+          ? games.length > 0
+            ? games.map(game => (
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  navigation={props.navigation}
+                />
+              ))
+            : null
+          : null}
+      </Content>
     </ScrollView>
   );
 };

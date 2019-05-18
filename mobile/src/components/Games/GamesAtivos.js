@@ -17,7 +17,7 @@ const GamesAtivos = props => {
 
   return (
     <Card>
-      <CardItem header>
+      <CardItem header bordered>
         <Text>Games ativos</Text>
       </CardItem>
       <CardItem>
@@ -35,7 +35,9 @@ const GamesAtivos = props => {
               <Text>Não há games ativos</Text>
             )
           ) : (
-            <ActivityIndicator />
+            <CardItem>
+              <ActivityIndicator />
+            </CardItem>
           )}
         </Body>
       </CardItem>

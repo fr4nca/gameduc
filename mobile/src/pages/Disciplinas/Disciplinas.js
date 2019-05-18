@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
-import { Card, CardItem, Text, Body, List, ListItem } from "native-base";
+import {
+  Card,
+  CardItem,
+  Text,
+  Body,
+  List,
+  ListItem,
+  Content
+} from "native-base";
 
 import { connect } from "react-redux";
 import { getDisciplinasProfessor } from "~/store/actions/disciplinaActions";
@@ -13,32 +21,30 @@ const Disciplinas = props => {
   const { disciplinasProf } = props.disciplina;
 
   return (
-    <Card>
-      <CardItem header>
-        <Text>Suas disciplinas</Text>
-      </CardItem>
-      <CardItem>
-        <Body>
-          <List>
-            {disciplinasProf ? (
-              disciplinasProf.length > 0 ? (
-                disciplinasProf.map(d => (
-                  <ListItem key={d.id}>
-                    <Text>{d.nome}</Text>
-                  </ListItem>
-                ))
-              ) : (
-                <ListItem>
-                  <Text>Nenhuma tarefa pendente</Text>
-                </ListItem>
-              )
-            ) : (
-              <ActivityIndicator />
-            )}
-          </List>
-        </Body>
-      </CardItem>
-    </Card>
+    <Content padder>
+      <Card>
+        <CardItem header bordered>
+          <Text>Suas disciplinas</Text>
+        </CardItem>
+        {disciplinasProf ? (
+          disciplinasProf.length > 0 ? (
+            disciplinasProf.map(d => (
+              <CardItem key={d.id} bordered>
+                <Text>{d.nome}</Text>
+              </CardItem>
+            ))
+          ) : (
+            <CardItem>
+              <Text>Nenhuma tarefa pendente</Text>
+            </CardItem>
+          )
+        ) : (
+          <CardItem>
+            <ActivityIndicator />
+          </CardItem>
+        )}
+      </Card>
+    </Content>
   );
 };
 

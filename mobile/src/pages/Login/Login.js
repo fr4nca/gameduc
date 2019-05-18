@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import {
-  Container,
-  Content,
-  Form,
-  Item,
-  Input,
-  Label,
-  Button,
-  Text,
-  Right
-} from "native-base";
+import { Form, Item, Input, Label, Button, Text, Right } from "native-base";
 
 import { connect } from "react-redux";
 
@@ -81,42 +71,40 @@ class Login extends Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Form>
-            <Item floatingLabel>
-              <Label>Email</Label>
-              <Input
-                keyboardType="email-address"
-                value={this.state.email}
-                onChangeText={email => this.setState({ ...this.state, email })}
-                name="email"
-              />
-            </Item>
-            {this.state.emailErr !== "" ? (
-              <Text style={styles.error}>{this.state.emailErr}</Text>
-            ) : null}
-            <Item floatingLabel>
-              <Label>Senha</Label>
-              <Input
-                secureTextEntry={true}
-                value={this.state.senha}
-                onChangeText={senha => this.setState({ ...this.state, senha })}
-                name="senha"
-              />
-            </Item>
-            {this.state.senhaErr !== "" ? (
-              <Text style={styles.error}>{this.state.senhaErr}</Text>
-            ) : null}
-          </Form>
-          <Text style={styles.error}>{this.props.errors.msg.error}</Text>
-          <Right>
-            <Button onPress={this.handleSubmit} style={styles.button}>
-              <Text>Entrar</Text>
-            </Button>
-          </Right>
-        </Content>
-      </Container>
+      <View>
+        <Form>
+          <Item floatingLabel>
+            <Label>Email</Label>
+            <Input
+              keyboardType="email-address"
+              value={this.state.email}
+              onChangeText={email => this.setState({ ...this.state, email })}
+              name="email"
+            />
+          </Item>
+          {this.state.emailErr !== "" ? (
+            <Text style={styles.error}>{this.state.emailErr}</Text>
+          ) : null}
+          <Item floatingLabel>
+            <Label>Senha</Label>
+            <Input
+              secureTextEntry={true}
+              value={this.state.senha}
+              onChangeText={senha => this.setState({ ...this.state, senha })}
+              name="senha"
+            />
+          </Item>
+          {this.state.senhaErr !== "" ? (
+            <Text style={styles.error}>{this.state.senhaErr}</Text>
+          ) : null}
+        </Form>
+        <Text style={styles.error}>{this.props.errors.msg.error}</Text>
+        <Right>
+          <Button onPress={this.handleSubmit} style={styles.button}>
+            <Text>Entrar</Text>
+          </Button>
+        </Right>
+      </View>
     );
   }
 }
