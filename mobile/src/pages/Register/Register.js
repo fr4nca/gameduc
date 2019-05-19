@@ -22,6 +22,7 @@ import {
 import { connect } from "react-redux";
 
 import { registerUser } from "~/store/actions/authActions";
+import isEmpty from "~/utils/isEmpty";
 
 class Register extends Component {
   static navigationOptions = {
@@ -96,13 +97,35 @@ class Register extends Component {
       curso,
       email,
       senha,
-      graduacao,
       papel,
+      graduacao,
+      conSenha,
       tagId
     };
 
     newUser.dta_nascimento = moment.utc(dta_nascimento).format("YYYY-MM-DD");
-    this.props.registerUser(newUser, this.props.navigation);
+
+    if (
+      !isEmpty(newUser.nome) &&
+      !isEmpty(newUser.sobrenome) &&
+      !isEmpty(newUser.matricula) &&
+      !isEmpty(newUser.dta_nascimento) &&
+      !isEmpty(newUser.email) &&
+      !isEmpty(newUser.senha) &&
+      !isEmpty(newUser.papel) &&
+      !isEmpty(newUser.conSenha)
+    ) {
+      if (
+        (papel === "professor" && !isEmpty(graduacao)) ||
+        (papel === "aluno" && !isEmpty(curso))
+      ) {
+        this.props.registerUser(newUser, this.props.navigation);
+      } else {
+        alert("Preencha curso ou graduação!");
+      }
+    } else {
+      alert("Preencha todos os campos!");
+    }
   };
 
   handlePicker = texto => {
@@ -222,7 +245,6 @@ class Register extends Component {
                   : this.state.curso
               }
               onChangeText={this.handlePicker}
-              name="conSenha"
             />
           </Item>
 
@@ -245,17 +267,22 @@ class Register extends Component {
 
           {this.state.tagId !== "" ? (
             <>
-              <Icon name="check" size={30} color="green" style={styles.icon} />
-              <Icon
-                name="trash"
-                size={30}
-                color="red"
-                style={styles.icon}
-                onPress={() => {
-                  this.setState({ ...this.state, tagId: "" });
-                  startNFC(this.handleNFCTagReading);
-                }}
-              />
+              <Text style={styles.icon}>
+                <Icon name="check" size={25} color="green" /> Carteirinha
+                incluída com sucesso{" "}
+              </Text>
+              <Text style={styles.icon}>
+                <Icon
+                  name="trash"
+                  size={25}
+                  color="red"
+                  onPress={() => {
+                    this.setState({ ...this.state, tagId: "" });
+                    startNFC(this.handleNFCTagReading);
+                  }}
+                />{" "}
+                Remover?
+              </Text>
             </>
           ) : null}
 

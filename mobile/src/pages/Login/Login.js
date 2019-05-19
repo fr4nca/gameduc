@@ -9,16 +9,15 @@ import {
   Input,
   Label,
   Button,
-  Right,
   Text,
   Content,
-  Left,
-  View
+  Left
 } from "native-base";
 
 import { connect } from "react-redux";
 
 import { loginUser } from "~/store/actions/authActions";
+import isEmpty from "~/utils/isEmpty";
 
 class Login extends Component {
   static navigationOptions = {
@@ -86,7 +85,7 @@ class Login extends Component {
       senhaErr: senha === "" ? "Digite sua senha" : ""
     });
 
-    if (email !== "" && senha !== "") {
+    if (!isEmpty(email) && !isEmpty(senha)) {
       this.setState({
         ...this.state,
         isLoading: true
@@ -145,9 +144,6 @@ class Login extends Component {
           {this.state.senhaErr !== "" ? (
             <Text style={styles.error}>{this.state.senhaErr}</Text>
           ) : null}
-          {this.state.isSupported ? (
-            <Text style={styles.carteirinha}>Ou aproxime sua carteirinha</Text>
-          ) : null}
 
           <Text style={styles.error}>{this.props.errors.msg.error}</Text>
           {!this.state.isLoading ? (
@@ -167,6 +163,10 @@ class Login extends Component {
           ) : (
             <ActivityIndicator />
           )}
+
+          {this.state.isSupported ? (
+            <Text style={styles.carteirinha}>Ou aproxime sua carteirinha</Text>
+          ) : null}
         </Form>
       </Content>
     );
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   carteirinha: {
     color: "#555",
     marginLeft: 15,
-    marginTop: 10
+    marginTop: 18
   }
 });
 

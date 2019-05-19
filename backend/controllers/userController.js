@@ -6,7 +6,6 @@ const keys = require("../config/keys");
 
 class UserController {
   static async register(req, res, next) {
-    console.log(req.body);
     try {
       const {
         matricula,
