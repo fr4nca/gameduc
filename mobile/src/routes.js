@@ -104,7 +104,6 @@ const AppProfessorStack = createBottomTabNavigator(
         )
       }
     }
-    //TODO: Hide disciplinas when aluno
   },
   {
     tabBarOptions: {

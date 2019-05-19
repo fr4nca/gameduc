@@ -1,57 +1,54 @@
 import React, { useEffect } from "react";
-
 import { ActivityIndicator } from "react-native";
 
-import { Card, CardItem, Text, Right, Left } from "native-base";
+import { Card, CardItem, Text, Left, Right } from "native-base";
 
 import { connect } from "react-redux";
-import { getRanking } from "~/store/actions/gameActions";
+import { getRegras } from "~/store/actions/regraActions";
 
-const Ranking = props => {
+const Regras = props => {
   useEffect(() => {
-    props.getRanking(props.currentGame.id);
+    props.getRegras(props.currentGame.id);
   }, []);
 
-  const { ranking } = props.game;
-  let posicao = 0;
+  const { regras } = props.regra;
 
   return (
     <Card>
       <CardItem header bordered>
-        <Text>Ranking</Text>
+        <Text>Regras</Text>
       </CardItem>
       <CardItem bordered>
         <Left>
-          <Text style={{ fontWeight: "bold" }}>Posição</Text>
+          <Text style={{ fontWeight: "bold" }}>Descrição</Text>
         </Left>
         <Left>
-          <Text style={{ fontWeight: "bold" }}>Aluno</Text>
+          <Text style={{ fontWeight: "bold" }}>Classificação</Text>
         </Left>
         <Right>
           <Text style={{ fontWeight: "bold" }}>Pontuação</Text>
         </Right>
       </CardItem>
-      {ranking ? (
-        ranking.length > 0 ? (
-          ranking.map(aluno => {
-            posicao++;
+      {regras ? (
+        regras.length > 0 ? (
+          regras.map(regra => {
             return (
-              <CardItem bordered key={aluno.matricula}>
+              <CardItem key={regra.id}>
                 <Left>
-                  <Text>{posicao}º</Text>
+                  <Text>{regra.descricao}</Text>
                 </Left>
                 <Left>
-                  <Text>{aluno.nome}</Text>
+                  <Text>{regra.classificacao}</Text>
                 </Left>
                 <Right>
-                  <Text>{aluno.soma}</Text>
+                  <Text>{regra.pontuacao}</Text>
                 </Right>
               </CardItem>
             );
           })
         ) : (
           <CardItem>
-            <Text>Nenhum aluno pontuou</Text>
+            <Text>Nenhuma regra cadastrada</Text>
           </CardItem>
         )
       ) : (
@@ -63,9 +60,9 @@ const Ranking = props => {
   );
 };
 
-const mapStateToProps = ({ game }) => ({ game });
+const mapStateToProps = ({ regra, auth }) => ({ regra, auth });
 
 export default connect(
   mapStateToProps,
-  { getRanking }
-)(Ranking);
+  { getRegras }
+)(Regras);

@@ -11,7 +11,10 @@ import {
   Button,
   Text,
   Content,
-  Left
+  Left,
+  Card,
+  CardItem,
+  Body
 } from "native-base";
 
 import { connect } from "react-redux";
@@ -39,7 +42,6 @@ class Login extends Component {
 
   componentWillUnmount() {
     stopNFC();
-    this._isMounted = false;
   }
 
   async componentDidMount() {
@@ -120,60 +122,67 @@ class Login extends Component {
           justifyContent: "center"
         }}
       >
-        <Form>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input
-              keyboardType="email-address"
-              value={this.state.email}
-              onChangeText={email =>
-                this.setState({ ...this.state, email, emailErr: "" })
-              }
-              name="email"
-            />
-          </Item>
-          {this.state.emailErr !== "" ? (
-            <Text style={styles.error}>{this.state.emailErr}</Text>
-          ) : null}
-          <Item floatingLabel>
-            <Label>Senha</Label>
-            <Input
-              secureTextEntry={true}
-              value={this.state.senha}
-              onChangeText={senha =>
-                this.setState({ ...this.state, senha, senhaErr: "" })
-              }
-              name="senha"
-            />
-          </Item>
+        <Card>
+          <CardItem header bordered>
+            <Text>Login</Text>
+          </CardItem>
+          <Form style={{ padding: 15 }}>
+            <Item floatingLabel>
+              <Label>Email</Label>
+              <Input
+                keyboardType="email-address"
+                value={this.state.email}
+                onChangeText={email =>
+                  this.setState({ ...this.state, email, emailErr: "" })
+                }
+                name="email"
+              />
+            </Item>
+            {this.state.emailErr !== "" ? (
+              <Text style={styles.error}>{this.state.emailErr}</Text>
+            ) : null}
+            <Item floatingLabel>
+              <Label>Senha</Label>
+              <Input
+                secureTextEntry={true}
+                value={this.state.senha}
+                onChangeText={senha =>
+                  this.setState({ ...this.state, senha, senhaErr: "" })
+                }
+                name="senha"
+              />
+            </Item>
 
-          {this.state.senhaErr !== "" ? (
-            <Text style={styles.error}>{this.state.senhaErr}</Text>
-          ) : null}
+            {this.state.senhaErr !== "" ? (
+              <Text style={styles.error}>{this.state.senhaErr}</Text>
+            ) : null}
 
-          <Text style={styles.error}>{this.props.errors.msg.error}</Text>
-          {!this.state.isLoading ? (
-            <>
-              <Left>
-                <Button onPress={this.handleSubmit} style={styles.button}>
-                  <Text>Entrar</Text>
+            <Text style={styles.error}>{this.props.errors.msg.error}</Text>
+            {!this.state.isLoading ? (
+              <>
+                <Left>
+                  <Button onPress={this.handleSubmit} style={styles.button}>
+                    <Text>Entrar</Text>
+                  </Button>
+                </Left>
+                <Button
+                  onPress={() => this.props.navigation.navigate("Register")}
+                  style={styles.button}
+                >
+                  <Text>Registrar</Text>
                 </Button>
-              </Left>
-              <Button
-                onPress={() => this.props.navigation.navigate("Register")}
-                style={styles.button}
-              >
-                <Text>Registrar</Text>
-              </Button>
-            </>
-          ) : (
-            <ActivityIndicator />
-          )}
+              </>
+            ) : (
+              <ActivityIndicator />
+            )}
 
-          {this.state.isSupported ? (
-            <Text style={styles.carteirinha}>Ou aproxime sua carteirinha</Text>
-          ) : null}
-        </Form>
+            {this.state.isSupported ? (
+              <Text style={styles.carteirinha}>
+                Ou aproxime sua carteirinha
+              </Text>
+            ) : null}
+          </Form>
+        </Card>
       </Content>
     );
   }

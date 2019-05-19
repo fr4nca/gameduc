@@ -12,11 +12,13 @@ import {
   Input,
   Label,
   Button,
-  Right,
+  Left,
   Text,
   Content,
   DatePicker,
-  Picker
+  Picker,
+  Card,
+  CardItem
 } from "native-base";
 
 import { connect } from "react-redux";
@@ -137,161 +139,175 @@ class Register extends Component {
   render() {
     return (
       <Content padder>
-        <Form>
-          <Item floatingLabel>
-            <Label>Nome</Label>
-            <Input
-              value={this.state.nome}
-              onChangeText={nome => this.setState({ ...this.state, nome })}
-              name="nome"
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Sobrenome</Label>
-            <Input
-              value={this.state.sobrenome}
-              onChangeText={sobrenome =>
-                this.setState({ ...this.state, sobrenome })
-              }
-              name="sobrenome"
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Matricula</Label>
-            <Input
-              value={this.state.matricula}
-              keyboardType="numeric"
-              onChangeText={matricula =>
-                this.setState({ ...this.state, matricula })
-              }
-              name="matricula"
-            />
-          </Item>
-          <DatePicker
-            locale={"pt"}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            placeHolderText="Data de nascimento"
-            placeHolderTextStyle={{
-              color: "#444",
-              marginBottom: -30,
-              marginTop: 15,
-              marginLeft: 4
-            }}
-            textStyle={{
-              color: "#444",
-              marginBottom: -30,
-              marginTop: 15,
-              marginLeft: 4
-            }}
-            onDateChange={dta_nascimento =>
-              this.setState({ ...this.state, dta_nascimento })
-            }
-            disabled={false}
-          />
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input
-              keyboardType="email-address"
-              secureTextEntry={true}
-              value={this.state.email}
-              onChangeText={email => this.setState({ ...this.state, email })}
-              name="email"
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Senha</Label>
-            <Input
-              secureTextEntry={true}
-              value={this.state.senha}
-              onChangeText={senha => this.setState({ ...this.state, senha })}
-              name="senha"
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Confirme sua senha</Label>
-            <Input
-              secureTextEntry={true}
-              value={this.state.conSenha}
-              onChangeText={conSenha =>
-                this.setState({ ...this.state, conSenha })
-              }
-              name="conSenha"
-            />
-          </Item>
-          <Item picker style={{ marginLeft: 15, marginTop: 10 }}>
-            <Picker
-              mode="dropdown"
-              placeholder="Papel"
-              placeholderStyle={{ color: "#444" }}
-              placeholderIconColor="#007aff"
-              selectedValue={this.state.papel}
-              onValueChange={papel => this.setState({ ...this.state, papel })}
-            >
-              <Picker.Item label="Aluno" value="aluno" />
-              <Picker.Item label="Professor" value="professor" />
-            </Picker>
-          </Item>
-
-          <Item floatingLabel>
-            <Label>
-              {this.state.papel === "professor" ? "Graduação" : "Curso"}
-            </Label>
-            <Input
-              value={
-                this.state.papel === "professor"
-                  ? this.state.graduacao
-                  : this.state.curso
-              }
-              onChangeText={this.handlePicker}
-            />
-          </Item>
-
-          {this.state.isSupported && !this.state.addCarteirinha ? (
-            <Button
-              light
-              style={styles.addCarteirinha}
-              onPress={() => {
-                this.setState({ ...this.state, addCarteirinha: true });
-                startNFC(this.handleNFCTagReading);
+        <Card>
+          <CardItem header bordered>
+            <Text>Register</Text>
+          </CardItem>
+          <Form style={{ padding: 15 }}>
+            <Item floatingLabel>
+              <Label>Nome</Label>
+              <Input
+                value={this.state.nome}
+                onChangeText={nome => this.setState({ ...this.state, nome })}
+                name="nome"
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Sobrenome</Label>
+              <Input
+                value={this.state.sobrenome}
+                onChangeText={sobrenome =>
+                  this.setState({ ...this.state, sobrenome })
+                }
+                name="sobrenome"
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Matricula</Label>
+              <Input
+                value={this.state.matricula}
+                keyboardType="numeric"
+                onChangeText={matricula =>
+                  this.setState({ ...this.state, matricula })
+                }
+                name="matricula"
+              />
+            </Item>
+            <DatePicker
+              locale={"pt"}
+              modalTransparent={false}
+              animationType={"fade"}
+              androidMode={"default"}
+              placeHolderText="Data de nascimento"
+              placeHolderTextStyle={{
+                color: "#444",
+                marginBottom: -30,
+                marginTop: 15,
+                marginLeft: 4
               }}
-            >
-              <Text>Adicionar carteirinha</Text>
-            </Button>
-          ) : null}
+              textStyle={{
+                color: "#444",
+                marginBottom: -30,
+                marginTop: 15,
+                marginLeft: 4
+              }}
+              onDateChange={dta_nascimento =>
+                this.setState({ ...this.state, dta_nascimento })
+              }
+              disabled={false}
+            />
+            <Item floatingLabel>
+              <Label>Email</Label>
+              <Input
+                keyboardType="email-address"
+                secureTextEntry={true}
+                value={this.state.email}
+                onChangeText={email => this.setState({ ...this.state, email })}
+                name="email"
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Senha</Label>
+              <Input
+                secureTextEntry={true}
+                value={this.state.senha}
+                onChangeText={senha => this.setState({ ...this.state, senha })}
+                name="senha"
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Confirme sua senha</Label>
+              <Input
+                secureTextEntry={true}
+                value={this.state.conSenha}
+                onChangeText={conSenha =>
+                  this.setState({ ...this.state, conSenha })
+                }
+                name="conSenha"
+              />
+            </Item>
+            <Item picker style={{ marginLeft: 15, marginTop: 10 }}>
+              <Picker
+                mode="dropdown"
+                placeholder="Papel"
+                placeholderStyle={{ color: "#444" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.papel}
+                onValueChange={papel => this.setState({ ...this.state, papel })}
+              >
+                <Picker.Item label="Aluno" value="aluno" />
+                <Picker.Item label="Professor" value="professor" />
+              </Picker>
+            </Item>
 
-          {this.state.addCarteirinha && this.state.tagId === "" ? (
-            <Text style={styles.carteirinha}>Aproxime sua carteirinha</Text>
-          ) : null}
+            <Item floatingLabel>
+              <Label>
+                {this.state.papel === "professor" ? "Graduação" : "Curso"}
+              </Label>
+              <Input
+                value={
+                  this.state.papel === "professor"
+                    ? this.state.graduacao
+                    : this.state.curso
+                }
+                onChangeText={this.handlePicker}
+              />
+            </Item>
 
-          {this.state.tagId !== "" ? (
+            {this.state.isSupported && !this.state.addCarteirinha ? (
+              <Button
+                light
+                style={styles.addCarteirinha}
+                onPress={() => {
+                  this.setState({ ...this.state, addCarteirinha: true });
+                  startNFC(this.handleNFCTagReading);
+                }}
+              >
+                <Text>Adicionar carteirinha</Text>
+              </Button>
+            ) : null}
+
+            {this.state.addCarteirinha && this.state.tagId === "" ? (
+              <Text style={styles.carteirinha}>Aproxime sua carteirinha</Text>
+            ) : null}
+
+            {this.state.tagId !== "" ? (
+              <>
+                <Text style={styles.icon}>
+                  <Icon name="check" size={25} color="green" /> Carteirinha
+                  incluída com sucesso{" "}
+                </Text>
+                <Text style={styles.icon}>
+                  <Icon
+                    name="trash"
+                    size={25}
+                    color="red"
+                    onPress={() => {
+                      this.setState({ ...this.state, tagId: "" });
+                      startNFC(this.handleNFCTagReading);
+                    }}
+                  />{" "}
+                  Remover?
+                </Text>
+              </>
+            ) : null}
             <>
-              <Text style={styles.icon}>
-                <Icon name="check" size={25} color="green" /> Carteirinha
-                incluída com sucesso{" "}
-              </Text>
-              <Text style={styles.icon}>
-                <Icon
-                  name="trash"
-                  size={25}
-                  color="red"
-                  onPress={() => {
-                    this.setState({ ...this.state, tagId: "" });
-                    startNFC(this.handleNFCTagReading);
-                  }}
-                />{" "}
-                Remover?
-              </Text>
+              <Left>
+                <Button onPress={this.handleSubmit} style={styles.button}>
+                  <Text>Registrar</Text>
+                </Button>
+              </Left>
+              <Left>
+                <Button
+                  onPress={() => this.props.navigation.navigate("Login")}
+                  style={styles.button}
+                >
+                  <Text>Login</Text>
+                </Button>
+              </Left>
             </>
-          ) : null}
-
-          <Right>
-            <Button onPress={this.handleSubmit} style={styles.button}>
-              <Text>Registrar</Text>
-            </Button>
-          </Right>
-        </Form>
+          </Form>
+        </Card>
       </Content>
     );
   }
