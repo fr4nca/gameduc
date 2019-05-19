@@ -70,7 +70,7 @@ const DisciplinasStack = createStackNavigator(
   }
 );
 
-const AppStack = createBottomTabNavigator(
+const AppProfessorStack = createBottomTabNavigator(
   {
     Dashboard: {
       screen: DashboardStack,
@@ -115,13 +115,46 @@ const AppStack = createBottomTabNavigator(
   }
 );
 
+const AppAlunoStack = createBottomTabNavigator(
+  {
+    Dashboard: {
+      screen: DashboardStack,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="dashboard"
+            size={25}
+            color={focused ? "#FFF" : "#4F8EF7"}
+          />
+        )
+      }
+    },
+    Games: {
+      screen: GamesStack,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Icon name="gamepad" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+        )
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      activeBackgroundColor: "#4F8EF7",
+      activeTintColor: "#fff",
+      inactiveTintColor: "#4F8EF7"
+    }
+  }
+);
+
 export default createAppContainer(
   createSwitchNavigator(
     {
       LoginLoading,
       Login,
       Register,
-      App: AppStack
+      AppProfessorStack,
+      AppAlunoStack
     },
     {
       initialRouteName: "LoginLoading"

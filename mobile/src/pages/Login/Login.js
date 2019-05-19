@@ -44,7 +44,10 @@ class Login extends Component {
 
   async componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.navigation.navigate("App");
+      if (this.props.auth.user.papel === "professor")
+        this.props.navigation.navigate("AppProfessorStack");
+      else if (this.props.auth.user.papel === "aluno")
+        this.props.navigation.navigate("AppAlunoStack");
     }
 
     const isSupported = await isNFCSupported();
@@ -56,7 +59,10 @@ class Login extends Component {
 
   componentWillReceiveProps(next) {
     if (next.auth.isAuthenticated) {
-      this.props.navigation.navigate("App");
+      if (next.auth.user.papel === "professor")
+        this.props.navigation.navigate("AppProfessorStack");
+      else if (next.auth.user.papel === "aluno")
+        this.props.navigation.navigate("AppAlunoStack");
     }
   }
 

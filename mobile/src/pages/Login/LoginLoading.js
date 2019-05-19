@@ -18,7 +18,7 @@ import setAuthToken from "~/utils/setAuthToken";
 
 import jwt_decode from "jwt-decode";
 
-export default class LoginLoading extends Component {
+class LoginLoading extends Component {
   constructor() {
     super();
     this._loginLoading();
@@ -42,7 +42,10 @@ export default class LoginLoading extends Component {
         this.props.navigation.navigate("Login");
       }
 
-      this.props.navigation.navigate("App");
+      if (store.getState().auth.user.papel === "professor")
+        this.props.navigation.navigate("AppProfessorStack");
+      else if (store.getState().auth.user.papel === "aluno")
+        this.props.navigation.navigate("AppAlunoStack");
     } else {
       this.props.navigation.navigate("Login");
     }
@@ -64,3 +67,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+export default LoginLoading;
