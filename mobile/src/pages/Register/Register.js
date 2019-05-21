@@ -56,10 +56,6 @@ class Register extends Component {
     });
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   handleNFCTagReading = nfcResult => {
     if (this.state.addCarteirinha) {
       const tagId = nfcResult.id;

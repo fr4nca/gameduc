@@ -71,17 +71,19 @@ class Login extends Component {
   handleNFCTagReading = nfcResult => {
     const tagId = nfcResult.id;
 
-    this.setState({
-      ...this.state,
-      isLoading: true
-    });
+    if (!isEmpty(tagId)) {
+      this.setState({
+        ...this.state,
+        isLoading: true
+      });
 
-    this.props.loginUser({ tagId });
+      this.props.loginUser({ tagId });
 
-    this.setState({
-      ...this.state,
-      isLoading: false
-    });
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
+    }
   };
 
   handleSubmit = () => {

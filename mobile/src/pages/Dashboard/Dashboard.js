@@ -1,28 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { connect } from "react-redux";
+import DashboardProfessor from "./DashboardProfessor";
+import DashboardAluno from "./DashboardAluno";
 
-import { ScrollView } from "react-native-gesture-handler";
-
-import { Content } from "native-base";
-
-import GamesAtivos from "~/components/Games/GamesAtivos";
-import TarefasPendentes from "~/components/TarefasPendentes/TarefasPendentes";
-import RelatorioProfessor from "~/components/Relatorio/RelatorioProfessor";
-
-class Dashboard extends Component {
-  render() {
-    return (
-      <ScrollView>
-        <Content padder>
-          <GamesAtivos navigation={this.props.navigation} />
-          <TarefasPendentes />
-          <RelatorioProfessor />
-        </Content>
-      </ScrollView>
-    );
-  }
-}
+const Dashboard = props => {
+  return (
+    <>
+      {props.auth.user.papel === "professor" ? (
+        <DashboardProfessor navigation={props.navigation} />
+      ) : (
+        <DashboardAluno navigation={props.navigation} />
+      )}
+    </>
+  );
+};
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
