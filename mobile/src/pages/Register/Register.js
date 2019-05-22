@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { startNFC, stopNFC, isNFCSupported } from "../../helpers/NFCHelper";
 import moment from "moment";
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -39,7 +39,7 @@ class Register extends Component {
     curso: "",
     email: "",
     senha: "",
-    papel: undefined,
+    papel: "aluno",
     conSenha: "",
     graduacao: "",
     tagId: "",
@@ -102,7 +102,6 @@ class Register extends Component {
     };
 
     newUser.dta_nascimento = moment.utc(dta_nascimento).format("YYYY-MM-DD");
-
     if (
       !isEmpty(newUser.nome) &&
       !isEmpty(newUser.sobrenome) &&
@@ -287,21 +286,25 @@ class Register extends Component {
                 </Text>
               </>
             ) : null}
-            <>
-              <Left>
-                <Button onPress={this.handleSubmit} style={styles.button}>
-                  <Text>Registrar</Text>
-                </Button>
-              </Left>
-              <Left>
-                <Button
-                  onPress={() => this.props.navigation.navigate("Login")}
-                  style={styles.button}
-                >
-                  <Text>Login</Text>
-                </Button>
-              </Left>
-            </>
+            {this.props.auth.isLoading ? (
+              <ActivityIndicator style={{ marginTop: 10 }} />
+            ) : (
+              <>
+                <Left>
+                  <Button onPress={this.handleSubmit} style={styles.button}>
+                    <Text>Registrar</Text>
+                  </Button>
+                </Left>
+                <Left>
+                  <Button
+                    onPress={() => this.props.navigation.navigate("Login")}
+                    style={styles.button}
+                  >
+                    <Text>Login</Text>
+                  </Button>
+                </Left>
+              </>
+            )}
           </Form>
         </Card>
       </Content>

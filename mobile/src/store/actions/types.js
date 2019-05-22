@@ -40,3 +40,6 @@ export const EDIT_USER = "EDIT_USER";
 export const RELATORIO_PROFESSOR = "RELATORIO_PROFESSOR";
 export const RELATORIO_ALUNO = "RELATORIO_ALUNO";
 export const PONTUACAO = "PONTUACAO";
+
+export const IS_LOADING = "IS_LOADING";
+export const LOGOUT = "LOGOUT";

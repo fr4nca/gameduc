@@ -13,8 +13,7 @@ import {
   Content,
   Left,
   Card,
-  CardItem,
-  Body
+  CardItem
 } from "native-base";
 
 import { connect } from "react-redux";
@@ -32,8 +31,7 @@ class Login extends Component {
     senha: "",
     emailErr: "",
     senhaErr: "",
-    isSupported: false,
-    isLoading: false
+    isSupported: false
   };
 
   componentWillMount() {
@@ -72,17 +70,7 @@ class Login extends Component {
     const tagId = nfcResult.id;
 
     if (!isEmpty(tagId)) {
-      this.setState({
-        ...this.state,
-        isLoading: true
-      });
-
       this.props.loginUser({ tagId });
-
-      this.setState({
-        ...this.state,
-        isLoading: false
-      });
     }
   };
 
@@ -96,22 +84,12 @@ class Login extends Component {
     });
 
     if (!isEmpty(email) && !isEmpty(senha)) {
-      this.setState({
-        ...this.state,
-        isLoading: true
-      });
-
       const loginUser = {
         email,
         senha
       };
 
       this.props.loginUser(loginUser);
-
-      this.setState({
-        ...this.state,
-        isLoading: false
-      });
     }
   };
 
@@ -160,7 +138,10 @@ class Login extends Component {
             ) : null}
 
             <Text style={styles.error}>{this.props.errors.msg.error}</Text>
-            {!this.state.isLoading ? (
+
+            {this.props.auth.isLoading ? (
+              <ActivityIndicator />
+            ) : (
               <>
                 <Left>
                   <Button onPress={this.handleSubmit} style={styles.button}>
@@ -168,14 +149,14 @@ class Login extends Component {
                   </Button>
                 </Left>
                 <Button
-                  onPress={() => this.props.navigation.navigate("Register")}
+                  onPress={() => {
+                    this.props.navigation.navigate("Register");
+                  }}
                   style={styles.button}
                 >
                   <Text>Registrar</Text>
                 </Button>
               </>
-            ) : (
-              <ActivityIndicator />
             )}
 
             {this.state.isSupported ? (

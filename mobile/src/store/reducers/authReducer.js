@@ -4,18 +4,25 @@ import {
   SET_CURRENT_PROFILE,
   GET_ALL_ALUNOS,
   EDIT_PROFILE,
-  EDIT_USER
+  EDIT_USER,
+  IS_LOADING
 } from "../actions/types";
 
 const initalState = {
   isAuthenticated: false,
   user: {},
   profile: {},
-  alunos: []
+  alunos: [],
+  isLoading: false
 };
 
 export default (state = initalState, action) => {
   switch (action.type) {
+    case IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload
+      };
     case SET_CURRENT_USER:
       return {
         ...state,

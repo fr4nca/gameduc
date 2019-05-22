@@ -8,13 +8,17 @@ import {
   SET_CURRENT_USER,
   SET_CURRENT_PROFILE,
   GET_ALL_ALUNOS,
-  GET_ERRORS
+  GET_ERRORS,
+  IS_LOADING,
+  LOGOUT
 } from "./types";
 
 import { AsyncStorage } from "react-native";
 
 export const loginUser = userData => async dispatch => {
   try {
+    dispatch({ type: IS_LOADING, payload: true });
+
     const res = userData.tagId
       ? await axios.post("/user/logintag", userData)
       : await axios.post("/user/login", userData);
@@ -30,6 +34,8 @@ export const loginUser = userData => async dispatch => {
     dispatch(setCurrentUser(decoded));
 
     dispatch(setCurrentProfile());
+
+    dispatch({ type: IS_LOADING, payload: false });
   } catch (e) {
     const error = {
       msg: e.response.data,
@@ -39,13 +45,18 @@ export const loginUser = userData => async dispatch => {
       type: GET_ERRORS,
       payload: error
     });
+    dispatch({ type: IS_LOADING, payload: false });
   }
 };
 
 export const registerUser = (user, navigation) => async dispatch => {
   try {
+    dispatch({ type: IS_LOADING, payload: true });
+
     await axios.post("/user/register", user);
     navigation.navigate("Login");
+
+    dispatch({ type: IS_LOADING, payload: false });
   } catch (e) {
     const error = {
       msg: e.response.data,
@@ -55,6 +66,7 @@ export const registerUser = (user, navigation) => async dispatch => {
       type: GET_ERRORS,
       payload: error
     });
+    dispatch({ type: IS_LOADING, payload: false });
   }
 };
 
@@ -67,6 +79,10 @@ export const logoutUser = () => async dispatch => {
   dispatch({
     type: SET_CURRENT_PROFILE,
     payload: {}
+  });
+
+  dispatch({
+    type: LOGOUT
   });
 };
 

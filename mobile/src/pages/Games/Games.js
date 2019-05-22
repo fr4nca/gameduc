@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, RefreshControl } from "react-native";
 
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -13,10 +13,22 @@ const Games = props => {
     props.getGames(props.auth.profile.matricula);
   }, [props.auth.profile.matricula]);
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  function _onRefresh() {
+    setRefreshing(true);
+    props.getGames(props.auth.profile.matricula);
+    setRefreshing(false);
+  }
+
   const { games } = props.game;
 
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+      }
+    >
       <Content padder>
         {games ? (
           games.length > 0 ? (

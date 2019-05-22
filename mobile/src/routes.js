@@ -17,6 +17,7 @@ import Disciplinas from "~/pages/Disciplinas/Disciplinas";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
 import Register from "./pages/Register/Register";
+import Perfil from "./pages/Perfil/Perfil";
 
 const GamesStack = createStackNavigator(
   {
@@ -70,6 +71,20 @@ const DisciplinasStack = createStackNavigator(
   }
 );
 
+const PerfilStack = createStackNavigator(
+  {
+    Perfil: {
+      screen: Perfil,
+      navigationOptions: () => ({
+        title: "Perfil"
+      })
+    }
+  },
+  {
+    headerLayoutPreset: "center"
+  }
+);
+
 const AppProfessorStack = createBottomTabNavigator(
   {
     Dashboard: {
@@ -103,6 +118,14 @@ const AppProfessorStack = createBottomTabNavigator(
           />
         )
       }
+    },
+    Perfil: {
+      screen: PerfilStack,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Icon name="user" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+        )
+      }
     }
   },
   {
@@ -133,6 +156,14 @@ const AppAlunoStack = createBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <Icon name="gamepad" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+        )
+      }
+    },
+    Perfil: {
+      screen: PerfilStack,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Icon name="user" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
         )
       }
     }

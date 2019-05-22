@@ -8,7 +8,7 @@ import regraReducer from "./regraReducer";
 import errorsReducer from "./errorsReducer";
 import messagesReducer from "./messagesReducer";
 
-export default combineReducers({
+const appReducer = combineReducers({
   auth: authReducer,
   game: gameReducer,
   disciplina: disciplinaReducer,
@@ -17,3 +17,12 @@ export default combineReducers({
   errors: errorsReducer,
   messages: messagesReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === "LOGOUT") {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;
