@@ -133,7 +133,8 @@ const AppProfessorStack = createBottomTabNavigator(
       activeBackgroundColor: "#4F8EF7",
       activeTintColor: "#fff",
       inactiveTintColor: "#4F8EF7"
-    }
+    },
+    resetOnBlur: true
   }
 );
 
@@ -173,7 +174,8 @@ const AppAlunoStack = createBottomTabNavigator(
       activeBackgroundColor: "#4F8EF7",
       activeTintColor: "#fff",
       inactiveTintColor: "#4F8EF7"
-    }
+    },
+    resetOnBlur: true
   }
 );
 
