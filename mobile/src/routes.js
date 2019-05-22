@@ -94,7 +94,7 @@ const AppProfessorStack = createBottomTabNavigator(
           <Icon
             name="dashboard"
             size={25}
-            color={focused ? "#FFF" : "#4F8EF7"}
+            color={focused ? "#4F8EF7" : "#FFF"}
           />
         )
       }
@@ -103,7 +103,7 @@ const AppProfessorStack = createBottomTabNavigator(
       screen: GamesStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <Icon name="gamepad" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+          <Icon name="gamepad" size={25} color={focused ? "#4F8EF7" : "#FFF"} />
         )
       }
     },
@@ -114,7 +114,7 @@ const AppProfessorStack = createBottomTabNavigator(
           <Icon5
             name="chalkboard-teacher"
             size={25}
-            color={focused ? "#FFF" : "#4F8EF7"}
+            color={focused ? "#4F8EF7" : "#FFF"}
           />
         )
       }
@@ -123,18 +123,22 @@ const AppProfessorStack = createBottomTabNavigator(
       screen: PerfilStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <Icon name="user" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+          <Icon name="user" size={25} color={focused ? "#4F8EF7" : "#FFF"} />
         )
       }
     }
   },
   {
     tabBarOptions: {
-      activeBackgroundColor: "#4F8EF7",
-      activeTintColor: "#fff",
-      inactiveTintColor: "#4F8EF7"
+      activeBackgroundColor: "#FFF",
+      activeTintColor: "#4F8EF7",
+      inactiveTintColor: "#FFF",
+      style: {
+        backgroundColor: "#4F8EF7"
+      }
     },
-    resetOnBlur: true
+    resetOnBlur: true,
+    lazy: false
   }
 );
 
@@ -147,7 +151,7 @@ const AppAlunoStack = createBottomTabNavigator(
           <Icon
             name="dashboard"
             size={25}
-            color={focused ? "#FFF" : "#4F8EF7"}
+            color={focused ? "#4F8EF7" : "#FFF"}
           />
         )
       }
@@ -156,7 +160,7 @@ const AppAlunoStack = createBottomTabNavigator(
       screen: GamesStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <Icon name="gamepad" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+          <Icon name="gamepad" size={25} color={focused ? "#4F8EF7" : "#FFF"} />
         )
       }
     },
@@ -164,18 +168,22 @@ const AppAlunoStack = createBottomTabNavigator(
       screen: PerfilStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <Icon name="user" size={25} color={focused ? "#FFF" : "#4F8EF7"} />
+          <Icon name="user" size={25} color={focused ? "#4F8EF7" : "#FFF"} />
         )
       }
     }
   },
   {
     tabBarOptions: {
-      activeBackgroundColor: "#4F8EF7",
-      activeTintColor: "#fff",
-      inactiveTintColor: "#4F8EF7"
+      activeBackgroundColor: "#FFF",
+      activeTintColor: "#4F8EF7",
+      inactiveTintColor: "#FFF",
+      style: {
+        backgroundColor: "#4F8EF7"
+      }
     },
-    resetOnBlur: true
+    resetOnBlur: true,
+    lazy: false
   }
 );
 
