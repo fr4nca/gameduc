@@ -25,6 +25,14 @@ const TarefasPendentes = props => {
     <Card>
       <CardItem header bordered>
         <Text>Tarefas pendentes</Text>
+        {props.auth.isLoading ? (
+          <>
+            <Right />
+            <Right>
+              <ActivityIndicator />
+            </Right>
+          </>
+        ) : null}
       </CardItem>
       {tarefas ? (
         tarefas.length > 0 ? (

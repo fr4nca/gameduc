@@ -304,7 +304,7 @@ class Register extends Component {
           rounded
           onPress={() => this.props.navigation.navigate("Login")}
         >
-          <Text>Voltar</Text>
+          <Text>Login</Text>
         </Button>
       </Content>
     );

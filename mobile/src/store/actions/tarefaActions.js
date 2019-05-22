@@ -7,7 +7,8 @@ import {
   VALIDAR_TAREFA,
   DELETE_ALUNO_TAREFAS,
   GET_TAREFAS_PENDENTES,
-  CREATE_MESSAGE
+  CREATE_MESSAGE,
+  IS_LOADING
 } from "./types";
 
 import { getRanking } from "./gameActions";
@@ -96,8 +97,13 @@ export const validarTarefa = tarefa => async dispatch => {
   }
 };
 
-export const validarTarefaPendente = (tarefa, matricula) => async dispatch => {
+export const validarTarefaPendente = tarefa => async dispatch => {
   try {
+    dispatch({
+      type: IS_LOADING,
+      payload: true
+    });
+
     await axios.put(`/tarefa/updateValidado`, {
       tarefaId: tarefa.id,
       validado: tarefa.validado
@@ -108,11 +114,9 @@ export const validarTarefaPendente = (tarefa, matricula) => async dispatch => {
     });
 
     dispatch({
-      type: CREATE_MESSAGE,
-      payload: { validateTarefa: "Tarefa validada com sucesso" }
+      type: IS_LOADING,
+      payload: false
     });
-
-    dispatch(getTarefasPendentes(matricula));
   } catch (e) {
     console.log(e.response.data);
   }
