@@ -13,7 +13,9 @@ import {
   Content,
   Left,
   Card,
-  CardItem
+  CardItem,
+  Right,
+  View
 } from "native-base";
 
 import { connect } from "react-redux";
@@ -102,10 +104,7 @@ class Login extends Component {
           justifyContent: "center"
         }}
       >
-        <Card>
-          <CardItem header bordered>
-            <Text>Login</Text>
-          </CardItem>
+        <View>
           <Form style={{ padding: 15 }}>
             <Item floatingLabel>
               <Label>Email</Label>
@@ -139,33 +138,46 @@ class Login extends Component {
 
             <Text style={styles.error}>{this.props.errors.msg.error}</Text>
 
-            {this.props.auth.isLoading ? (
-              <ActivityIndicator />
-            ) : (
-              <>
-                <Left>
-                  <Button onPress={this.handleSubmit} style={styles.button}>
-                    <Text>Entrar</Text>
-                  </Button>
-                </Left>
-                <Button
-                  onPress={() => {
-                    this.props.navigation.navigate("Register");
-                  }}
-                  style={styles.button}
-                >
-                  <Text>Registrar</Text>
-                </Button>
-              </>
-            )}
-
             {this.state.isSupported ? (
-              <Text style={styles.carteirinha}>
-                Ou aproxime sua carteirinha
-              </Text>
+              <>
+                <Right>
+                  <Text style={styles.ou}>ou</Text>
+                </Right>
+                <Right>
+                  <Text style={styles.carteirinha}>
+                    Aproxime sua carteirinha
+                  </Text>
+                </Right>
+              </>
             ) : null}
+
+            {this.props.auth.isLoading ? (
+              <ActivityIndicator style={styles.button} />
+            ) : (
+              <Button
+                full
+                rounded
+                onPress={this.handleSubmit}
+                style={styles.button}
+              >
+                <Text>Entrar</Text>
+              </Button>
+            )}
           </Form>
-        </Card>
+          <Right>
+            <Button
+              transparent
+              style={{
+                color: "#4F8EF7"
+              }}
+              onPress={() => {
+                this.props.navigation.navigate("Register");
+              }}
+            >
+              <Text>Não possui uma conta? Clique aqui</Text>
+            </Button>
+          </Right>
+        </View>
       </Content>
     );
   }
@@ -173,7 +185,7 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 20
+    marginTop: 80
   },
   error: {
     color: "red",
@@ -183,8 +195,11 @@ const styles = StyleSheet.create({
   },
   carteirinha: {
     color: "#555",
-    marginLeft: 15,
-    marginTop: 18
+    marginTop: 40
+  },
+  ou: {
+    color: "#555",
+    marginTop: 10
   }
 });
 

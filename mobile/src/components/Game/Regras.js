@@ -25,6 +25,9 @@ const Regras = props => {
         <Left>
           <Text style={{ fontWeight: "bold" }}>Classificação</Text>
         </Left>
+        <Left>
+          <Text style={{ fontWeight: "bold" }}>Tag</Text>
+        </Left>
         <Right>
           <Text style={{ fontWeight: "bold" }}>Pontuação</Text>
         </Right>
@@ -39,6 +42,9 @@ const Regras = props => {
                 </Left>
                 <Left>
                   <Text>{regra.classificacao}</Text>
+                </Left>
+                <Left>
+                  <Text>{regra.tag}</Text>
                 </Left>
                 <Right>
                   <Text>{regra.pontuacao}</Text>

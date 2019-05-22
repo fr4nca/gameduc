@@ -11,7 +11,7 @@ import GameCard from "./GameCard";
 const GamesAtivos = props => {
   useEffect(() => {
     props.getGamesAtivos(props.auth.profile.matricula);
-  }, [props.auth.profile.matricula]);
+  }, []);
 
   const { gamesAtivos: games } = props.game;
 

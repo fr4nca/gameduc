@@ -8,7 +8,7 @@ import { pontuacao } from "~/store/actions/gameActions";
 const Pontuacao = props => {
   useEffect(() => {
     props.pontuacao(props.auth.profile.matricula);
-  }, [props.auth.profile.matricula]);
+  }, []);
 
   const { pontuacao } = props.game;
 
@@ -22,12 +22,15 @@ const Pontuacao = props => {
           {pontuacao ? (
             pontuacao.length > 0 ? (
               <Text>
-                Sua pontuação geral é de {pontuacao[0].pontuacao} pontos em{" "}
+                Sua pontuação geral é de{" "}
+                {pontuacao[0].pontuacao ? pontuacao[0].pontuacao : "0"} ponto
+                {pontuacao[0].pontuacao !== 1 ? "s" : null} em{" "}
                 {pontuacao[0].tarefas} tarefas validadas de {pontuacao[1].games}{" "}
-                jogos. Você ainda possui {pontuacao[2].tarefasNaoValidadas}{" "}
-                tarefa
-                {pontuacao[2].tarefasNaoValidadas > 1 ? "s" : null} pendente
-                {pontuacao[2].tarefasNaoValidadas > 1 ? "s" : null} de validação
+                jogo{pontuacao[1].games !== 1 ? "s" : null}. Você ainda possui{" "}
+                {pontuacao[2].tarefasNaoValidadas} tarefa
+                {pontuacao[2].tarefasNaoValidadas !== 1 ? "s" : null} pendente
+                {pontuacao[2].tarefasNaoValidadas !== 1 ? "s" : null} de
+                validação
               </Text>
             ) : (
               <Text>Não há games ativos</Text>

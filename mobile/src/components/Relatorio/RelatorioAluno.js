@@ -10,7 +10,7 @@ import { Card, CardItem, Text, Left, Right } from "native-base";
 const RelatorioAluno = props => {
   useEffect(() => {
     props.relatorioAluno(props.auth.profile.matricula);
-  }, [props.refreshing, props.auth.profile.matricula]);
+  }, []);
 
   const { relatorio } = props.game;
 

@@ -12,12 +12,12 @@ import {
 
 import { relatorioProfessor } from "~/store/actions/gameActions";
 
-import { Card, CardItem, Text, Right } from "native-base";
+import { Card, CardItem, Text, Right, Left, Button } from "native-base";
 
 const TarefasPendentes = props => {
   useEffect(() => {
     props.getTarefasPendentes(props.auth.profile.matricula);
-  }, [props.auth.profile.matricula]);
+  }, []);
 
   const { tarefasPendentes: tarefas } = props.tarefa;
 
@@ -30,18 +30,20 @@ const TarefasPendentes = props => {
         tarefas.length > 0 ? (
           tarefas.map(tarefa => (
             <CardItem key={tarefa.id} bordered>
-              <Text>{tarefa.descricao}</Text>
+              <Left>
+                <Text>{tarefa.descricao}</Text>
+              </Left>
               <Right>
-                <Icon
+                <Button
+                  transparent
                   onPress={() => {
                     props.validarTarefaPendente(tarefa);
                     props.getTarefasPendentes(props.auth.profile.matricula);
                     props.relatorioProfessor(props.auth.profile.matricula);
                   }}
-                  name="check"
-                  size={20}
-                  color="#4F8EF7"
-                />
+                >
+                  <Icon name="check" size={20} color="#4F8EF7" />
+                </Button>
               </Right>
             </CardItem>
           ))

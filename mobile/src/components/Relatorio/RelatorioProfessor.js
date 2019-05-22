@@ -10,8 +10,7 @@ import { Card, CardItem, Text } from "native-base";
 const RelatorioProfessor = props => {
   useEffect(() => {
     props.relatorioProfessor(props.auth.profile.matricula);
-    //TODO: Get right relatorio deppending on papel
-  }, [props.auth.profile.matricula]);
+  }, []);
 
   const { relatorio } = props.game;
 

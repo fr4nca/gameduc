@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 
@@ -19,6 +19,12 @@ import {
 import { getTarefasPendentes } from "~/store/actions/tarefaActions";
 
 const DashboardProfessor = props => {
+  useEffect(() => {
+    props.getTarefasPendentes(props.auth.profile.matricula);
+    props.getGamesAtivos(props.auth.profile.matricula);
+    props.relatorioProfessor(props.auth.profile.matricula);
+  }, [props.auth.profile.matricula]);
+
   const [refreshing, setRefreshing] = useState(false);
 
   function _onRefresh() {

@@ -1,7 +1,7 @@
 let config = {};
 
 if (process.env.NODE_ENV !== "production") {
-  config = { apiUrl: "http://localhost:5000/api" };
+  config = { apiUrl: "https://gameduc-api.herokuapp.com/api" };
 } else {
   config = { apiUrl: process.env.REACT_APP_API_URL };
 }

@@ -251,6 +251,8 @@ class Register extends Component {
 
             {this.state.isSupported && !this.state.addCarteirinha ? (
               <Button
+                full
+                rounded
                 light
                 style={styles.addCarteirinha}
                 onPress={() => {
@@ -290,23 +292,25 @@ class Register extends Component {
               <ActivityIndicator style={{ marginTop: 10 }} />
             ) : (
               <>
-                <Left>
-                  <Button onPress={this.handleSubmit} style={styles.button}>
-                    <Text>Registrar</Text>
-                  </Button>
-                </Left>
-                <Left>
-                  <Button
-                    onPress={() => this.props.navigation.navigate("Login")}
-                    style={styles.button}
-                  >
-                    <Text>Login</Text>
-                  </Button>
-                </Left>
+                <Button
+                  full
+                  rounded
+                  onPress={this.handleSubmit}
+                  style={styles.button}
+                >
+                  <Text>Registrar</Text>
+                </Button>
               </>
             )}
           </Form>
         </Card>
+        <Button
+          transparent
+          rounded
+          onPress={() => this.props.navigation.navigate("Login")}
+        >
+          <Text>Voltar</Text>
+        </Button>
       </Content>
     );
   }

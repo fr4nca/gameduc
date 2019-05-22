@@ -18,7 +18,7 @@ const GameCard = props => {
 
   useEffect(() => {
     getDisciplina();
-  }, [props]);
+  }, []);
 
   return (
     <Card>
@@ -40,6 +40,7 @@ const GameCard = props => {
       </CardItem>
       <CardItem
         button
+        bordered
         onPress={() =>
           props.navigation.navigate("Game", {
             game: props.game,

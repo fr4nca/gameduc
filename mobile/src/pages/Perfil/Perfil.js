@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, RefreshControl } from "react-native";
+import React, { useState } from "react";
+import { Alert } from "react-native";
 import { Card, CardItem, Text, Content, Button } from "native-base";
 
 import moment from "moment";
@@ -10,21 +10,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import { logoutUser } from "~/store/actions/authActions";
 
 const Perfil = props => {
-  const [refreshing, setRefreshing] = useState(false);
-
-  function _onRefresh() {
-    setRefreshing(true);
-    setRefreshing(false);
-  }
-
   const { profile, user } = props.auth;
 
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
-      }
-    >
+    <ScrollView>
       <Content padder>
         <Card>
           <CardItem header bordered>
@@ -65,10 +54,26 @@ const Perfil = props => {
         <Button
           danger
           full
+          rounded
           style={{ marginTop: 10 }}
           onPress={() => {
-            props.logoutUser();
-            props.navigation.navigate("LoginLoading");
+            Alert.alert(
+              "Tem certeza que deseja sair?",
+              "Clique em 'sair' para sair",
+              [
+                {
+                  text: "Abortar",
+                  style: "cancel"
+                },
+                {
+                  text: "Sair",
+                  onPress: () => {
+                    props.logoutUser();
+                    props.navigation.navigate("LoginLoading");
+                  }
+                }
+              ]
+            );
           }}
         >
           <Text>Sair</Text>
