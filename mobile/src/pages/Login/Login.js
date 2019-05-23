@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { startNFC, stopNFC, isNFCSupported } from "../../helpers/NFCHelper";
 
-import { StyleSheet, ActivityIndicator } from "react-native";
+import { StyleSheet, ActivityIndicator, Image } from "react-native";
 
 import {
   Form,
@@ -11,9 +11,6 @@ import {
   Button,
   Text,
   Content,
-  Left,
-  Card,
-  CardItem,
   Right,
   View
 } from "native-base";
@@ -22,6 +19,8 @@ import { connect } from "react-redux";
 
 import { loginUser } from "~/store/actions/authActions";
 import isEmpty from "~/utils/isEmpty";
+
+import logo from "~/static/img/logo1024.png";
 
 class Login extends Component {
   static navigationOptions = {
@@ -104,6 +103,15 @@ class Login extends Component {
           justifyContent: "center"
         }}
       >
+        <Image
+          source={logo}
+          style={{
+            width: 340,
+            height: 340,
+            alignSelf: "center",
+            marginBottom: -60
+          }}
+        />
         <View>
           <Form style={{ padding: 15 }}>
             <Item floatingLabel>
