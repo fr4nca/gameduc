@@ -164,7 +164,7 @@ class GameController {
       const { id } = req.params;
       if (id !== 'undefined') {
         let ranking = await db.query(
-          `SELECT * FROM ranking WHERE tb_game_id = ? ORDER BY soma DESC`,
+          `SELECT * FROM ranking WHERE tb_game_id = ? ORDER BY soma DESC;`,
           [id]
         );
         return res.json(ranking);
