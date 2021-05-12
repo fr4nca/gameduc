@@ -7,7 +7,7 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.4",
     "bulma-dashboard": "^0.1.40",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "jwt-decode": "^2.2.0",
